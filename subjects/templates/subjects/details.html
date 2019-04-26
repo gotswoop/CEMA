@@ -1,0 +1,92 @@
+{% extends "home/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+    <div class="content-section">
+    	<h1>{{ subject.first_name }} {{ subject.last_name }}</h1>
+    	<h6>Study Id: {{ subject.study_id }}</h6>
+    	<h6>Phone Number: {{ subject.phone_1 }}</h6>
+    	<h6>Recruited by {{ subject.recruited_by }} on {{subject.recruited_date }} at {{ subject.recruited_location}}</h6>
+    	<h6>Language: {{ subject.language}}</h6>
+    	<h6>Treatment: {{ subject.treatment}}</h6>
+    	{% if subject.optout %}
+    		<div class="alert-danger p-2 m-2">
+    		<p>
+    			Opted-out of the study on {{ subject.optout_date }}<br/>
+    			Reason: {{ subject.optout_reason }}</p>
+    		</div>
+    	{% endif %}
+    	<p><a class="btn btn-outline-info btn-sm" href="{% url 'subjects_all' %}">Back to Study Subjects</a></p>
+    	<hr/>
+    </div>
+    <div class="content-section">
+		<form action="." method="post">
+		    {% csrf_token %}
+		    <input type="hidden" name="to_phone" value={{ subject.phone_1 }} />
+		    <input type="hidden" name="study_id" value={{ subject.study_id }} />
+      		{{ form|crispy }}
+		    <input type="submit" class="btn btn-danger" value="SEND TEXT MESSAGE to {{ subject.first_name}} {{ subject.last_name }} ({{ subject.phone_1}})">
+		</form>
+		<span class="text-danger">* Check for correctness and grammar, and only click once.</span>
+		<hr/>
+	</div>
+    <div class="content-section mt-5">
+    	<h5 class="text-danger">INCOMING MESSAGES</h5>
+    	{% if msgs_incoming.count == 0 %}
+    		<p class="pl-3 text-info">* None</p>
+    	{% else %}
+        	<table class="table table-sm table-hover table-bordered bg-white">
+	    	<thead class="thead-light"><tr><th>Received on</th><th>Message</th></tr></thead>
+	    	<tbody>
+    		{% for msg in msgs_incoming %}
+		    	<tr>
+		     	<td>{{ msg.ts_created}}</td>
+		    	<td><span onmouseover="{{msg.from_phone}}">{{ msg.message}}</span></td>
+		    	</tr>
+	     	{% endfor %}
+    	</tbody>
+	    	</table>
+    	{% endif %}
+    	</div>
+
+    <div class="content-section mt-5">
+    	<h5 class="text-success">MESSAGES PREVIOUSLY SENT</h5>
+    	{% if msgs_sent.count == 0 %}
+    		<p class="pl-3 text-info">* None</p>
+    	{% else %}
+	    	<table class="table table-sm table-hover table-bordered bg-white">
+	    	<thead class="thead-light"><tr><th>Sent on</th><th>Message</th><th>Type</th></tr></thead>
+	    	<tbody>
+	    	{% for msg in msgs_sent %}
+	    	<tr>
+	     	<td>{{ msg.sent_on}}</td>
+	    	<td><span onmouseover="{{msg.from_phone}}">{{ msg.message}}</span></td>
+	    	<td>{{ msg.send_mode}}</span></td>
+		   	</tr>
+	     	{% endfor %}
+	     	</tbody>
+	     	</table>
+     {% endif %}
+    </div>
+
+	<div class="content-section mt-5">
+    	<h5 class="text-primary">MESSAGES SCHEDULED TO BE SENT</h5>
+    	{% if msgs_queue.count == 0 %}
+    		<p class="pl-3 text-info">* None</p>
+    	{% else %}
+        	<table class="table table-sm table-hover table-bordered bg-white">
+	    	<thead class="thead-light"><tr><th>Scheduled</th><th>Message</th><th>Type</th></tr></thead>
+	    	<tbody>
+	    	{% for msg in msgs_queue %}
+	    	<tr>
+	     	<td>{{ msg.send_after}}</td>
+	    	<td><span onmouseover="{{msg.from_phone}}">{{ msg.message}}</span></td>
+	    	<td>{{ msg.send_mode}}</span></td>
+		   	</tr>
+	     	{% endfor %}
+	     	</tbody>
+	     	</table>
+	     {% endif %}
+	</div>
+
+{% endblock content %}

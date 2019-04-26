@@ -1,0 +1,27 @@
+{% extends "home/base.html" %}
+{% block content %}
+    <div class="content-section">
+    	<h3>Messages already sent</h3>
+    	<table class="table table-sm table-hover table-bordered bg-white">
+    	<caption>
+			<p><small> * Showing last 1000 sent messages.</small></p>
+			<p><a class="btn btn-outline-info btn-sm" href="{% url 'dashboard' %}">Back to Dashboard</a></p>
+		</caption>
+		<thead class="thead-light"><tr><th>Sent</th><th>To</th><th>Message</th><th>Type</th></tr></thead>
+    	<tbody>
+    	{% for msg in msgs %}
+    	<tr>
+     	<td>{{ msg.sent_on}}</td>
+    	{% if msg.study_id %}
+    		<td><a href="{% url 'subject_details' msg.study_id.pk %}">{{ msg.study_id.first_name }} {{ msg.study_id.last_name }}</a></td>
+    	{% else %}
+    		<td>{{ msg.from_phone }}</td>
+    	{% endif %}
+    	<td><span onmouseover="{{msg.from_phone}}">{{ msg.message}}</span></td>
+    	<td>{{ msg.send_mode}}</span></td>
+	   	</tr>
+     	{% endfor %}
+     	</tbody>
+     </table>
+    </div>
+{% endblock content %}

@@ -1,0 +1,14 @@
+/static/
+/media/
+__pycache__
+migrations
+*.csv
+*.xlsx
+*.xls
+*.sql
+*.gz
+*.jpg
+*.png
+*.pdf
+*.log
+*.pyc

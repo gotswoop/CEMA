@@ -1,0 +1,51 @@
+{% extends "home/base.html" %}
+{% block content %}
+    <div class="content-section">
+    	<h3>Inbox - To be processed</h3>
+    	<table class="table table-sm table-hover table-bordered bg-white">
+		<caption>
+		<p><small> * Unprocessed Messages</small></p>
+		<p><a class="btn btn-outline-info btn-sm" href="{% url 'dashboard' %}">Back to Dashboard</a></p>
+		</caption>
+		<thead class="thead-light"><tr><th>#</th><th>Date / Time</th><th>From</th><th>Message</th></tr></thead>
+    	<tbody>
+    	{% for msg in unread_msgs %}
+    	<tr>
+    	<td>{{ forloop.counter }} </td>
+     	<td>{{ msg.ts_created }}</td>
+     	{% if msg.study_id %}
+    		<td><a href="{% url 'subject_details' msg.study_id.pk %}">{{ msg.study_id.first_name }} {{ msg.study_id.last_name }}</a></td>
+    	{% else %}
+    		<td>{{ msg.from_phone }}</td>
+    	{% endif %}
+    	<td><span onmouseover="{{ msg.message }}">{{ msg.message|truncatechars:80 }}</span></td>
+    	</tr>
+     	{% endfor %}
+     	</tbody>
+     </table>
+    </div>
+    <div class="content-section">
+    	<h3>Inbox - Already Processed</h3>
+    	<table class="table table-sm table-hover table-bordered bg-white">
+		<caption>
+		<p><small> * Processed Messages</small></p>
+		<p><a class="btn btn-outline-info btn-sm" href="{% url 'dashboard' %}">Back to Dashboard</a></p>
+		</caption>
+		<thead class="thead-light"><tr><th>#</th><th>Date / Time</th><th>From</th><th>Message</th></tr></thead>
+    	<tbody>
+    	{% for msg in read_msgs %}
+    	<tr>
+    	<td>{{ forloop.counter }} </td>
+     	<td>{{ msg.ts_created }}</td>
+    	{% if msg.study_id %}
+    		<td><a href="{% url 'subject_details' msg.study_id.pk %}">{{ msg.study_id.first_name }} {{ msg.study_id.last_name }}</a></td>
+    	{% else %}
+    		<td>{{ msg.from_phone }}</td>
+    	{% endif %}
+    	<td><span onmouseover="{{ msg.message }}">{{ msg.message|truncatechars:80 }}</span></td>
+    	</tr>
+     	{% endfor %}
+     	</tbody>
+     </table>
+    </div>
+{% endblock content %}

@@ -12,7 +12,7 @@
     	{% for msg in unread_msgs %}
     	<tr>
     	<td>{{ forloop.counter }} </td>
-     	<td>{{ msg.ts_created }}</td>
+     	<td>{{ msg.ts_created|date:'M dS, g:i a' }}</td>
      	{% if msg.study_id %}
     		<td><a href="{% url 'subject_details' msg.study_id.pk %}">{{ msg.study_id.first_name }} {{ msg.study_id.last_name }}</a></td>
     	{% else %}
@@ -36,7 +36,7 @@
     	{% for msg in read_msgs %}
     	<tr>
     	<td>{{ forloop.counter }} </td>
-     	<td>{{ msg.ts_created }}</td>
+     	<td>{{ msg.ts_created|date:'M dS, g:i a' }}</td>
     	{% if msg.study_id %}
     		<td><a href="{% url 'subject_details' msg.study_id.pk %}">{{ msg.study_id.first_name }} {{ msg.study_id.last_name }}</a></td>
     	{% else %}

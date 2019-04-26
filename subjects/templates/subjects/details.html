@@ -6,7 +6,7 @@
     	<h1>{{ subject.first_name }} {{ subject.last_name }}</h1>
     	<h6>Study Id: {{ subject.study_id }}</h6>
     	<h6>Phone Number: {{ subject.phone_1 }}</h6>
-    	<h6>Recruited by {{ subject.recruited_by }} on {{subject.recruited_date }} at {{ subject.recruited_location}}</h6>
+    	<h6>Recruited by {{ subject.recruited_by }} on {{subject.recruited_date|date:'M d, Y' }} at {{ subject.recruited_location}}</h6>
     	<h6>Language: {{ subject.language}}</h6>
     	<h6>Treatment: {{ subject.treatment}}</h6>
     	{% if subject.optout %}
@@ -19,6 +19,7 @@
     	<p><a class="btn btn-outline-info btn-sm" href="{% url 'subjects_all' %}">Back to Study Subjects</a></p>
     	<hr/>
     </div>
+    {% if form != None %}
     <div class="content-section">
 		<form action="." method="post">
 		    {% csrf_token %}
@@ -30,6 +31,7 @@
 		<span class="text-danger">* Check for correctness and grammar, and only click once.</span>
 		<hr/>
 	</div>
+	{% endif %}
     <div class="content-section mt-5">
     	<h5 class="text-danger">INCOMING MESSAGES</h5>
     	{% if msgs_incoming.count == 0 %}
@@ -40,7 +42,7 @@
 	    	<tbody>
     		{% for msg in msgs_incoming %}
 		    	<tr>
-		     	<td>{{ msg.ts_created}}</td>
+		     	<td>{{ msg.ts_created|date:'M dS, g:i a'}}</td>
 		    	<td><span onmouseover="{{msg.from_phone}}">{{ msg.message}}</span></td>
 		    	</tr>
 	     	{% endfor %}
@@ -59,9 +61,13 @@
 	    	<tbody>
 	    	{% for msg in msgs_sent %}
 	    	<tr>
-	     	<td>{{ msg.sent_on}}</td>
+	     	<td>{{ msg.sent_on|date:'M dS, g:i a'}}</td>
 	    	<td><span onmouseover="{{msg.from_phone}}">{{ msg.message}}</span></td>
-	    	<td>{{ msg.send_mode}}</span></td>
+	    	{% if msg.send_mode == "manual" %}
+    			<td>{{ msg.sent_by_user.first_name.0|title }}. {{ msg.sent_by_user.last_name}}</span></td>
+    		{% else %}
+    			<td>{{ msg.send_mode|title}}</span></td>
+    		{% endif %}
 		   	</tr>
 	     	{% endfor %}
 	     	</tbody>
@@ -75,13 +81,12 @@
     		<p class="pl-3 text-info">* None</p>
     	{% else %}
         	<table class="table table-sm table-hover table-bordered bg-white">
-	    	<thead class="thead-light"><tr><th>Scheduled</th><th>Message</th><th>Type</th></tr></thead>
+	    	<thead class="thead-light"><tr><th>Scheduled</th><th>Message</th></tr></thead>
 	    	<tbody>
 	    	{% for msg in msgs_queue %}
 	    	<tr>
-	     	<td>{{ msg.send_after}}</td>
+	     	<td>{{ msg.send_after|date:'M dS, g:i a'}}</td>
 	    	<td><span onmouseover="{{msg.from_phone}}">{{ msg.message}}</span></td>
-	    	<td>{{ msg.send_mode}}</span></td>
 		   	</tr>
 	     	{% endfor %}
 	     	</tbody>

@@ -12,7 +12,7 @@
     	{% for msg in msgs %}
     	<tr>
     	<td>{{ forloop.counter }} </td>
-     	<td>{{ msg.send_after}}</td>
+     	<td>{{ msg.send_after|date:'M dS, g:i a'}}</td>
     	{% if msg.study_id %}
     		<td><a href="{% url 'subject_details' msg.study_id.pk %}">{{ msg.study_id.first_name }} {{ msg.study_id.last_name }}</a></td>
     	{% else %}

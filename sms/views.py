@@ -97,6 +97,8 @@ def incoming_sms(request):
 
 	# TODO: Rate limit responses
 	response = '<?xml version="1.0" encoding="UTF-8"?><Response><Message>' + text_response + '</Message></Response>'
+	# Not responding for now...
+	response = '<?xml version="1.0" encoding="UTF-8"?><Response></Response>'
 	return HttpResponse(response, content_type='text/xml')
 
 def pretty_print_response(response):

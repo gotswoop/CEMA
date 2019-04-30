@@ -7,7 +7,7 @@
 			<p><small> * Showing last 1000 sent messages.</small></p>
 			<p><a class="btn btn-outline-info btn-sm" href="{% url 'dashboard' %}">Back to Dashboard</a></p>
 		</caption>
-		<thead class="thead-light"><tr><th>Sent</th><th>To</th><th>Message</th><th>Sender</th></tr></thead>
+		<thead class="thead-light"><tr><th>Sent</th><th>To</th><th>Message</th><th>Sender</th><th>Text length</th></tr></thead>
     	<tbody>
     	{% for msg in msgs %}
     	<tr>
@@ -22,6 +22,11 @@
     		<td>{{ msg.sent_by_user.first_name.0|title }}. {{ msg.sent_by_user.last_name}}</span></td>
     	{% else %}
     		<td>{{ msg.send_mode|title}}</span></td>
+    	{% endif %}
+    	{% if msg.message|length > 160 %}
+    		<td><span class="text-danger">{{ msg.message|length }}</span></td>
+    	{% else %}
+    		<td>{{ msg.message|length }}</td>
     	{% endif %}
 	   	</tr>
      	{% endfor %}

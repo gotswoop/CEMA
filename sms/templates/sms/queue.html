@@ -7,7 +7,7 @@
 			<p><small> * Messages in queue</small></p>
 			<p><a class="btn btn-outline-info btn-sm" href="{% url 'dashboard' %}">Back to Dashboard</a></p>
 		</caption>
-		<thead class="thead-light"><tr><th>#</th><th>Date / Time</th><th>To</th><th>Message</th></tr></thead>
+		<thead class="thead-light"><tr><th>#</th><th>Date / Time</th><th>To</th><th>Message</th><th>Text length</th></tr></thead>
     	<tbody>
     	{% for msg in msgs %}
     	<tr>
@@ -18,7 +18,12 @@
     	{% else %}
     		<td>{{ msg.from_phone }}</td>
     	{% endif %}
-    	<td><span onmouseover="{{ msg.message }}">{{ msg.message|truncatechars:80 }}</span></td>
+    	<td><span onmouseover="{{ msg.message }}">{{ msg.message }}</span></td>
+    	{% if msg.message|length > 160 %}
+    		<td><span class="text-danger">{{ msg.message|length }}</span></td>
+    	{% else %}
+    		<td>{{ msg.message|length }}</td>
+    	{% endif %}
     	</tr>
      	{% endfor %}
      	</tbody>

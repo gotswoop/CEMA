@@ -14,11 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from home import views as home_views
 from sms import views as sms_views
 from subjects import views as subject_views
+from shorty import views as shorty_views
 
 urlpatterns = [
 	path('admin/', admin.site.urls),
@@ -45,4 +46,9 @@ urlpatterns = [
 	# POST - incoming webhook
 	path('incoming_sms/', sms_views.incoming_sms, name='incoming_sms'),
 	# path('ping/', user_views.ping, name='ping'),
+	# URL Redirect
+	path('l/<str:short_url>', shorty_views.redirect_url, name='redirect_url'),
+	# URL Shortner
+	path('shorty/', include('shorty.urls')),
+
 ]

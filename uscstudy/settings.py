@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'subjects.apps.SubjectsConfig',
     'sms.apps.SmsConfig',
     'survey.apps.SurveyConfig',
+    'shorty.apps.ShortyConfig',
     'crispy_forms',
 ]
 

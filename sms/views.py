@@ -79,7 +79,7 @@ def incoming_sms(request):
 		message = 'From: ' + sub_obj.first_name + ' ' + sub_obj.last_name + ' (' + incoming.get('From') + ')\n\nStudy id: ' + str(sub_obj.study_id) + '\n\nMessage: ' + incoming.get('Body') + '\n\n\nYou can reply to this message from the USC Study Website.'
 	
 	# TODO: If images show them!
-	to_emails=['ssamek@usc.edu','andregra@usc.edu','tarushgu@usc.edu']
+	to_emails=['anyasamek+ng@gmail.com', 'ssamek@usc.edu','andregra@usc.edu','tarushgu@usc.edu']
 	notify_admins = EmailMessage(subject, message, settings.EMAIL_HOST_USER, to_emails, reply_to=['ssamek@usc.edu'])
 	notify_admins.send()
 	

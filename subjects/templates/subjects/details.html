@@ -2,24 +2,23 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
-    <div class="content-section">
-    	<h1>{{ subject.first_name }} {{ subject.last_name }}</h1>
-    	<h6>Study Id: {{ subject.study_id }}</h6>
-    	<h6>Phone Number: {{ subject.phone_1 }}</h6>
-    	<h6>Recruited by {{ subject.recruited_by }} on {{subject.recruited_date|date:'M d, Y' }} at {{ subject.recruited_location}}</h6>
-    	<h6>Language: {{ subject.language}}</h6>
-    	<h6>Treatment: {{ subject.treatment}}</h6>
-    	{% if subject.optout %}
-    		<div class="alert-danger p-2 m-2">
-    		<p>
-    			Opted-out of the study on {{ subject.optout_date }}<br/>
-    			Reason: {{ subject.optout_reason }}</p>
-    		</div>
-    	{% endif %}
-    	<p><a class="btn btn-outline-info btn-sm" href="{% url 'subjects_all' %}">Back to Study Subjects</a></p>
-    	<hr/>
-    
-    
+<div class="content-section">
+	<h1>{{ subject.first_name }} {{ subject.last_name }}</h1>
+	<h6>Study Id: {{ subject.study_id }}</h6>
+	<h6>Phone Number: {{ subject.phone_1 }}</h6>
+	<h6>Recruited by {{ subject.recruited_by }} on {{subject.recruited_date|date:'M d, Y' }} at {{ subject.recruited_location}}</h6>
+	<h6>Language: {{ subject.language}}</h6>
+	<h6>Treatment: {{ subject.treatment}}</h6>
+	{% if subject.optout %}
+		<div class="alert-danger p-2 m-2">
+		<p>
+			Opted-out of the study on {{ subject.optout_date }}<br/>
+			Reason: {{ subject.optout_reason }}</p>
+		</div>
+	{% endif %}
+	<p><a class="btn btn-outline-info btn-sm" href="{% url 'subjects_all' %}">Back to Study Subjects</a></p>
+	<hr/>
+        
     <ul class="nav nav-tabs" id="myTab" role="tablist">
 		<li class="nav-item">
 		    <a class="nav-link active" id="tab-chat" data-toggle="tab" href="#chat" role="tab" aria-controls="chat" aria-selected="true">Chat History</a>
@@ -32,43 +31,41 @@
 		</li>
 	</ul>
 
-
 	<div class="tab-content mt-4" id="myTabContent">
 
 	    <!-- Active tab -->
 		<div class="tab-pane fade show active" id="chat" role="tabpanel" aria-labelledby="tab-chat">
-    	
-    	<h5>Chat History</h5>
-	   	{% if chat.count == 0 %}
-    		<p class="pl-3 text-info">* None</p>
-    	{% else %}
-        	<table class="table table-sm table-hover table-bordered bg-white">
-	    	<thead class="thead-light"><tr><th scope="col">Time</th><th scope="col">Message</th><th scope="col">Sender</th></tr></thead>
-	    	<tbody>
-    		{% for msg in chat %}
-		    	{% if msg.1 == 1 %}
-		    		<tr class="bg-primary text-white">
-		    	{% else %}
-		    		<tr>
-		    	{% endif %}
-		     	
-		     	<td style="width:11em;">{{ msg.0|date:'M jS, g:i a'}}</td>
-		     	
-		     	{% if msg.1 == 1 %}	  	
-		     		<td colspan="2">{{ msg.2 }}</td>
-		     	{% else %}
-		     		<td>{{ msg.2 }}</td>
-		     		{% if msg.4 == 'auto' %}
-		     			<td>Auto</td>
-		     		{% else %}
-		     			<td>{{ msg.3.first_name }} {{ msg.3.last_name|first }}</td>
-		     		{% endif %}
-		    	{% endif %}
-		    	</tr>
-	     	{% endfor %}
-    		</tbody>
-	   		</table>
-    	{% endif %}
+    		<h5>Chat History</h5>
+		   	{% if chat.count == 0 %}
+	    		<p class="pl-3 text-info">* None</p>
+	    	{% else %}
+	        	<table class="table table-sm table-hover table-bordered bg-white">
+		    	<thead class="thead-light"><tr><th scope="col">Time</th><th scope="col">Message</th><th scope="col">Sender</th></tr></thead>
+		    	<tbody>
+	    		{% for msg in chat %}
+			    	{% if msg.1 == 1 %}
+			    		<tr class="bg-primary text-white">
+			    	{% else %}
+			    		<tr>
+			    	{% endif %}
+			     	
+			     	<td style="width:11em;">{{ msg.0|date:'M jS, g:i a'}}</td>
+			     	
+			     	{% if msg.1 == 1 %}	  	
+			     		<td colspan="2">{{ msg.2 }}</td>
+			     	{% else %}
+			     		<td>{{ msg.2 }}</td>
+			     		{% if msg.4 == 'auto' %}
+			     			<td>Auto</td>
+			     		{% else %}
+			     			<td>{{ msg.3.first_name }} {{ msg.3.last_name|first }}</td>
+			     		{% endif %}
+			    	{% endif %}
+			    	</tr>
+		     	{% endfor %}
+	    		</tbody>
+		   		</table>
+	    	{% endif %}
     	</div>
 
 		<!-- Queue tab -->
@@ -93,22 +90,24 @@
 
 		<!-- SMS tab -->
 		<div class="tab-pane fade" id="sms" role="tabpanel" aria-labelledby="tab-sms">
-			<h5>Send New Message to {{ subject.first_name }} {{ subject.last_name }}</h5>
 			{% if form != None %}
+				<h5>Send New Message to</h5>
+				<h6 class="pl-3">{{ subject.first_name }} {{ subject.last_name }}</h6>
+				<h6 class="pl-3">Phone: {{ subject.phone_1 }}</h6>
 				<form action="." method="post">
 				{% csrf_token %}
 				<input type="hidden" name="to_phone" value={{ subject.phone_1 }} />
 				<input type="hidden" name="study_id" value={{ subject.study_id }} />
-				{{ form|crispy }}
-				<input type="submit" class="btn btn-danger" value="SEND TEXT MESSAGE to {{ subject.first_name}} {{ subject.last_name }} ({{ subject.phone_1}})">
+				<div class="pl-3">{{ form|crispy }}</div>
+				<span class="text-danger">* Check for correctness and grammar, and click the button below only click once.</span>
+				<br/><br/>
+				<input type="submit" class="btn btn-danger" value="CLICK TO SEND TEXT MESSAGE">
 				</form>
-				<span class="text-danger">* Check for correctness and grammar, and only click once.</span>
 				<hr/>
 			{% else %}
-				<p class="bg-danger text-white">This user has opted-out of the study and cannot be messaged</p>
+				<h5 class="text-danger p-2 m-2">This user has opted-out of the study and cannot be messaged</h5>
 			{% endif %}
 		</div>
-
 	</div>
 </div>
 {% endblock content %}

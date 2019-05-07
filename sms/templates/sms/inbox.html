@@ -1,7 +1,7 @@
 {% extends "home/base.html" %}
 {% block content %}
     <div class="content-section">
-    	<h3>Inbox - To be processed</h3>
+    	<h4>Inbox - To be processed</h4>
     	<table class="table table-sm table-hover table-bordered bg-white">
 		<caption>
 		<p><small> * Unprocessed Messages</small></p>
@@ -12,7 +12,7 @@
     	{% for msg in unread_msgs %}
     	<tr>
     	<td>{{ forloop.counter }} </td>
-     	<td>{{ msg.ts_created|date:'M dS, g:i a' }}</td>
+     	<td>{{ msg.ts_created|date:'M jS, g:i a' }}</td>
      	{% if msg.study_id %}
     		<td><a href="{% url 'subject_details' msg.study_id.pk %}">{{ msg.study_id.first_name }} {{ msg.study_id.last_name }}</a></td>
     	{% else %}
@@ -25,7 +25,7 @@
      </table>
     </div>
     <div class="content-section">
-    	<h3>Inbox - Already Processed</h3>
+    	<h3>Read Messages - Already Processed</h3>
     	<table class="table table-sm table-hover table-bordered bg-white">
 		<caption>
 		<p><small> * Processed Messages</small></p>
@@ -36,7 +36,7 @@
     	{% for msg in read_msgs %}
     	<tr>
     	<td>{{ forloop.counter }} </td>
-     	<td>{{ msg.ts_created|date:'M dS, g:i a' }}</td>
+     	<td>{{ msg.ts_created|date:'M jS, g:i a' }}</td>
     	{% if msg.study_id %}
     		<td><a href="{% url 'subject_details' msg.study_id.pk %}">{{ msg.study_id.first_name }} {{ msg.study_id.last_name }}</a></td>
     	{% else %}

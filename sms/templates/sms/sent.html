@@ -1,17 +1,16 @@
 {% extends "home/base.html" %}
 {% block content %}
     <div class="content-section">
-    	<h3>Messages already sent</h3>
+    	<h4>Previously Sent Messages</h4>
     	<table class="table table-sm table-hover table-bordered bg-white">
     	<caption>
-			<p><small> * Showing last 1000 sent messages.</small></p>
 			<p><a class="btn btn-outline-info btn-sm" href="{% url 'dashboard' %}">Back to Dashboard</a></p>
 		</caption>
-		<thead class="thead-light"><tr><th>Sent</th><th>To</th><th>Message</th><th>Sender</th><th>Text length</th></tr></thead>
+		<thead class="thead-light"><tr><th>#</th><th>Sent</th><th>To</th><th>Message</th><th>Sender</th><th>Text length</th></tr></thead>
     	<tbody>
     	{% for msg in msgs %}
-    	<tr>
-     	<td>{{ msg.sent_on|date:'M dS, g:i a'}}</td>
+    	<tr><td>{{ forloop.counter }}</td>
+     	<td>{{ msg.sent_on|date:'M jS, g:i a'}}</td>
     	{% if msg.study_id %}
     		<td><a href="{% url 'subject_details' msg.study_id.pk %}">{{ msg.study_id.first_name }} {{ msg.study_id.last_name }}</a></td>
     	{% else %}

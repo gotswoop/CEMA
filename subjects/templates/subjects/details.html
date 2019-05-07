@@ -43,14 +43,21 @@
 		    	<thead class="thead-light"><tr><th scope="col">Time</th><th scope="col">Message</th><th scope="col">Sender</th></tr></thead>
 		    	<tbody>
 	    		{% for msg in chat %}
+	    			<!-- If incoming message -->
 			    	{% if msg.1 == 1 %}
-			    		<tr class="bg-primary text-white">
+			    		<!-- If incoming message is not processed -->
+			    		{% if msg.5 == 0 %}
+			    			<tr class="bg-danger text-white">
+			    		{% else %}
+							<tr class="bg-primary text-white">
+			    		{% endif %}
 			    	{% else %}
 			    		<tr>
 			    	{% endif %}
 			     	
 			     	<td style="width:11em;">{{ msg.0|date:'M jS, g:i a'}}</td>
 			     	
+			     	<!-- If incoming message -->
 			     	{% if msg.1 == 1 %}	  	
 			     		<td colspan="2">{{ msg.2 }}</td>
 			     	{% else %}
@@ -99,7 +106,7 @@
 				<input type="hidden" name="to_phone" value={{ subject.phone_1 }} />
 				<input type="hidden" name="study_id" value={{ subject.study_id }} />
 				<div class="pl-3">{{ form|crispy }}</div>
-				<span class="text-danger">* Check for correctness and grammar, and click the button below only click once.</span>
+				<span class="text-danger">* Check for correctness and grammar, and click the button below only once.</span>
 				<br/><br/>
 				<input type="submit" class="btn btn-danger" value="CLICK TO SEND TEXT MESSAGE">
 				</form>

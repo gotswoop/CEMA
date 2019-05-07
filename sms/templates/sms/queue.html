@@ -1,32 +1,38 @@
 {% extends "home/base.html" %}
 {% block content %}
-    <div class="content-section">
-    	<h4>Messages scheduled to be sent</h4>
-    	<table class="table table-sm table-hover table-bordered bg-white">
-		<caption>
-			<p><small> * Messages in queue</small></p>
-			<p><a class="btn btn-outline-info btn-sm" href="{% url 'dashboard' %}">Back to Dashboard</a></p>
-		</caption>
-		<thead class="thead-light"><tr><th>#</th><th>Date / Time</th><th>To</th><th>Message</th><th>Text length</th></tr></thead>
-    	<tbody>
-    	{% for msg in msgs %}
-    	<tr>
-    	<td>{{ forloop.counter }} </td>
-     	<td>{{ msg.send_after|date:'M dS, g:i a'}}</td>
-    	{% if msg.study_id %}
-    		<td><a href="{% url 'subject_details' msg.study_id.pk %}">{{ msg.study_id.first_name }} {{ msg.study_id.last_name }}</a></td>
-    	{% else %}
-    		<td>{{ msg.from_phone }}</td>
-    	{% endif %}
-    	<td><span onmouseover="{{ msg.message }}">{{ msg.message }}</span></td>
-    	{% if msg.message|length > 160 %}
-    		<td><span class="text-danger">{{ msg.message|length }}</span></td>
-    	{% else %}
-    		<td>{{ msg.message|length }}</td>
-    	{% endif %}
-    	</tr>
-     	{% endfor %}
-     	</tbody>
-     </table>
-    </div>
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+  <li class="breadcrumb-item active">Messages - Scheduled</li>
+</ol>
+
+<div class="content-section mt-4">
+	<h4>Messages scheduled to be sent</h4>
+	<table class="table table-sm table-hover table-bordered bg-white">
+	<caption>
+		<p><small> * Messages in queue</small></p>
+		<p><a class="btn btn-outline-info btn-sm" href="{% url 'dashboard' %}">Back to Dashboard</a></p>
+	</caption>
+	<thead class="thead-light"><tr><th>#</th><th>Date / Time</th><th>To</th><th>Message</th><th>Text length</th></tr></thead>
+	<tbody>
+	{% for msg in msgs %}
+	<tr>
+	<td>{{ forloop.counter }} </td>
+ 	<td>{{ msg.send_after|date:'M dS, g:i a'}}</td>
+	{% if msg.study_id %}
+		<td><a href="{% url 'subject_details' msg.study_id.pk %}">{{ msg.study_id.first_name }} {{ msg.study_id.last_name }}</a></td>
+	{% else %}
+		<td>{{ msg.from_phone }}</td>
+	{% endif %}
+	<td><span onmouseover="{{ msg.message }}">{{ msg.message }}</span></td>
+	{% if msg.message|length > 160 %}
+		<td><span class="text-danger">{{ msg.message|length }}</span></td>
+	{% else %}
+		<td>{{ msg.message|length }}</td>
+	{% endif %}
+	</tr>
+ 	{% endfor %}
+ 	</tbody>
+ </table>
+</div>
 {% endblock content %}

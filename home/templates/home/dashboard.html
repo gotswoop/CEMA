@@ -1,16 +1,21 @@
 {% extends "home/base.html" %}
 {% block content %}
-	<div class="content-section">
-	<ul>
-		<li><a href="{% url 'subjects_all' %}">Study Subjects</a></li>
-		<li>Messages:
-			<ul>
-				<li><a href="{% url 'sms_inbox' %}">Incoming</a></li>
-				<li><a href="{% url 'sms_queue' %}">Scheduled To Be Sent</a></li>
-				<li><a href="{% url 'sms_sent' %}">Previously Sent</a></li>
-			</ul>
-		</li>
-		<li><a href="{% url 'all_links' %}">Shortened Links</a></li>
-	</ul>
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item active">Dashboard</li>
+</ol>
+
+<div class="content-section mt-4">
+<ul>
+	<li><a href="{% url 'subjects_all' %}">Study Subjects</a></li>
+	<li>Messages:
+		<ul>
+			<li><a href="{% url 'sms_inbox' %}">Incoming</a></li>
+			<li><a href="{% url 'sms_queue' %}">Scheduled To Be Sent</a></li>
+			<li><a href="{% url 'sms_sent' %}">Previously Sent</a></li>
+		</ul>
+	</li>
+	<li><a href="{% url 'all_links' %}">Shortened Links</a></li>
+</ul>
 </div>
 {% endblock content %}

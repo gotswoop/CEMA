@@ -1,35 +1,41 @@
 {% extends "home/base.html" %}
 {% block content %}
-    <div class="content-section">
-    	<h4>Previously Sent Messages</h4>
-    	<table class="table table-sm table-hover table-bordered bg-white">
-    	<caption>
-			<p><a class="btn btn-outline-info btn-sm" href="{% url 'dashboard' %}">Back to Dashboard</a></p>
-		</caption>
-		<thead class="thead-light"><tr><th>#</th><th>Sent</th><th>To</th><th>Message</th><th>Sender</th><th>Text length</th></tr></thead>
-    	<tbody>
-    	{% for msg in msgs %}
-    	<tr><td>{{ forloop.counter }}</td>
-     	<td>{{ msg.sent_on|date:'M jS, g:i a'}}</td>
-    	{% if msg.study_id %}
-    		<td><a href="{% url 'subject_details' msg.study_id.pk %}">{{ msg.study_id.first_name }} {{ msg.study_id.last_name }}</a></td>
-    	{% else %}
-    		<td>{{ msg.from_phone }}</td>
-    	{% endif %}
-    	<td><span onmouseover="{{msg.from_phone}}">{{ msg.message}}</span></td>
-    	{% if msg.send_mode == "manual" %}
-    		<td>{{ msg.sent_by_user.first_name.0|title }}. {{ msg.sent_by_user.last_name}}</span></td>
-    	{% else %}
-    		<td>{{ msg.send_mode|title}}</span></td>
-    	{% endif %}
-    	{% if msg.message|length > 160 %}
-    		<td><span class="text-danger">{{ msg.message|length }}</span></td>
-    	{% else %}
-    		<td>{{ msg.message|length }}</td>
-    	{% endif %}
-	   	</tr>
-     	{% endfor %}
-     	</tbody>
-     </table>
-    </div>
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+  <li class="breadcrumb-item active">Messages - Previously Sent</li>
+</ol>
+
+<div class="content-section mt-4">
+	<h4>Previously Sent Messages</h4>
+	<table class="table table-sm table-hover table-bordered bg-white">
+	<caption>
+		<p><a class="btn btn-outline-info btn-sm" href="{% url 'dashboard' %}">Back to Dashboard</a></p>
+	</caption>
+	<thead class="thead-light"><tr><th>#</th><th>Sent</th><th>To</th><th>Message</th><th>Sender</th><th>Text length</th></tr></thead>
+	<tbody>
+	{% for msg in msgs %}
+	<tr><td>{{ forloop.counter }}</td>
+ 	<td>{{ msg.sent_on|date:'M jS, g:i a'}}</td>
+	{% if msg.study_id %}
+		<td><a href="{% url 'subject_details' msg.study_id.pk %}">{{ msg.study_id.first_name }} {{ msg.study_id.last_name }}</a></td>
+	{% else %}
+		<td>{{ msg.from_phone }}</td>
+	{% endif %}
+	<td><span onmouseover="{{msg.from_phone}}">{{ msg.message}}</span></td>
+	{% if msg.send_mode == "manual" %}
+		<td>{{ msg.sent_by_user.first_name.0|title }}. {{ msg.sent_by_user.last_name}}</span></td>
+	{% else %}
+		<td>{{ msg.send_mode|title}}</span></td>
+	{% endif %}
+	{% if msg.message|length > 160 %}
+		<td><span class="text-danger">{{ msg.message|length }}</span></td>
+	{% else %}
+		<td>{{ msg.message|length }}</td>
+	{% endif %}
+   	</tr>
+ 	{% endfor %}
+ 	</tbody>
+ </table>
+</div>
 {% endblock content %}

@@ -20,6 +20,7 @@ from home import views as home_views
 from sms import views as sms_views
 from subjects import views as subject_views
 from shorty import views as shorty_views
+from survey import views as survey_views
 
 urlpatterns = [
 	path('admin/', admin.site.urls),
@@ -51,4 +52,6 @@ urlpatterns = [
 	# URL Shortner
 	path('shorty/', include('shorty.urls')),
 
+	# Incoming survey request
+	path('s/<str:survey_key>', survey_views.survey, name='survey'),
 ]

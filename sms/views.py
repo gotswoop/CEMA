@@ -69,18 +69,18 @@ def incoming_sms(request):
 	text_response = 'Thank you for your message. We will get back to you shortly.'
 	if phone_not_found:
 		study_id = None
-		subject = '[NG Study]' + ' Incoming text from ' + incoming.get('From') + ' (unrecognized)'
+		subject = 'Incoming text from ' + incoming.get('From') + ' (unrecognized)'
 		message = 'Sender not recognized based on phone number: ' + incoming.get('From') + '\n\nMessage: ' + incoming.get('Body')
 	else:
 		study_id = sub_obj
 		if sub_obj.language == "Spanish":
 			text_response = 'Gracias por su mensaje. Le responderemos pronto.'
-		subject = '[NG Study]' + ' Incoming text from ' + sub_obj.first_name + ' ' + sub_obj.last_name + ' (' + sub_obj.study_id + ')'
+		subject = 'Incoming text from ' + sub_obj.first_name + ' ' + sub_obj.last_name + ' (' + sub_obj.study_id + ')'
 		message = 'From: ' + sub_obj.first_name + ' ' + sub_obj.last_name + ' (' + sub_obj.study_id + ')\n\nFrom #: ' + str(sub_obj.phone_1) + '\n\nMessage: ' + incoming.get('Body')
 	
 	# TODO: If images show them!
-	to_emails=['anyasamek+ng@gmail.com','ssamek@usc.edu','andregra@usc.edu','tarushgu@usc.edu']
-	notify_admins = EmailMessage(subject, message, settings.EMAIL_HOST_USER, to_emails, reply_to=['ssamek@usc.edu'])
+	to_emails=['beelab-northgate-l@mymaillists.usc.edu']
+	notify_admins = EmailMessage(subject, message, settings.EMAIL_HOST_USER, to_emails, reply_to=['anyasamek@gmail.com'])
 	notify_admins.send()
 	
 	try:

@@ -151,8 +151,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'swoop.work@gmail.com'
-EMAIL_HOST_PASSWORD = 'typwalijvnenuzfu'
+EMAIL_HOST_USER = 'bee.research.lab@gmail.com'
+EMAIL_HOST_PASSWORD = 'hlgbiijqjlmvvflb'
 
 SESSION_COOKIE_AGE = 1800 # 30 mins
 PASSWORD_RESET_TIMEOUT_DAYS = 1 # 1 day

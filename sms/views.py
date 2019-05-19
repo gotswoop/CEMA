@@ -80,7 +80,7 @@ def incoming_sms(request):
 	
 	# TODO: If images show them!
 	to_emails=['beelab-northgate-l@mymaillists.usc.edu']
-	notify_admins = EmailMessage(subject, message, settings.EMAIL_HOST_USER, to_emails, reply_to=['anyasamek@gmail.com'])
+	notify_admins = EmailMessage(subject, message, settings.EMAIL_HOST_USER, to_emails, reply_to=['beelab-northgate-l@mymaillists.usc.edu'])
 	notify_admins.send()
 	
 	try:

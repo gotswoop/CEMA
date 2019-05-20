@@ -21,7 +21,7 @@ class Subjects(models.Model):
 	address_state = models.CharField(null=True, max_length=20)
 	address_zip = models.CharField(null=True, max_length=10)
 	address_country = models.CharField(null=True, max_length=20)
-	language = models.CharField(default="English", max_length=10)
+	language = models.CharField(default="en", max_length=10)
 	treatment = models.CharField(null=True, max_length=10)
 	time_zone = models.CharField(default="PT", null=True, max_length=10)
 	optout = models.IntegerField(default=0)
@@ -37,3 +37,8 @@ class Subjects(models.Model):
 	
 	class Meta:
 		db_table = "subjects"
+
+	def lang(self):
+		if self.language == "es":
+			return "Spanish"
+		return "English"

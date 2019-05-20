@@ -73,7 +73,7 @@ def incoming_sms(request):
 		message = 'Sender not recognized based on phone number: ' + incoming.get('From') + '\n\nMessage: ' + incoming.get('Body')
 	else:
 		study_id = sub_obj
-		if sub_obj.language == "Spanish":
+		if sub_obj.language == "es":
 			text_response = 'Gracias por su mensaje. Le responderemos pronto.'
 		subject = 'Incoming text from ' + sub_obj.first_name + ' ' + sub_obj.last_name + ' (' + sub_obj.study_id + ')'
 		message = 'From: ' + sub_obj.first_name + ' ' + sub_obj.last_name + ' (' + sub_obj.study_id + ')\n\nFrom #: ' + str(sub_obj.phone_1) + '\n\nMessage: ' + incoming.get('Body')

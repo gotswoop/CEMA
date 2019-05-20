@@ -12,8 +12,8 @@
 	<h1>{{ subject.first_name }} {{ subject.last_name }}</h1>
 	<h6>Study Id: {{ subject.study_id }}</h6>
 	<h6>Phone Number: {{ subject.phone_1 }}</h6>
-	<h6>Recruited by {{ subject.recruited_by }} on {{subject.recruited_date|date:'M d, Y' }} at {{ subject.recruited_location}}</h6>
-	<h6>Language: {{ subject.language}}</h6>
+	<h6>Recruited by {{ subject.recruited_by }} on {{subject.recruited_date|date:'M d, Y' }} at {{ subject.recruited_location }}</h6>
+	<h6>Language: {{ subject.lang }}</h6>
 	<h6>Treatment: {{ subject.treatment}}</h6>
 	{% if subject.optout %}
 		<div class="alert-danger p-2 m-2">

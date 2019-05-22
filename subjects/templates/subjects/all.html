@@ -9,7 +9,7 @@
 <div class="content-section mb-5 mt-4">
 	<table class="table table-sm table-hover table-bordered bg-white">
 	<h3>Active Subjects ({{ subjects_active.count }})</h3>
-	<thead class="thead-light"><tr><th>#</th><th>Name</th><th>Study Id</th>	<th>Primary Ph</th><th>Interviewer</th><th>Location</th><th>Recruited Date</th><th>Language</th><th>Treatment</th></tr></thead>
+	<thead class="thead-light"><tr><th>#</th><th>Name</th><th>Study Id</th>	<th>Primary Ph</th><th>Interviewer</th><th>Location</th><th>Recruited Date</th><th>Language</th></tr></thead>
 	<tbody>
 	{% for subject in subjects_active %}
 	<tr>
@@ -21,7 +21,6 @@
 	<td>{{ subject.recruited_location }}</td>
 	<td>{{ subject.recruited_date|date:'Y-m-d' }}</td>
 	<td>{{ subject.lang }}</td>
-	<td>{{ subject.treatment }}</td>
 	</tr>
  	{% endfor %}
  	</tbody>
@@ -30,7 +29,7 @@
 <div class="content-section mb-5">
 	<table class="table table-sm table-hover table-bordered bg-white">
 	<h3>Inactive Subjects ({{ subjects_inactive.count }})</h3>
-	<thead class="thead-light"><tr><th>#</th><th>Name</th><th>Study Id</th>	<th>Primary Ph</th><th>Interviewer</th><th>Location</th><th>Recruited Date</th><th>Language</th><th>Treatment</th></tr></thead>
+	<thead class="thead-light"><tr><th>#</th><th>Name</th><th>Study Id</th>	<th>Primary Ph</th><th>Interviewer</th><th>Location</th><th>Recruited Date</th><th>Language</th></tr></thead>
 	<tbody>
 	{% for subject in subjects_inactive %}
 	<tr>
@@ -42,7 +41,6 @@
 	<td>{{ subject.recruited_location }}</td>
 	<td>{{ subject.recruited_date|date:'Y-m-d' }}</td>
 	<td>{{ subject.lang }}</td>
-	<td>{{ subject.treatment }}</td>
 	</tr>
  	{% endfor %}
  	</tbody>
@@ -51,7 +49,7 @@
 <div class="content-section mb-5">
 	<table class="table table-sm table-hover table-bordered bg-white">
 	<h3>Test Subjects ({{ subjects_test.count }})</h3>
-	<thead class="thead-light"><tr><th>#</th><th>Name</th><th>Study Id</th>	<th>Primary Ph</th><th>Interviewer</th><th>Location</th><th>Recruited Date</th><th>Language</th><th>Treatment</th></tr></thead>
+	<thead class="thead-light"><tr><th>#</th><th>Name</th><th>Study Id</th>	<th>Primary Ph</th><th>Interviewer</th><th>Location</th><th>Recruited Date</th><th>Language</th></tr></thead>
 	<tbody>
 	{% for subject in subjects_test %}
 	<tr>
@@ -63,7 +61,6 @@
 	<td>{{ subject.recruited_location }}</td>
 	<td>{{ subject.recruited_date|date:'Y-m-d' }}</td>
 	<td>{{ subject.lang }}</td>
-	<td>{{ subject.treatment }}</td>
 	</tr>
  	{% endfor %}
  	</tbody>

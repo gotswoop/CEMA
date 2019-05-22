@@ -42,3 +42,13 @@ class Subjects(models.Model):
 		if self.language == "es":
 			return "Spanish"
 		return "English"
+
+	# Fetching primary phone number (TODO) and return it in format (XXX) XXX-XXXX
+	def phone(self):
+		# TODO: get primary phone 
+		primary_number = self.phone_1
+		a = primary_number[2:5]
+		b = primary_number[5:8]
+		c = primary_number[8:12]
+		return '(' + a + ')' + ' ' + b + '-' + c
+

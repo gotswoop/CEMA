@@ -11,7 +11,7 @@
 <div class="content-section mt-4">
 	<h1>{{ subject.first_name }} {{ subject.last_name }}</h1>
 	<h6>Study Id: {{ subject.study_id }}</h6>
-	<h6>Phone Number: {{ subject.phone_1 }}</h6>
+	<h6>Phone Number: {{ subject.phone }}</h6>
 	<h6>Recruited by {{ subject.recruited_by }} on {{subject.recruited_date|date:'M d, Y' }} at {{ subject.recruited_location }}</h6>
 	<h6>Language: {{ subject.lang }}</h6>
 	{% if subject.optout %}
@@ -104,7 +104,7 @@
 			{% if form != None %}
 				<h5>Send New Message to</h5>
 				<h6 class="pl-3">{{ subject.first_name }} {{ subject.last_name }}</h6>
-				<h6 class="pl-3">Phone: {{ subject.phone_1 }}</h6>
+				<h6 class="pl-3">Phone: {{ subject.phone }}</h6>
 				<form action="." method="post">
 				{% csrf_token %}
 				<input type="hidden" name="to_phone" value={{ subject.phone_1 }} />

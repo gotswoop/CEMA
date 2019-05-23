@@ -24,7 +24,7 @@
 	{% endif %}
 	<td><span onmouseover="{{msg.from_phone}}">{{ msg.message}}</span></td>
 	{% if msg.send_mode == "manual" %}
-		<td>{{ msg.sent_by_user.first_name.0|title }}. {{ msg.sent_by_user.last_name}}</span></td>
+		<td>{{ msg.sent_by_user.first_name }} {{ msg.sent_by_user.last_name.0|title }}</span></td>
 	{% else %}
 		<td>{{ msg.send_mode|title}}</span></td>
 	{% endif %}

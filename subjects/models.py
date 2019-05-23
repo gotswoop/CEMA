@@ -43,6 +43,14 @@ class Subjects(models.Model):
 			return "Spanish"
 		return "English"
 
+	def fullname(self):
+		return self.first_name + ' ' + self.last_name
+
+	# Fetching primary phone number (TODO)
+	def primary_phone(self):
+		# TODO: get primary phone 
+		return self.phone_1
+
 	# Fetching primary phone number (TODO) and return it in format (XXX) XXX-XXXX
 	def phone(self):
 		# TODO: get primary phone 

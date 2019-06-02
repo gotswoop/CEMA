@@ -7,7 +7,7 @@
 
 <div class="content-section mt-4">
 <ul>
-	<li><a class="badge badge-danger"href="{% url 'subjects_recruit' %}">RECRUIT SUBJECTS</a></li>
+	<li><a class="badge badge-danger" href="{% url 'subjects_recruit' %}">RECRUIT SUBJECTS</a></li>
 	<li><a href="{% url 'subjects_all' %}">Study Subjects</a></li>
 	<li>Messages:
 		<ul>
@@ -16,7 +16,8 @@
 			<li><a href="{% url 'sms_sent' %}">Previously Sent</a></li>
 		</ul>
 	</li>
-	<li><a href="{% url 'all_links' %}">Shortened Links</a></li>
+	<!-- <li><a href="{% url 'all_links' %}">Shortened Links</a></li> -->
+	<li><a class="badge badge-success" href="{% url 'survey_test' %}">Test Survey</a></li>
 </ul>
 </div>
 {% endblock content %}

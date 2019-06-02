@@ -14,6 +14,7 @@ from survey.models import *
 from django.db import IntegrityError
 from survey.functions import *
 
+# No login required
 @require_http_methods(["GET", "POST"])
 def survey(request, survey_key):
 
@@ -81,6 +82,7 @@ def survey(request, survey_key):
 			}
 			return render(request, 'survey/main.html', context)
 
+@login_required
 @require_http_methods(["GET", "POST"])
 def survey_test(request):
 

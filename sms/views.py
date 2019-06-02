@@ -62,7 +62,7 @@ def incoming_sms(request):
 
 	# Search for other phone numbers here!!
 	try:
-		sub_obj = Subjects.objects.get(phone_1=incoming.get('From'))
+		sub_obj = Subjects.objects.get(phone=incoming.get('From'))
 	except Subjects.DoesNotExist:
 		phone_not_found = True
 
@@ -75,8 +75,8 @@ def incoming_sms(request):
 		study_id = sub_obj
 		if sub_obj.language == "es":
 			text_response = 'Gracias por su mensaje. Le responderemos pronto.'
-		subject = 'Incoming text from ' + sub_obj.first_name + ' ' + sub_obj.last_name + ' (' + sub_obj.study_id + ')'
-		message = 'From: ' + sub_obj.first_name + ' ' + sub_obj.last_name + ' (' + sub_obj.study_id + ')\n\nFrom #: ' + str(sub_obj.phone_1) + '\n\nMessage: ' + incoming.get('Body')
+		subject = 'Incoming text from ' + sub_obj.first_name + ' ' + sub_obj.last_name + ' (' + str(sub_obj.study_id) + ')'
+		message = 'From: ' + sub_obj.first_name + ' ' + sub_obj.last_name + ' (' + str(sub_obj.study_id) + ')\n\nFrom #: ' + str(sub_obj.phone) + '\n\nMessage: ' + incoming.get('Body')
 	
 	# TODO: If images show them!
 	to_emails=['beelab-northgate-l@mymaillists.usc.edu']

@@ -11,8 +11,8 @@
 <div class="content-section mt-4">
 	<h1>{{ subject.first_name }} {{ subject.last_name }}</h1>
 	<h6>Study Id: {{ subject.study_id }}</h6>
-	<h6>Phone Number: {{ subject.phone }}</h6>
-	<h6>Recruited by {{ subject.recruited_by }} on {{subject.recruited_date|date:'M d, Y' }} at {{ subject.recruited_location }}</h6>
+	<h6>Phone Number: {{ subject.phone_number }}</h6>
+	<h6>Recruited by {{ subject.recruited_by.first_name }} {{ subject.recruited_by.last_name }} on {{subject.recruited_date|date:'M d, Y' }} at {{ subject.recruited_location }}</h6>
 	<h6>Language: {{ subject.lang }}</h6>
 	{% if subject.optout %}
 		<div class="alert-danger p-2 m-2">
@@ -33,6 +33,10 @@
 		<li class="nav-item">
 			<a class="nav-link" id="tab-sms" data-toggle="tab" href="#sms" role="tab" aria-controls="sms" aria-selected="false">Text {{ subject.first_name }}</a>
 		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="tab-settings" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">Settings</a>
+		</li>
+
 	</ul>
 
 	<div class="tab-content mt-4" id="myTabContent">
@@ -104,10 +108,10 @@
 			{% if form != None %}
 				<h5>Send New Message to</h5>
 				<h6 class="pl-3">{{ subject.first_name }} {{ subject.last_name }}</h6>
-				<h6 class="pl-3">Phone: {{ subject.phone }}</h6>
+				<h6 class="pl-3">Phone: {{ subject.phone_number }}</h6>
 				<form action="." method="post">
 				{% csrf_token %}
-				<input type="hidden" name="to_phone" value={{ subject.phone_1 }} />
+				<input type="hidden" name="to_phone" value={{ subject.phone }} />
 				<input type="hidden" name="study_id" value={{ subject.study_id }} />
 				<div class="pl-3">{{ form|crispy }}</div>
 				<span class="text-danger">* Check for correctness and grammar, and click the button below only once.</span>
@@ -118,6 +122,17 @@
 			{% else %}
 				<h5 class="text-danger p-2 m-2">This user has opted-out of the study and cannot be messaged</h5>
 			{% endif %}
+		</div>
+
+		<!-- Settings tab -->
+		<div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="tab-settings">
+			<input type="submit" class="btn btn-secondary" value="Send test survey">
+			<br/><br/>
+			<input type="submit" class="btn btn-info" value="Opt-out user">
+			<br/><br/>
+			<input type="submit" class="btn btn-warning" value="Pause all texts">
+			<br/><br/>
+			<input type="submit" class="btn btn-danger" value="Delete user">
 		</div>
 	</div>
 </div>

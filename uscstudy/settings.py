@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'survey.apps.SurveyConfig',
     'shorty.apps.ShortyConfig',
     'crispy_forms',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [

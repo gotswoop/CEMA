@@ -1,0 +1,42 @@
+{% extends "survey/base.html" %}
+{% load static %}
+{% block content %}
+<script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous">
+ </script>
+
+<div class="container mt-5">
+{% if survey_link == None %}
+	<h3 class="text-danger">This page is for testing only. <u>DO NOT</u> share links with study participants</h3>
+	<h4 class="mt-5">Generate test link for</h4>
+		<form name="form" method="post" action="">
+		{% csrf_token %}
+		<label><input type="radio" name="survey" value="1" checked /> Time Survey</label>
+		<br/>
+		<label><input type="radio" name="survey" value="2" /> Risk Survey</label>
+		<hr/>
+		<label><input type="checkbox" name="language" value="1"> Spanish</label>
+		<br/><br/>
+		<!--
+		<p><label><input type="radio" name="survey" value="4"> Week 4 Survey</label></p>
+		<p><label><input type="radio" name="survey" value="14"> Week 14 Survey</label></p>
+		-->
+		<button id="next_button" class="btn btn-block btn-primary" type="submit">Generate</button>
+		</form>
+	</div>
+{% else %}
+	<h3>Here's your survey link for testing</h3>
+	<br/>
+	<a href="{{ survey_link }}" target="_blank"><strong>{{ survey_link }}</strong></a>
+	<br/>
+	<br/>
+	<h4 class="text-danger">This link is for testing only. <u>DO NOT</u> share with study participants</h4>
+	
+
+{% endif %}
+</div>
+{% endblock content %}
+
+

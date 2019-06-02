@@ -1,0 +1,22 @@
+{% extends "home/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+  <li class="breadcrumb-item active">Study Subjects - Recruit</li>
+</ol>
+
+<div class="content-section mt-4">
+	{% if form != None %}
+		<h5>New Subject Enrollment</h5>
+		<form action="." method="post">
+		{% csrf_token %}
+		<div class="pl-3">{{ form|crispy }}</div>
+		<br/>
+		<input type="submit" class="btn btn-warning btn-block" value="SAVE">
+		</form>
+	{% else %}
+		<h5 class="text-danger p-2 m-2">This user has opted-out of the study and cannot be messaged</h5>
+	{% endif %}
+{% endblock content %}

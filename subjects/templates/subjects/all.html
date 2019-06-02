@@ -16,8 +16,8 @@
 	<td>{{ forloop.counter }} </td>
 	<td><a href="{% url 'subject_details' subject.study_id %}">{{ subject.first_name }} {{  subject.last_name }} </a></td>
 	<td>{{ subject.study_id }}</td>
-	<td>{{ subject.phone }}</td>
-	<td>{{ subject.recruited_by }}</td>
+	<td>{{ subject.phone_number }}</td>
+	<td>{{ subject.recruited_by.first_name }}</td>
 	<td>{{ subject.recruited_location }}</td>
 	<td>{{ subject.recruited_date|date:'Y-m-d' }}</td>
 	<td>{{ subject.lang }}</td>
@@ -36,8 +36,8 @@
 	<td>{{ forloop.counter }} </td>
 	<td><a href="{% url 'subject_details' subject.study_id %}">{{ subject.first_name }} {{  subject.last_name }} </a></td>
 	<td>{{ subject.study_id }}</td>
-	<td>{{ subject.phone }}</td>
-	<td>{{ subject.recruited_by }}</td>
+	<td>{{ subject.phone_number }}</td>
+	<td>{{ subject.recruited_by.first_name }}</td>
 	<td>{{ subject.recruited_location }}</td>
 	<td>{{ subject.recruited_date|date:'Y-m-d' }}</td>
 	<td>{{ subject.lang }}</td>
@@ -56,8 +56,8 @@
 	<td>{{ forloop.counter }} </td>
 	<td><a href="{% url 'subject_details' subject.study_id %}">{{ subject.first_name }} {{  subject.last_name }} </a></td>
 	<td>{{ subject.study_id }}</td>
-	<td>{{ subject.phone }}</td>
-	<td>{{ subject.recruited_by }}</td>
+	<td>{{ subject.phone_number }}</td>
+	<td>{{ subject.recruited_by.first_name }}</td>
 	<td>{{ subject.recruited_location }}</td>
 	<td>{{ subject.recruited_date|date:'Y-m-d' }}</td>
 	<td>{{ subject.lang }}</td>

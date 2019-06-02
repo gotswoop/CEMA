@@ -2,17 +2,26 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Subjects(models.Model):
-	study_id = models.CharField(max_length=30, primary_key=True)
+
+	LANG_EN = 'en'
+	LANG_ES = 'es'
+	LANGUAGE_CHOICES = (
+		(LANG_EN, 'English'),
+		(LANG_ES, 'Spanish'),
+	)
+
+	LOC_1 = 'Bell'
+	LOC_2 = 'Long Beach'
+	LOCATION_CHOICES = (
+		(LOC_1, 'Bell'),
+		(LOC_2, 'Long Beach'),
+	)
+
+	study_id = models.AutoField(auto_created=True, primary_key=True)
 	first_name = models.CharField(max_length=100)
 	last_name = models.CharField(max_length=100)
-	phone_1 = models.CharField(max_length=50)
-	phone_2 = models.CharField(null=True, max_length=50)
-	phone_3 = models.CharField(null=True, max_length=50)
-	phone_primary = models.IntegerField(default=1)
-	email_1 = models.CharField(max_length=50)
-	email_2 = models.CharField(null=True, max_length=50)
-	email_3 = models.CharField(null=True, max_length=50)
-	email_primary = models.IntegerField(default=1)
+	phone = models.CharField(null=False, blank=False, max_length=50, unique=True)
+	email = models.CharField(null=True, max_length=50)
 	emergency_contact = models.CharField(null=True, max_length=200)
 	emergency_contact_phone = models.CharField(null=True, max_length=50)
 	address_1 = models.CharField(null=True, max_length=100)
@@ -21,16 +30,15 @@ class Subjects(models.Model):
 	address_state = models.CharField(null=True, max_length=20)
 	address_zip = models.CharField(null=True, max_length=10)
 	address_country = models.CharField(null=True, max_length=20)
-	language = models.CharField(default="en", max_length=10)
+	language = models.CharField(blank=False, default=None, max_length=10, choices=LANGUAGE_CHOICES)
 	treatment = models.CharField(null=True, max_length=10)
 	time_zone = models.CharField(default="PT", null=True, max_length=10)
 	optout = models.IntegerField(default=0)
 	optout_reason = models.TextField(null=True)
 	optout_date = models.DateTimeField(null=True)
 	recruited_date = models.DateTimeField(null=True)
-	# recruited_by = models.ForeignKey(User, db_column='recruited_by', on_delete=models.PROTECT, null=True)
-	recruited_by = models.CharField(null=True, max_length=100)
-	recruited_location = models.TextField(null=True)
+	recruited_by = models.ForeignKey(User, db_column='recruited_by', on_delete=models.PROTECT)
+	recruited_location = models.CharField(blank=False, default=None, max_length=20, choices=LOCATION_CHOICES)
 	notes = models.TextField(null=True)
 	ts_created = models.DateTimeField(auto_now_add=True)
 	ts_updated = models.DateTimeField(auto_now=True)
@@ -46,15 +54,10 @@ class Subjects(models.Model):
 	def fullname(self):
 		return self.first_name + ' ' + self.last_name
 
-	# Fetching primary phone number (TODO)
-	def primary_phone(self):
-		# TODO: get primary phone 
-		return self.phone_1
-
 	# Fetching primary phone number (TODO) and return it in format (XXX) XXX-XXXX
-	def phone(self):
+	def phone_number(self):
 		# TODO: get primary phone 
-		primary_number = self.phone_1
+		primary_number = self.phone
 		a = primary_number[2:5]
 		b = primary_number[5:8]
 		c = primary_number[8:12]

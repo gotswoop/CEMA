@@ -44,11 +44,11 @@ class Command(BaseCommand):
 			last_name = row['last_name']
 			language = row['language']
 			treatment = row['treatment']
-			phone_1 = '+1' + row['phone_1'].replace("-","")
+			phone = '+1' + row['phone'].replace("-","")
 
 			try:
 				sub_obj = Subjects.objects.create(study_id=study_id, recruited_date=recruited_date, recruited_location=recruited_location, 
-					recruited_by=recruited_by, first_name=first_name, last_name=last_name,	phone_1=phone_1, language=language, treatment=treatment)
+					recruited_by=recruited_by, first_name=first_name, last_name=last_name,	phone=phone, language=language, treatment=treatment)
 			except IntegrityError as e:
 				msg = '# ERROR: MySQL ' + str(e.args)
 				raise CommandError(msg)

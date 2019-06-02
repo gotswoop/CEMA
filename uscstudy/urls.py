@@ -37,6 +37,7 @@ urlpatterns = [
     #
 	path('subjects/', subject_views.subjects_all, name='subjects_all'),
 	path('subject/<int:study_id>/', subject_views.subject_details, name='subject_details'),
+	path('subjects/recruit/', subject_views.subject_recruit, name='subjects_recruit'),
 	#
 	path('sms/queue/', sms_views.sms_queue, name='sms_queue'),
 	path('sms/sent/', sms_views.sms_sent, name='sms_sent'),
@@ -54,4 +55,6 @@ urlpatterns = [
 
 	# Incoming survey request
 	path('s/<str:survey_key>', survey_views.survey, name='survey'),
+	# Test
+	path('survey/test/', survey_views.survey_test, name='survey_test'),
 ]

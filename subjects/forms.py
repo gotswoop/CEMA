@@ -7,6 +7,8 @@ class SMS_Form(forms.Form):
 
 class RecruitForm(forms.ModelForm):
 
+	send_test_survey = forms.BooleanField(label='<font color="red"><strong>SEND TEST SURVEY?</strong></font>',required=False,initial=True)
+
 	def clean_phone(self):
 
 		phone = self.cleaned_data.get('phone')
@@ -15,8 +17,10 @@ class RecruitForm(forms.ModelForm):
 		regexp = re.compile(rgxpattern)
 
 		if not regexp.match(phone):
-			raise forms.ValidationError("Incorrect format for phone number. Please enter as XXX-XXX-XXXX")
+			raise forms.ValidationError("Please enter phone number in the format XXX-XXX-XXXX")
+		
 		phone_db = '+1' + phone.replace("-","")
+		
 		if Subjects.objects.filter(phone=phone_db).exists():
 			raise forms.ValidationError("A user with this phone number already in the system")
 		return phone_db
@@ -24,8 +28,11 @@ class RecruitForm(forms.ModelForm):
 	class Meta:
 		model = Subjects
 		fields = ['first_name', 'last_name', 'phone', 'language', 'recruited_by', 'recruited_location', 'recruited_date']
+		labels = {
+        	"phone": "Phone:",
+    	}
 		widgets = {
-			'phone': forms.TextInput(attrs={"required": "required"}),
+			'phone': forms.TextInput(attrs={"required": "required", "placeholder": "XXX-XXX-XXXX"}),
 			'language': forms.RadioSelect(attrs={"required": "required"}),
 			'recruited_location': forms.RadioSelect(attrs={"required": "required"}),
 			'recruited_by': forms.HiddenInput(),

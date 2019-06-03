@@ -28,7 +28,7 @@
 	Survey starts @ {{ survey.start_datetime }}<br/>
 	Survey expires @ {{ survey.end_time }}<br/>
 	Survey language in {{ survey.subject_study_id.lang }}<br/>
-	Recruited by @ Location: {{ survey.subject_study_id.recruited_by }} @ {{ survey.subject_study_id.recruited_location }}<br/>
+	Recruited by {{ survey.subject_study_id.recruited_by.first_name }} @ {{ survey.subject_study_id.recruited_location }}<br/>
 	</p>
 </div>
 

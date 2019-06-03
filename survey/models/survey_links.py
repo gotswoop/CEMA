@@ -1,6 +1,7 @@
 from django.db import models
 from subjects.models import Subjects
 from datetime import datetime, timedelta
+from survey.settings import *
 
 class SurveyLinks(models.Model):
 	survey_key = models.CharField(max_length=50, unique=True)
@@ -13,9 +14,6 @@ class SurveyLinks(models.Model):
 	ts_created = models.DateTimeField(auto_now_add=True)
 	ts_updated = models.DateTimeField(auto_now=True)
 	
-	# Expiration time for untimed surveys
-	untimed_expiration_days = 7	
-
 	class Meta:
 		db_table = "survey_links"
 
@@ -36,12 +34,8 @@ class SurveyLinks(models.Model):
 			self.save()
 	
 	def survey_num(self):
-		if self.survey_number == 1:
-			return str(self.survey_number) + ' (Time Preference)'
-		if self.survey_number == 2:
-			return str(self.survey_number) + ' (Risk Preference)'
-		if self.survey_number == 3:
-			return str(self.survey_number) + ' (End of Week)'
+		return str(self.survey_number) + ' (' + survey_labels.get(self.survey_number) + ')'
+		
 	def end_time(self):
 		if self.timed:
 			end_datetime = self.start_datetime + timedelta(minutes=self.timed)
@@ -75,13 +69,7 @@ class SurveyLinks(models.Model):
 		survey_number = self.survey_number
 		last_question = self.last_answered_question
 		
-		surveys_and_questions = {
-	        1: ('q_00', 'q_01', 'q_02', 'q_03', 'q_04', 'q_05', 'q_06', 'q_10', 'q_11', 'q_12'),
-	        2: ('q_00', 'q_01', 'q_02', 'q_03', 'q_04', 'q_05', 'q_06', 'q_20', 'q_21'),
-	        3: ('q_00', 'q_01', 'q_02', 'q_03', 'q_04', 'q_05'),
-	    }
-
-		questions = surveys_and_questions.get(survey_number)
+		questions = survey_questions.get(survey_number)
 		if questions == None:
 			return None
 

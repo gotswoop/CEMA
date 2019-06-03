@@ -4,7 +4,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
-  <li class="breadcrumb-item"><a href="{% url 'subjects_all' %}">Study Subjects</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'subjects_all' %}">Subjects</a></li>
   <li class="breadcrumb-item active">{{ subject.first_name }} {{ subject.last_name }}</li>
 </ol>
 
@@ -125,14 +125,19 @@
 		</div>
 
 		<!-- Settings tab -->
-		<div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="tab-settings">
-			<input type="submit" class="btn btn-secondary" value="Send test survey">
-			<br/><br/>
-			<input type="submit" class="btn btn-info" value="Opt-out user">
-			<br/><br/>
-			<input type="submit" class="btn btn-warning" value="Pause all texts">
-			<br/><br/>
-			<input type="submit" class="btn btn-danger" value="Delete user">
+		<div class="tab-pane fade col" id="settings" role="tabpanel" aria-labelledby="tab-settings">
+			<input type="submit" class="btn btn-primary btn-block" value="Mark messages as read">
+			<br/>
+			<input type="submit" class="btn btn-success btn-block" value="Edit user information">
+			<br/>
+			<input type="submit" class="btn btn-secondary btn-block" value="Send test survey">
+			<br/>
+			<input type="submit" class="btn btn-info btn-block" value="Opt-out user">
+			<br/>
+			<input type="submit" class="btn btn-warning btn-block" value="Pause all texts">
+			<br/>
+			<input type="submit" class="btn btn-danger btn-block" value="Delete user">
+			
 		</div>
 	</div>
 </div>

@@ -96,10 +96,8 @@ def survey_test(request):
 		else:
 			# Test user for English
 			study_id = 109
-		print(spanish)
-		print(study_id)
-		survey_key = generate_survey_link(survey_number, study_id)
-		survey_link = ('https://' if request.is_secure() else 'http://') + request.get_host() + '/s/' + survey_key
+		survey_obj = generate_survey_link(survey_number, study_id)
+		survey_link = ('https://' if request.is_secure() else 'http://') + request.get_host() + '/s/' + survey_obj.survey_key
 		context = {
 			'survey_link': survey_link,
 		}

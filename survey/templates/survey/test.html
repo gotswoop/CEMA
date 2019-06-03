@@ -1,4 +1,4 @@
-{% extends "survey/base.html" %}
+{% extends "home/base.html" %}
 {% load static %}
 {% block content %}
 <script
@@ -7,10 +7,16 @@
   crossorigin="anonymous">
  </script>
 
-<div class="container mt-5">
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+  <li class="breadcrumb-item active">Survey - Test</li>
+</ol>
+
+
+<div class="container mt-3">
 {% if survey_link == None %}
-	<h3 class="text-danger">This page is for testing only. <u>DO NOT</u> share links with study participants</h3>
-	<h4 class="mt-5">Generate test link for</h4>
+	<h4 class="text-danger">This page is for testing only. <u>DO NOT</u> share links with study participants</h4>
+	<h5 class="mt-5">Generate test link for</h5>
 		<form name="form" method="post" action="">
 		{% csrf_token %}
 		<label><input type="radio" name="survey" value="1" checked /> Time Survey</label>
@@ -27,16 +33,14 @@
 		</form>
 	</div>
 {% else %}
-	<h3>Here's your survey link for testing</h3>
+	<h5>Here's your survey link for testing (opens in a new window)</h5>
 	<br/>
 	<a href="{{ survey_link }}" target="_blank"><strong>{{ survey_link }}</strong></a>
 	<br/>
 	<br/>
-	<h4 class="text-danger">This link is for testing only. <u>DO NOT</u> share with study participants</h4>
+	<h5 class="text-danger">This link is for testing only. <u>DO NOT</u> share with study participants</h5>
 	
 
 {% endif %}
 </div>
 {% endblock content %}
-
-

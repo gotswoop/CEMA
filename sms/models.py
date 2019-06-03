@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from subjects.models import Subjects
+from survey.functions import SurveyLinks
 
 class SMS_Incoming(models.Model):
 	study_id = models.ForeignKey(Subjects, to_field='study_id', db_column='study_id', on_delete=models.PROTECT, null=True)
@@ -25,7 +26,8 @@ class SMS_Outgoing(models.Model):
 	sent = models.IntegerField(default=0)
 	sent_on = models.DateTimeField(null=True)
 	sent_sid = models.CharField(null=True, max_length=200)
-	sent_by_user = models.ForeignKey(User, db_column='sent_by_user', on_delete=models.PROTECT, null=True)
+	sent_by_user = models.ForeignKey(User, db_column='sent_by_user', on_delete=models.PROTECT)
+	survey_key = models.ForeignKey(SurveyLinks, to_field='survey_key', db_column='survey_key', on_delete=models.PROTECT, null=True)
 	send_mode = models.CharField(default="auto", max_length=10, null=True)
 	ts_created = models.DateTimeField(auto_now_add=True)
 	ts_updated = models.DateTimeField(auto_now=True)

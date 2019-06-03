@@ -19,15 +19,22 @@ def generate_survey_link(survey_number, study_id):
 	timed = 60
 	short_url_length = 10
 
+	# TODO: What if it's not unique
 	survey_key = ''.join(random.choices(string.ascii_letters + string.digits, k=short_url_length))
 	
 	try:
-		survey_link = SurveyLinks.objects.create(survey_key=survey_key, start_datetime=datetime.now(), timed=timed, survey_number=survey_number, subject_study_id=Subjects(study_id=study_id))
+		survey_link = SurveyLinks.objects.create(
+			survey_key=survey_key, 
+			start_datetime=datetime.now(), 
+			timed=timed, 
+			survey_number=survey_number, 
+			subject_study_id=Subjects(study_id=study_id)
+		)
 	except IntegrityError as e:
 		msg = '# ERROR - Error creating a survey link : ' + str(e.args)
 		return msg
 
-	return survey_link.survey_key
+	return survey_link
 
 def save_survey_response(survey, question, question_response, user_ip):
 	try:

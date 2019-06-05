@@ -48,10 +48,14 @@ def survey(request, survey_key):
 			
 		next_question = survey.get_next_question()
 		if next_question == None:
+			if survey.study_id.language == 'es':
+				msg = 'Gracias por participar, ' + survey.study_id.first_name + '! Le enviaremos un mensaje de texto una vez que le agregamos dinero a su tarjeta.'
+			else: 
+				msg = 'Thanks for participating, ' + survey.study_id.first_name + '! We will text you once your card is loaded.'
 			context = {
 				'survey_key': survey.survey_key, 
 				'survey_status': survey.status, 
-				'survey_status_details': 'Thanks for participating, ' + survey.study_id.first_name + '! We will text you once your card is loaded.', 
+				'survey_status_details': msg, 
 			}
 			return JsonResponse(context)
 

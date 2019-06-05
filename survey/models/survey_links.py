@@ -54,11 +54,23 @@ class SurveyLinks(models.Model):
 		elif self.status == 1:
 			return "Started survey but did not complete."
 		elif self.status == 2:
-			return 'You have already completed this survey, ' + self.study_id.first_name + '. Thank you!'
+			if self.study_id.language == 'es':
+				msg = 'Ya ha completado esta encuesta, ' + self.study_id.first_name + '. Gracias!'
+			else:
+				msg = 'You have already completed this survey, ' + self.study_id.first_name + '. Thank you!'
+			return msg
 		elif self.status == 3:
-			return 'Sorry, ' + self.study_id.first_name + '. The survey link expired at ' + str(end_datetime.strftime("%I:%M %p").lstrip('0')) + ' on ' + str(end_datetime.strftime("%B %d, %Y")) + '.'
+			if self.study_id.language == 'es':
+				msg = 'Lo siento, ' + self.study_id.first_name + '. El enlace de la encuesta expiró a las ' + str(end_datetime.strftime("%I:%M %p").lstrip('0')) + ' el ' + str(end_datetime.strftime("%B %d, %Y")) + '.'
+			else:
+				msg = 'Sorry, ' + self.study_id.first_name + '. The survey link expired at ' + str(end_datetime.strftime("%I:%M %p").lstrip('0')) + ' on ' + str(end_datetime.strftime("%B %d, %Y")) + '.'
+			return msg
 		elif self.status == 4:
-			return 'Sorry, ' + self.study_id.first_name + '. The survey is closed.'
+			if self.study_id.language == 'es':
+				msg = 'Lo siento, ' + self.study_id.first_name + '. La encuesta esta cerrada.'
+			else:
+				msg = 'Sorry, ' + self.study_id.first_name + '. The survey is closed.'
+			return msg
 	
 	def update_last_answered(self, question):
 		self.last_answered_question = question

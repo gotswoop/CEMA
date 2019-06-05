@@ -14,7 +14,7 @@
 	<h2>{{ subject.first_name }} {{ subject.last_name }} {% if not subject.deleted %}<a class="ml-2" href="{% url 'subject_edit' study_id=subject.study_id %}"><img src="{% static 'subjects/edit.png' %}"/></a>{% endif %}</h2>
 	<h4>
 		<img src="{% static 'subjects/' %}{{subject.language}}.png" style="height:25px;"/>
-		<span class="badge badge-info">{{ subject.phone_number }}</span>
+		<span class="badge badge-dark">{{ subject.phone_number }}</span>
 		{% if subject.test_account %}
 			<span class="badge badge-warning">BeeLab Account</span>
 		{% endif %}
@@ -49,12 +49,13 @@
 
 	<div class="tab-content mt-4" id="myTabContent">
 
-	    <!-- Active tab -->
+	    <!-- Chat History tab -->
 		<div class="tab-pane fade show active" id="chat" role="tabpanel" aria-labelledby="tab-chat">
     		<h5>Chat History</h5>
 		   	{% if chat.count == 0 %}
 	    		<p class="pl-3 text-info">* None</p>
 	    	{% else %}
+	    		<div class="table-responsive">
 	        	<table class="table table-sm table-hover table-bordered bg-white">
 		    	<thead class="thead-light"><tr><th scope="col">Time</th><th scope="col">Message</th><th scope="col">Sender</th></tr></thead>
 		    	<tbody>
@@ -88,6 +89,7 @@
 		     	{% endfor %}
 	    		</tbody>
 		   		</table>
+		   		</div>
 	    	{% endif %}
     	</div>
 
@@ -97,6 +99,7 @@
 			{% if msgs_queue.count == 0 %}
 				<p class="pl-3 text-info">* None</p>
 				{% else %}
+				<div class="table-responsive">
 				<table class="table table-sm table-hover table-bordered bg-white">
 					<thead class="thead-light"><tr><th>Scheduled</th><th>Message</th></tr></thead>
 					<tbody>
@@ -108,6 +111,7 @@
 						{% endfor %}
 					</tbody>
 				</table>
+				</div>
 			{% endif %}
 		</div>
 

@@ -9,7 +9,7 @@ survey_labels = {
 	1: 'Time Preference',
 	2: 'Risk Preference',
 	4: 'Week 4',
-	123: 'Recruitment Survey (Risk + Time)'
+	123: 'Demo Survey (Risk + Time)'
 }
 
 # Expiration time for untimed surveys

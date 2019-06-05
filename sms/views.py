@@ -79,7 +79,7 @@ def incoming_sms(request):
 		message = 'From: ' + sub_obj.first_name + ' ' + sub_obj.last_name + ' (' + str(sub_obj.study_id) + ')\n\nFrom #: ' + str(sub_obj.phone) + '\n\nMessage: ' + incoming.get('Body')
 	
 	# TODO: If images show them!
-	to_emails=['beelab-northgate-l@mymaillists.usc.edu']
+	to_emails=['beelab-northgate-l@mymaillists.usc.edu','bee.research.lab@gmail.com']
 	notify_admins = EmailMessage(subject, message, settings.EMAIL_HOST_USER, to_emails, reply_to=['beelab-northgate-l@mymaillists.usc.edu'])
 	notify_admins.send()
 	

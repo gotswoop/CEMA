@@ -22,7 +22,7 @@ class RecruitForm(forms.ModelForm):
 		phone_db = '+1' + phone.replace("-","")
 		
 		if Subjects.objects.filter(phone=phone_db).exists():
-			raise forms.ValidationError("A user with this phone number already in the system")
+			raise forms.ValidationError("A user with this phone number already exists")
 		return phone_db
 
 	class Meta:
@@ -30,7 +30,7 @@ class RecruitForm(forms.ModelForm):
 		fields = ['first_name', 'last_name', 'phone', 'language', 'recruited_by', 'recruited_location', 'test_account']
 		labels = {
         	"phone": "Phone:",
-        	"test_account": "<span class='text-info'><strong>This is a BeeLab (test) user.</strong></span>",
+        	"test_account": "<span class='text-info'><strong>This is a BeeLab (test) user</strong></span>",
     	}
 		widgets = {
 			'phone': forms.TextInput(attrs={"required": "required", "placeholder": "xxx-xxx-xxxx"}),
@@ -55,7 +55,7 @@ class EditSubjectForm(forms.ModelForm):
 
 		# checking if unqiue after excluding current user
 		if Subjects.objects.exclude(study_id=self.instance.study_id).filter(phone=phone_db).exists():
-			raise forms.ValidationError("A user with this phone number already in the system")
+			raise forms.ValidationError("A user with this phone number already exists")
 		return phone_db
 
 	class Meta:
@@ -65,8 +65,8 @@ class EditSubjectForm(forms.ModelForm):
 			"phone": "Phone:",
 			"optout": "<span class='text-danger'><strong>Opt-out from surveys.</strong></span>",
 			"deleted": "<span class='text-danger'><strong>DELETE USER. Cannot be undone.</strong></span>",
-			"notes": "<span class='text-danger'><strong>Notes</strong> (Please provide some details on why this record was updated):</span>",
-			"test_account": "<span class='text-info'><strong>This is BeeLab (test) user.</strong></span>",
+			"notes": "<span class='text-danger'><strong>Notes</strong> (Please provide details on why this account was updated):</span>",
+			"test_account": "<span class='text-info'><strong>This is a BeeLab (test) user</strong></span>",
 		}
 		widgets = {
 			'phone': forms.TextInput(attrs={"required": "required", "placeholder": "xxx-xxx-xxxx"}),

@@ -32,8 +32,8 @@ with open(out_file, 'w') as outFile:
 	for survey in surveys:
 
 		responses = {}
-		responses['study_id'] = survey.subject_study_id.pk
-		responses['fullname'] = survey.subject_study_id.fullname()
+		responses['study_id'] = survey.study_id.pk
+		responses['fullname'] = survey.study_id.fullname()
 		responses['survey_key'] = survey.survey_key
 		responses['survey'] = survey_types[survey.survey_number]
 		responses['survey_field_datetime'] = survey.start_datetime
@@ -41,7 +41,7 @@ with open(out_file, 'w') as outFile:
 		responses['status'] = survey.status
 		responses['last_answered_question'] = survey.last_answered_question
 
-		answers = SurveyData.objects.filter(survey_key=survey.survey_key)
+		answers = SurveyData.objects.filter(survey_link=survey.pk)
 		
 		for answer in answers:
 			q = answer.question

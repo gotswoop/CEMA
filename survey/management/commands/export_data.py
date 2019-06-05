@@ -21,8 +21,8 @@ with open(csv_file, 'w') as csvFile:
 		responses = SurveyData.objects.fetch(survey_key=survey.survey_key).values()
 
 		survey_key =
-		study_id = survey.subject_study_id.study_id
-		language = survey.subject_study_id.language
+		study_id = survey.study_id.study_id
+		language = survey.study_id.language
 
 		item1 = t.account_id.item_id.pk
 		# item2 = t.account_id.item_id.p_item_id

@@ -37,6 +37,7 @@ urlpatterns = [
     #
 	path('subjects/', subject_views.subjects_all, name='subjects_all'),
 	path('subject/<int:study_id>/', subject_views.subject_details, name='subject_details'),
+	path('subject/<int:study_id>/edit/', subject_views.subject_edit, name='subject_edit'),
 	path('subjects/recruit/', subject_views.subject_recruit, name='subjects_recruit'),
 	#
 	path('sms/queue/', sms_views.sms_queue, name='sms_queue'),

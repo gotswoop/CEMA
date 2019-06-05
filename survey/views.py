@@ -51,7 +51,7 @@ def survey(request, survey_key):
 			context = {
 				'survey_key': survey.survey_key, 
 				'survey_status': survey.status, 
-				'survey_status_details': 'Thanks for participating, ' + survey.subject_study_id.first_name + '! We will text you once your card is loaded.', 
+				'survey_status_details': 'Thanks for participating, ' + survey.study_id.first_name + '! We will text you once your card is loaded.', 
 			}
 			return JsonResponse(context)
 
@@ -59,7 +59,7 @@ def survey(request, survey_key):
 			context = {
 				'survey_key': survey.survey_key, 
 				'survey_status': survey.status, 
-				'survey_question': survey.subject_study_id.language + '/' + next_question
+				'survey_question': survey.study_id.language + '/' + next_question
 			}
 			return JsonResponse(context)
 
@@ -78,7 +78,7 @@ def survey(request, survey_key):
 			next_question = survey.get_next_question()
 			context = {
 				'survey': survey,
-				'survey_question': survey.subject_study_id.language + '/' + next_question,
+				'survey_question': survey.study_id.language + '/' + next_question,
 			}
 			return render(request, 'survey/main.html', context)
 

@@ -1,17 +1,56 @@
 <h5>How do you see yourself at this moment: are you a person who is generally impatient, or someone who always shows great patience?</h5>
 
-<p>Pick one dot along the scale</p>
-   
-<label><input type="radio" name="radio_btn" value="1" onclick="clickRadio();">&nbsp;&nbsp;Very impatient</label><br/>
-<label><input type="radio" name="radio_btn" value="2" onclick="clickRadio();">&nbsp;&nbsp;</label><br/>
-<label><input type="radio" name="radio_btn" value="3" onclick="clickRadio();">&nbsp;&nbsp;</label><br/>
-<label><input type="radio" name="radio_btn" value="4" onclick="clickRadio();">&nbsp;&nbsp;</label><br/>
-<label><input type="radio" name="radio_btn" value="5" onclick="clickRadio();">&nbsp;&nbsp;</label><br/>
-<label><input type="radio" name="radio_btn" value="6" onclick="clickRadio();">&nbsp;&nbsp;</label><br/>
-<label><input type="radio" name="radio_btn" value="7" onclick="clickRadio();">&nbsp;&nbsp;</label><br/>
-<label><input type="radio" name="radio_btn" value="8" onclick="clickRadio();">&nbsp;&nbsp;</label><br/>
-<label><input type="radio" name="radio_btn" value="9" onclick="clickRadio();">&nbsp;&nbsp;</label><br/>
-<label><input type="radio" name="radio_btn" value="10" onclick="clickRadio();">&nbsp;&nbsp;Great patience</label>
+<p>Tap or slide your finger along the bar to select</p>
+<br/>
+
+<div class="slider slider-horizontal">
+	<label>
+		<input id="white_castle" class="bootstrapslider" style="height: 40px; display: none;" type="text" name="white_castle" value="-1" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="hide" data-value="-1">
+	</label>
+</div>
+<table id="legend_table" style="width:100%">
+	<tbody>
+		<tr>
+			<td style="width: 20%; text-align: left;">Very impatient</td>
+			<td style="width: 20%; text-align: right;">Great patience</td>
+		</tr>
+	</tbody>
+</table>
+<br/><br/>
 
 <input type="hidden" id="question" name="question" value="q_12">
 <input type="hidden" id="question_response" name="question_response" value="-1">
+
+<script type="text/javascript">
+	// On document ready
+	$( document ).ready(function() {
+		// console.log(document.getElementById("white_castle").value)
+		$('#white_castle').slider({ 
+			formater: function(value) {
+				return this.calculateValue();
+			} 
+		});
+	
+		$('#white_castle').slider().on('slideStart', function(ev){
+			originalVal = $('#white_castle').data('slider').getValue();
+		});
+	
+		$('#white_castle').slider().on('slideStop', function(ev){
+			var newVal = $('#white_castle').data('slider').getValue();
+			// if(originalVal != newVal) {
+				// console.log(newVal);
+				document.getElementById("question_response").value = newVal;
+			// }
+		});
+
+		$(".slider-horizontal").css("width", $("#legend_table").width());  
+		
+		$('#white_castle').val(''); 
+		document.getElementById('white_castle').value='';
+	});
+
+	// On Window resize
+	$( window ).resize(function() {
+		$(".slider-horizontal").css("width", $("#legend_table").width());
+	});
+</script>

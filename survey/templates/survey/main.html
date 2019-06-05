@@ -23,12 +23,12 @@
 <div id="debug" class="bg-light text-dark mt-5 pl-2">
 	<p>
 	<strong>Debug:</strong><br/>
-	{{ survey.subject_study_id.first_name }} {{ survey.subject_study_id.last_name }} ({{ survey.subject_study_id.pk }})<br/>
+	{{ survey.study_id.first_name }} {{ survey.study_id.last_name }} ({{ survey.study_id.pk }})<br/>
 	Survey {{ survey.survey_num }}<br/>
 	Survey starts @ {{ survey.start_datetime }}<br/>
 	Survey expires @ {{ survey.end_time }}<br/>
-	Survey language in {{ survey.subject_study_id.lang }}<br/>
-	Recruited by {{ survey.subject_study_id.recruited_by.first_name }} @ {{ survey.subject_study_id.recruited_location }}<br/>
+	Survey language in {{ survey.study_id.lang }}<br/>
+	Recruited by {{ survey.study_id.recruited_by.first_name }} @ {{ survey.study_id.recruited_location }}<br/>
 	</p>
 </div>
 
@@ -56,7 +56,7 @@
 			$('#loading').show();
 			$('#survey_question').load('/static/survey/{{ survey_question }}.html', function () {
 				if ($('#first_name').length ) {
-					$('#first_name').html('{{ survey.subject_study_id.first_name }}');
+					$('#first_name').html('{{ survey.study_id.first_name }}');
 				}
 				if ($('#survey_endtime').length ) {
 					$('#survey_endtime').html('{{ survey.end_time }}');

@@ -27,7 +27,7 @@ class SMS_Outgoing(models.Model):
 	sent_on = models.DateTimeField(null=True)
 	sent_sid = models.CharField(null=True, max_length=200)
 	sent_by_user = models.ForeignKey(User, db_column='sent_by_user', on_delete=models.PROTECT)
-	survey_key = models.ForeignKey(SurveyLinks, to_field='survey_key', db_column='survey_key', on_delete=models.PROTECT, null=True)
+	survey_link = models.ForeignKey(SurveyLinks, db_column='survey_link', on_delete=models.PROTECT, null=True)
 	send_mode = models.CharField(default="auto", max_length=10, null=True)
 	ts_created = models.DateTimeField(auto_now_add=True)
 	ts_updated = models.DateTimeField(auto_now=True)

@@ -5,7 +5,7 @@ from survey.settings import *
 
 class SurveyLinks(models.Model):
 	survey_key = models.CharField(max_length=50, unique=True)
-	subject_study_id = models.ForeignKey(Subjects, to_field='study_id', db_column='subject_study_id', on_delete=models.PROTECT)
+	study_id = models.ForeignKey(Subjects, to_field='study_id', db_column='study_id', on_delete=models.PROTECT)
 	start_datetime = models.DateTimeField()
 	timed = models.IntegerField(null=True, default=75)
 	status = models.IntegerField(default=0)
@@ -54,11 +54,11 @@ class SurveyLinks(models.Model):
 		elif self.status == 1:
 			return "Started survey but did not complete."
 		elif self.status == 2:
-			return 'You have already completed this survey, ' + self.subject_study_id.first_name + '. Thank you!'
+			return 'You have already completed this survey, ' + self.study_id.first_name + '. Thank you!'
 		elif self.status == 3:
-			return 'Sorry, ' + self.subject_study_id.first_name + '. The survey link expired at ' + str(end_datetime.strftime("%I:%M %p").lstrip('0')) + ' on ' + str(end_datetime.strftime("%B %d, %Y")) + '.'
+			return 'Sorry, ' + self.study_id.first_name + '. The survey link expired at ' + str(end_datetime.strftime("%I:%M %p").lstrip('0')) + ' on ' + str(end_datetime.strftime("%B %d, %Y")) + '.'
 		elif self.status == 4:
-			return 'Sorry, ' + self.subject_study_id.first_name + '. The survey is closed.'
+			return 'Sorry, ' + self.study_id.first_name + '. The survey is closed.'
 	
 	def update_last_answered(self, question):
 		self.last_answered_question = question

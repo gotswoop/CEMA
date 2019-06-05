@@ -6,65 +6,112 @@
   <li class="breadcrumb-item active">Subjects - Enrolled</li>
 </ol>
 
-<div class="content-section mb-5 mt-4">
-	<table class="table table-sm table-hover table-bordered bg-white">
-	<h3>Active Subjects ({{ subjects_active.count }})</h3>
-	<thead class="thead-light"><tr><th>#</th><th>Name</th><th>Study Id</th>	<th>Primary Ph</th><th>Interviewer</th><th>Location</th><th>Recruited Date</th><th>Language</th></tr></thead>
-	<tbody>
-	{% for subject in subjects_active %}
-	<tr>
-	<td>{{ forloop.counter }} </td>
-	<td><a href="{% url 'subject_details' subject.study_id %}">{{ subject.first_name }} {{  subject.last_name }} </a></td>
-	<td>{{ subject.study_id }}</td>
-	<td>{{ subject.phone_number }}</td>
-	<td>{{ subject.recruited_by.first_name }}</td>
-	<td>{{ subject.recruited_location }}</td>
-	<td>{{ subject.recruited_date|date:'Y-m-d' }}</td>
-	<td>{{ subject.lang }}</td>
-	</tr>
- 	{% endfor %}
- 	</tbody>
- </table>
-</div>
-<div class="content-section mb-5">
-	<table class="table table-sm table-hover table-bordered bg-white">
-	<h3>Inactive Subjects ({{ subjects_inactive.count }})</h3>
-	<thead class="thead-light"><tr><th>#</th><th>Name</th><th>Study Id</th>	<th>Primary Ph</th><th>Interviewer</th><th>Location</th><th>Recruited Date</th><th>Language</th></tr></thead>
-	<tbody>
-	{% for subject in subjects_inactive %}
-	<tr>
-	<td>{{ forloop.counter }} </td>
-	<td><a href="{% url 'subject_details' subject.study_id %}">{{ subject.first_name }} {{  subject.last_name }} </a></td>
-	<td>{{ subject.study_id }}</td>
-	<td>{{ subject.phone_number }}</td>
-	<td>{{ subject.recruited_by.first_name }}</td>
-	<td>{{ subject.recruited_location }}</td>
-	<td>{{ subject.recruited_date|date:'Y-m-d' }}</td>
-	<td>{{ subject.lang }}</td>
-	</tr>
- 	{% endfor %}
- 	</tbody>
- </table>
-</div>
-<div class="content-section mb-5">
-	<table class="table table-sm table-hover table-bordered bg-white">
-	<h3>Test Subjects ({{ subjects_test.count }})</h3>
-	<thead class="thead-light"><tr><th>#</th><th>Name</th><th>Study Id</th>	<th>Primary Ph</th><th>Interviewer</th><th>Location</th><th>Recruited Date</th><th>Language</th></tr></thead>
-	<tbody>
-	{% for subject in subjects_test %}
-	<tr>
-	<td>{{ forloop.counter }} </td>
-	<td><a href="{% url 'subject_details' subject.study_id %}">{{ subject.first_name }} {{  subject.last_name }} </a></td>
-	<td>{{ subject.study_id }}</td>
-	<td>{{ subject.phone_number }}</td>
-	<td>{{ subject.recruited_by.first_name }}</td>
-	<td>{{ subject.recruited_location }}</td>
-	<td>{{ subject.recruited_date|date:'Y-m-d' }}</td>
-	<td>{{ subject.lang }}</td>
-	</tr>
- 	{% endfor %}
- 	</tbody>
- </table>
+<a class="btn btn-lg btn-success mt-3 pl-5 pr-5" href="{% url 'subjects_recruit' %}" role="button">Enroll</a>
+<ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
+	<li class="nav-item">
+	    <a class="nav-link active" id="tab-acct_active" data-toggle="tab" href="#acct_active" role="tab" aria-controls="acct_active" aria-selected="true">Active Accounts ({{ subjects_active.count }})</strong></a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" id="tab-acct_optout" data-toggle="tab" href="#acct_optout" role="tab" aria-controls="acct_optout" aria-selected="false">Inactive Accounts ({{ subjects_inactive.count }})</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" id="tab-acct_test" data-toggle="tab" href="#acct_test" role="tab" aria-controls="acct_test" aria-selected="false">Test (BeeLab) Accounts ({{ subjects_test.count }})</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" id="tab-acct_deleted" data-toggle="tab" href="#acct_deleted" role="tab" aria-controls="acct_deleted" aria-selected="false">Deleted Accounts ({{ subjects_deleted.count }})</a>
+	</li>
+</ul>
+
+<div class="tab-content mt-3" id="myTabContent">
+
+	<!-- Active users tab -->
+	<div class="tab-pane fade show active" id="acct_active" role="tabpanel" aria-labelledby="tab-acct_active">
+		<h3>Active Accounts ({{ subjects_active.count }})</h3>
+		<table class="table table-sm table-hover table-bordered bg-white mt-4">
+		<thead class="thead-light"><tr><th>#</th><th>Name</th><th>Study Id</th>	<th>Primary Ph</th><th>Interviewer</th><th>Location</th><th>Recruited Date</th><th>Language</th></tr></thead>
+		<tbody>
+		{% for subject in subjects_active %}
+		<tr>
+		<td>{{ forloop.counter }} </td>
+		<td><a href="{% url 'subject_details' subject.study_id %}">{{ subject.first_name }} {{  subject.last_name }} </a></td>
+		<td>{{ subject.study_id }}</td>
+		<td>{{ subject.phone_number }}</td>
+		<td>{{ subject.recruited_by.first_name }}</td>
+		<td>{{ subject.recruited_location }}</td>
+		<td>{{ subject.recruited_date|date:'Y-m-d' }}</td>
+		<td>{{ subject.lang }}</td>
+		</tr>
+	 	{% endfor %}
+	 	</tbody>
+	 	</table>
+	</div>
+
+	<!-- Opt-out users tab -->
+	<div class="tab-pane fade" id="acct_optout" role="tabpanel" aria-labelledby="tab-acct_optout">
+		<h3>Inactive Account ({{ subjects_inactive.count }})</h3>
+		<table class="table table-sm table-hover table-bordered bg-white mt-4">
+		<thead class="thead-light"><tr><th>#</th><th>Name</th><th>Study Id</th>	<th>Primary Ph</th><th>Interviewer</th><th>Location</th><th>Recruited Date</th><th>Language</th></tr></thead>
+		<tbody>
+		{% for subject in subjects_inactive %}
+		<tr>
+		<td>{{ forloop.counter }} </td>
+		<td><a href="{% url 'subject_details' subject.study_id %}">{{ subject.first_name }} {{  subject.last_name }} </a></td>
+		<td>{{ subject.study_id }}</td>
+		<td>{{ subject.phone_number }}</td>
+		<td>{{ subject.recruited_by.first_name }}</td>
+		<td>{{ subject.recruited_location }}</td>
+		<td>{{ subject.recruited_date|date:'Y-m-d' }}</td>
+		<td>{{ subject.lang }}</td>
+		</tr>
+	 	{% endfor %}
+	 	</tbody>
+	 	</table>
+	</div>
+
+	<!-- Test users tab -->
+	<div class="tab-pane fade" id="acct_test" role="tabpanel" aria-labelledby="tab-acct_test">
+		<h3>Test Accounts ({{ subjects_test.count }})</h3>
+		<table class="table table-sm table-hover table-bordered bg-white mt-4">
+		<thead class="thead-light"><tr><th>#</th><th>Name</th><th>Study Id</th>	<th>Primary Ph</th><th>Interviewer</th><th>Location</th><th>Recruited Date</th><th>Language</th></tr></thead>
+		<tbody>
+		{% for subject in subjects_test %}
+		<tr>
+		<td>{{ forloop.counter }} </td>
+		<td><a href="{% url 'subject_details' subject.study_id %}">{{ subject.first_name }} {{  subject.last_name }} </a></td>
+		<td>{{ subject.study_id }}</td>
+		<td>{{ subject.phone_number }}</td>
+		<td>{{ subject.recruited_by.first_name }}</td>
+		<td>{{ subject.recruited_location }}</td>
+		<td>{{ subject.recruited_date|date:'Y-m-d' }}</td>
+		<td>{{ subject.lang }}</td>
+		</tr>
+	 	{% endfor %}
+	 	</tbody>
+		</table>
+	</div>
+
+	<!-- Deleted users tab -->
+	<div class="tab-pane fade" id="acct_deleted" role="tabpanel" aria-labelledby="tab-acct_deleted">
+		<h3>Deleted Accounts ({{ subjects_deleted.count }})</h3>
+		<table class="table table-sm table-hover table-bordered bg-white mt-4">
+		<thead class="thead-light"><tr><th>#</th><th>Name</th><th>Study Id</th>	<th>Primary Ph</th><th>Interviewer</th><th>Location</th><th>Recruited Date</th><th>Language</th></tr></thead>
+		<tbody>
+		{% for subject in subjects_deleted %}
+		<tr>
+		<td>{{ forloop.counter }} </td>
+		<td><a href="{% url 'subject_details' subject.study_id %}">{{ subject.first_name }} {{  subject.last_name }} </a></td>
+		<td>{{ subject.study_id }}</td>
+		<td>{{ subject.phone_number }}</td>
+		<td>{{ subject.recruited_by.first_name }}</td>
+		<td>{{ subject.recruited_location }}</td>
+		<td>{{ subject.recruited_date|date:'Y-m-d' }}</td>
+		<td>{{ subject.lang }}</td>
+		</tr>
+	 	{% endfor %}
+	 	</tbody>
+	 	</table>
+	</div>
+
 </div>
 
 {% endblock content %}

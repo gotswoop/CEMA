@@ -33,13 +33,13 @@ class Subjects(models.Model):
 	language = models.CharField(blank=False, default=None, max_length=10, choices=LANGUAGE_CHOICES)
 	treatment = models.CharField(null=True, max_length=10)
 	time_zone = models.CharField(default="PT", null=True, max_length=10)
-	optout = models.IntegerField(default=0)
-	optout_reason = models.TextField(null=True)
-	optout_date = models.DateTimeField(null=True)
-	recruited_date = models.DateTimeField(null=True)
+	optout = models.BooleanField(default=False)
+	deleted = models.BooleanField(default=False)
+	test_account = models.BooleanField(default=False)
+	recruited_date = models.DateTimeField(auto_now_add=True)
 	recruited_by = models.ForeignKey(User, db_column='recruited_by', on_delete=models.PROTECT)
 	recruited_location = models.CharField(blank=False, default=None, max_length=20, choices=LOCATION_CHOICES)
-	notes = models.TextField(null=True)
+	notes = models.TextField(null=True, blank=True)
 	ts_created = models.DateTimeField(auto_now_add=True)
 	ts_updated = models.DateTimeField(auto_now=True)
 	
@@ -63,3 +63,11 @@ class Subjects(models.Model):
 		c = primary_number[8:12]
 		return '(' + a + ')' + ' ' + b + '-' + c
 
+	def phone_number_with_dashes(self):
+		primary_number = self.phone
+		a = primary_number[2:5]
+		b = primary_number[5:8]
+		c = primary_number[8:12]
+		return a + '-' + b + '-' + c
+
+	

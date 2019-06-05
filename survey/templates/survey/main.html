@@ -20,6 +20,7 @@
 	<button id="next_button" class="btn btn-block btn-primary" type="submit">NEXT >> </button>
 </div>
 
+{% if survey.study_id.test_account == 1 %}
 <div id="debug" class="bg-light text-dark mt-5 pl-2">
 	<p>
 	<strong>Debug:</strong><br/>
@@ -31,6 +32,7 @@
 	Recruited by {{ survey.study_id.recruited_by.first_name }} @ {{ survey.study_id.recruited_location }}<br/>
 	</p>
 </div>
+{% endif %}
 
 <script>
 (function($) {

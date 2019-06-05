@@ -155,5 +155,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'bee.research.lab@gmail.com'
 EMAIL_HOST_PASSWORD = 'hlgbiijqjlmvvflb'
 
-SESSION_COOKIE_AGE = 1800 # 30 mins
+SESSION_COOKIE_AGE = 14400 # 4 hours
 PASSWORD_RESET_TIMEOUT_DAYS = 1 # 1 day

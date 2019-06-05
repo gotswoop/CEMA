@@ -7,7 +7,7 @@ class SMS_Form(forms.Form):
 
 class RecruitForm(forms.ModelForm):
 
-	send_test_survey = forms.BooleanField(label="<span class='text-danger'><strong>SEND TEST SURVEY? This triggers a text message with a link to the Test survey (Risk + Time)</strong></span>",required=False,initial=True)
+	send_test_survey = forms.BooleanField(label="<span class='text-danger'><strong>SEND ENROLLMENT SURVEY? </strong></span> This sends a text message with a link to the Enrollment Survey (Risk + Time)",required=False,initial=True)
 
 	def clean_phone(self):
 

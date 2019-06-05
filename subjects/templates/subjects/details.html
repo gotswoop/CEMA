@@ -5,24 +5,24 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
-  <li class="breadcrumb-item"><a href="{% url 'subjects_all' %}">Subjects</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'subjects_all' %}">Study Participants</a></li>
   <li class="breadcrumb-item active">{{ subject.first_name }} {{ subject.last_name }}</li>
 </ol>
 
 <div class="content-section mt-4">
+	<h3><span class="badge badge-danger">{{ subject.study_id }}</span></h3>
 	<h2>{{ subject.first_name }} {{ subject.last_name }} {% if not subject.deleted %}<a class="ml-2" href="{% url 'subject_edit' study_id=subject.study_id %}"><img src="{% static 'subjects/edit.png' %}"/></a>{% endif %}</h2>
 	<h4>
-		<span class="badge badge-info">{{ subject.study_id }}</span>
 		<span class="badge badge-info">{{ subject.phone_number }}</span>
 		<span class="badge badge-info">{{ subject.lang }}</span>
 		{% if subject.test_account %}
 			<span class="badge badge-warning">BeeLab Account</span>
 		{% endif %}
 		{% if subject.optout %}
-			<span class="badge badge-danger">OPTED-OUT</span>
+			<span class="badge badge-warning">OPTED-OUT</span>
 		{% endif %}
 		{% if subject.deleted %}
-			<span class="badge badge-danger">DELETED</span>
+			<span class="badge badge-warning">DELETED</span>
 		{% endif %}
 	</h4>
 	<h5><span class="badge badge-light">Recruited by {{ subject.recruited_by.first_name }} {{ subject.recruited_by.last_name }} on {{subject.recruited_date|date:'M d, Y' }} at {{ subject.recruited_location }}</span></h5>

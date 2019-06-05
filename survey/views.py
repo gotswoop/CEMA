@@ -22,7 +22,7 @@ def survey(request, survey_key):
 		survey = SurveyLinks.objects.get(survey_key=survey_key)
 	except SurveyLinks.DoesNotExist:
 		# Key not found in database
-		msg = '<h3>Sorry, the survey link is invalid.</h3>'
+		msg = '<h3>Sorry, the survey link is invalid / Lo siento, el vínculo de encuesta no es válido</h3>'
 		return HttpResponse(msg)
 
 	# POST Method

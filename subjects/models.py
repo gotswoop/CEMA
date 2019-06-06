@@ -21,6 +21,7 @@ class Subjects(models.Model):
 	first_name = models.CharField(max_length=100)
 	last_name = models.CharField(max_length=100)
 	phone = models.CharField(null=False, blank=False, max_length=50, unique=True)
+	clincard = models.CharField(null=False, blank=False, max_length=50, unique=True)
 	email = models.CharField(null=True, max_length=50)
 	emergency_contact = models.CharField(null=True, max_length=200)
 	emergency_contact_phone = models.CharField(null=True, max_length=50)

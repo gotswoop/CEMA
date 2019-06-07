@@ -1,0 +1,56 @@
+<h5>Suppose you are considering buying a product. The product is <strong>shown to be ineffective 25% of the time.</strong> Knowing this information, how likely are you to buy it?</h5>
+
+<p>Tap or slide your finger along the bar to select</p>
+<br/>
+
+<div class="slider slider-horizontal">
+	<label>
+		<input id="white_castle" class="bootstrapslider" style="height: 40px; display: none;" type="text" name="white_castle" value="-1" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="" data-slider-orientation="horizontal" data-slider-selection="after" data-slider-tooltip="hide" data-value="-1">
+	</label>
+</div>
+<table id="legend_table" style="width:100%">
+	<tbody>
+		<tr>
+			<td style="width: 20%; text-align: left;">Very unlikely</td>
+			<td style="width: 20%; text-align: right;">Very likely</td>
+		</tr>
+	</tbody>
+</table>
+<br/><br/>
+
+<input type="hidden" id="question" name="question" value="qr_18">
+<input type="hidden" id="question_response" name="question_response" value="-1">
+
+<script type="text/javascript">
+	// On document ready
+	$( document ).ready(function() {
+		// console.log(document.getElementById("white_castle").value)
+		$('#white_castle').slider({ 
+			formater: function(value) {
+				return this.calculateValue();
+			} 
+		});
+	
+		$('#white_castle').slider().on('slideStart', function(ev){
+			originalVal = $('#white_castle').data('slider').getValue();
+		});
+	
+		$('#white_castle').slider().on('slideStop', function(ev){
+			var newVal = $('#white_castle').data('slider').getValue();
+			// if(originalVal != newVal) {
+				// console.log(newVal);
+				document.getElementById("question_response").value = newVal;
+			// }
+		});
+
+		$(".slider-horizontal").css("width", $("#legend_table").width());  
+		
+		$('#white_castle').val(''); 
+		document.getElementById('white_castle').value='';
+	});
+
+	// On Window resize
+	$( window ).resize(function() {
+		$(".slider-horizontal").css("width", $("#legend_table").width());
+	});
+</script>

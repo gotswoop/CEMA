@@ -40,7 +40,7 @@
 		<td>{{ subject.study_id }}</td>
 		<td><a href="{% url 'subject_details' subject.study_id %}">{{ subject.fullname }} </a></td>
 		<td>{{ subject.phone_number }}</td>
-		<td>{{ subject.clincard }}</td>
+		<td>{{ subject.clincard_number }}</td>
 		<td>{{ subject.recruited_by.first_name }} @ {{ subject.recruited_location }}</td>
 		<td>{{ subject.recruited_date|date:'Y-m-d' }}</td>
 		<td><img src="{% static 'subjects/' %}{{subject.language}}.png" style="height:25px;"/></td>
@@ -63,7 +63,7 @@
 		<td>{{ subject.study_id }}</td>
 		<td><a href="{% url 'subject_details' subject.study_id %}">{{ subject.fullname }} </a></td>
 		<td>{{ subject.phone_number }}</td>
-		<td>{{ subject.clincard }}</td>
+		<td>{{ subject.clincard_number }}</td>
 		<td>{{ subject.recruited_by.first_name }} @ {{ subject.recruited_location }}</td>
 		<td>{{ subject.recruited_date|date:'Y-m-d' }}</td>
 		<td><img src="{% static 'subjects/' %}{{subject.language}}.png" style="height:25px;"/></td>
@@ -86,7 +86,7 @@
 		<td>{{ subject.study_id }}</td>
 		<td><a href="{% url 'subject_details' subject.study_id %}">{{ subject.fullname }} </a></td>
 		<td>{{ subject.phone_number }}</td>
-		<td>{{ subject.clincard }}</td>
+		<td>{{ subject.clincard_number }}</td>
 		<td>{{ subject.recruited_by.first_name }} @ {{ subject.recruited_location }}</td>
 		<td>{{ subject.recruited_date|date:'Y-m-d' }}</td>
 		<td><img src="{% static 'subjects/' %}{{subject.language}}.png" style="height:25px;"/></td>
@@ -109,7 +109,7 @@
 		<td>{{ subject.study_id }}</td>
 		<td><a href="{% url 'subject_details' subject.study_id %}">{{ subject.fullname }} </a></td>
 		<td>{{ subject.phone_number }}</td>
-		<td>{{ subject.clincard }}</td>
+		<td>{{ subject.clincard_number }}</td>
 		<td>{{ subject.recruited_by.first_name }} @ {{ subject.recruited_location }}</td>
 		<td>{{ subject.recruited_date|date:'Y-m-d' }}</td>
 		<td><img src="{% static 'subjects/' %}{{subject.language}}.png" style="height:25px;"/></td>

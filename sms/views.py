@@ -9,6 +9,7 @@ from subjects.models import Subjects
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
 from django.conf import settings
+from subjects.functions import send_email_to_admins
 
 @login_required()
 def sms_queue(request):
@@ -69,20 +70,18 @@ def incoming_sms(request):
 	text_response = 'Thank you for your message. We will get back to you shortly.'
 	if phone_not_found:
 		study_id = None
-		subject = 'Incoming text from ' + incoming.get('From') + ' (unrecognized)'
-		message = 'Sender not recognized based on phone number: ' + incoming.get('From') + '\n\nMessage: ' + incoming.get('Body')
+		email_subject = 'Incoming text from ' + incoming.get('From') + ' (unrecognized)'
+		email_body = 'Sender not recognized based on phone number: ' + incoming.get('From') + '\n\nMessage: ' + incoming.get('Body')
 	else:
 		study_id = sub_obj
 		if sub_obj.language == "es":
 			text_response = 'Gracias por su mensaje. Le responderemos pronto.'
-		subject = 'Incoming text from ' + sub_obj.fullname() + ' (' + str(sub_obj.study_id) + ')'
-		message = 'From: ' + sub_obj.fullname() + ' (' + str(sub_obj.study_id) + ') @ ' + sub_obj.phone_number() + '\n\nMessage: ' + incoming.get('Body')
+		email_subject = 'Incoming text from ' + sub_obj.fullname() + ' (' + str(sub_obj.study_id) + ')'
+		email_body = 'From: ' + sub_obj.fullname() + ' (' + str(sub_obj.study_id) + ') @ ' + sub_obj.phone_number() + '\n\nMessage: ' + incoming.get('Body')
 	
 	# TODO: If images show them!
-	to_emails=['beelab-northgate-l@mymaillists.usc.edu','bee.research.lab@gmail.com']
-	notify_admins = EmailMessage(subject, message, settings.EMAIL_HOST_USER, to_emails, reply_to=['beelab-northgate-l@mymaillists.usc.edu'])
-	notify_admins.send()
-	
+	send_email_to_admins(email_subject, email_body)
+
 	try:
 		message = SMS_Incoming.objects.create(
 			to_phone = incoming.get('To'),

@@ -26,13 +26,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = '2yfkv3ogwgo@2544&b56)wuyq961%-8@s01%^s@wzo4%$1$aub'
-SECRET_KEY = config['SECRET_KEY']
+SECRET_KEY = config.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config.get('DEBUG')
 
 ALLOWED_HOSTS = ['uscstudy.com','127.0.0.1','50.18.216.76']
-
 
 # Application definition
 
@@ -49,7 +48,6 @@ INSTALLED_APPS = [
     'survey.apps.SurveyConfig',
     'shorty.apps.ShortyConfig',
     'crispy_forms',
-    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
@@ -149,11 +147,13 @@ LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'bee.research.lab@gmail.com'
-EMAIL_HOST_PASSWORD = 'hlgbiijqjlmvvflb'
+EMAIL_HOST = config.get('EMAIL_HOST')
+EMAIL_PORT = config.get('EMAIL_PORT')
+EMAIL_USE_TLS = config.get('EMAIL_USE_TLS')
+EMAIL_HOST_USER = config.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config.get('EMAIL_HOST_PASSWORD')
 
 SESSION_COOKIE_AGE = 28800 # 8 hours
 PASSWORD_RESET_TIMEOUT_DAYS = 1 # 1 day
+
+ADMIN_NOTIFICATION_EMAILS = config.get('ADMIN_NOTIFICATION_EMAILS').split()

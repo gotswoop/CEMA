@@ -7,7 +7,7 @@ class SMS_Form(forms.Form):
 
 class RecruitForm(forms.ModelForm):
 
-	send_test_survey = forms.BooleanField(label="<span class='text-danger'><strong>SEND DEMO SURVEY? </strong></span> This sends a text message with a link to the Demo Survey (Risk + Time)",required=False,initial=True)
+	sent_enrollment_survey = forms.BooleanField(label="<span class='text-danger'><strong>SEND DEMO SURVEY? </strong></span> This sends a text message with a link to the Demo Survey (Risk + Time)",required=False,initial=True)
 
 	def clean_phone(self):
 
@@ -42,7 +42,7 @@ class RecruitForm(forms.ModelForm):
 
 	class Meta:
 		model = Subjects
-		fields = ['first_name', 'last_name', 'phone', 'clincard', 'language', 'recruited_by', 'recruited_location', 'test_account']
+		fields = ['first_name', 'last_name', 'phone', 'clincard', 'language', 'recruited_by', 'recruited_location', 'test_account', 'sent_enrollment_survey']
 		labels = {
         	"phone": "Phone:",
         	"clincard": "Clincard Number:",

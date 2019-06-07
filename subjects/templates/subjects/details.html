@@ -15,7 +15,7 @@
 	<h4>
 		<img src="{% static 'subjects/' %}{{subject.language}}.png" style="height:25px;"/>
 		<span class="badge badge-dark">Ph: {{ subject.phone_number }}</span>
-		<span class="badge badge-dark">CC: {{ subject.clincard }}</span></h4>
+		<span class="badge badge-dark">CC: {{ subject.clincard_number }}</span></h4>
 	<h4>	
 		{% if subject.test_account %}
 			<span class="badge badge-warning">BeeLab Account</span>

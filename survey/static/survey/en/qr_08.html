@@ -34,7 +34,8 @@
 		console.log(value_survey);
 		document.getElementById("question_response").value = value_survey;
 		// TODO: Custom parameter is set below!!!!
-  		return /^\d*$/.test(value) && (value === "" || parseInt(value) <= 100);
-  	});
+		// Allows decimals
+		return /^-?\d*[.]?\d*$/.test(value) && (value === "" || parseInt(value) <= 100);
+	});
 
 </script>

@@ -7,7 +7,7 @@ survey_questions = {
 	223: ('q_00', 'qr_01', 'qr_02', 'qr_03', 'qr_04', 'qr_05', 'qr_06', 'qr_07', 'qr_08', 'qr_09', 'qr_10', 'qr_11', 'qr_12', 'qr_13', 'qr_14', 'qr_15', 'qr_16', 'qr_17', 'qr_18'),
 }
 
-survey_random_questions = [
+survey_bonus_questions = [
 	'qr_01',
 	'qr_02',
 	'qr_03',

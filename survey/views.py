@@ -1,4 +1,5 @@
 import json
+import random
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
@@ -13,6 +14,7 @@ from datetime import datetime
 from survey.models import *
 from django.db import IntegrityError
 from survey.functions import *
+from survey.settings import *
 
 # No login required
 @require_http_methods(["GET", "POST"])
@@ -100,7 +102,14 @@ def survey_test(request):
 		else:
 			# Test user for English
 			study_id = 109
-		survey_obj = generate_survey_link(survey_number, study_id)
+		# Add a random bonus question only if Time(1) or Risk(2) survey
+		if survey_number in ["1", "2"]:
+			random_pick, = random.sample(range(0,len(survey_bonus_questions)),k=1)
+			bonus_questions = survey_bonus_questions[random_pick]
+		else:
+			bonus_questions = None
+
+		survey_obj = generate_survey_link(survey_number, study_id, bonus_questions)
 		survey_link = ('https://' if request.is_secure() else 'http://') + request.get_host() + '/s/' + survey_obj.survey_key
 		context = {
 			'survey_link': survey_link,

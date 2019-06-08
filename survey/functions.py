@@ -14,7 +14,7 @@ from survey.models import *
 from django.db import IntegrityError
 import random, string
 
-def generate_survey_link(survey_number, study_id):
+def generate_survey_link(survey_number, study_id, bonus_questions=None):
 
 	timed = 60
 	short_url_length = 10
@@ -28,6 +28,7 @@ def generate_survey_link(survey_number, study_id):
 			start_datetime=datetime.now(), 
 			timed=timed, 
 			survey_number=survey_number, 
+			bonus_questions=bonus_questions,
 			study_id=Subjects(study_id=study_id)
 		)
 	except IntegrityError as e:

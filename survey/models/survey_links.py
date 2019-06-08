@@ -10,6 +10,7 @@ class SurveyLinks(models.Model):
 	timed = models.IntegerField(null=True, default=75)
 	status = models.IntegerField(default=0)
 	survey_number = models.IntegerField()
+	bonus_questions = models.CharField(null=True, max_length=50)
 	last_answered_question = models.CharField(max_length=10, null=True)
 	ts_created = models.DateTimeField(auto_now_add=True)
 	ts_updated = models.DateTimeField(auto_now=True)
@@ -82,6 +83,10 @@ class SurveyLinks(models.Model):
 		last_question = self.last_answered_question
 		
 		questions = survey_questions.get(survey_number)
+		# Checking if this survey has any bonus_questions and adding to the tuple of "standard questions"
+		if self.bonus_questions:
+			questions = questions + (self.bonus_questions,)
+
 		if questions == None:
 			return None
 

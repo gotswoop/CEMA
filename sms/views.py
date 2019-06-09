@@ -13,7 +13,7 @@ from subjects.functions import send_email_to_admins
 
 @login_required()
 def sms_queue(request):
-	messages = SMS_Outgoing.objects.filter(sent=0).order_by('send_after')
+	messages = SMS_Outgoing.objects.filter(sent=0).order_by('send_after','study_id')
 
 	context = {
 		'title': "Outbound Messages",

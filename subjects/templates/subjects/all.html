@@ -33,7 +33,7 @@
 		<h3>Active ({{ subjects_active.count }})</h3>
 		<div class="table-responsive">
 		<table class="table table-sm table-hover table-bordered bg-white mt-4">
-		<thead class="thead-light"><tr><th>Study Id</th><th>Name</th><th>Phone</th><th>Clincard</th><th>Interviewer @ Location</th><th>Recruited Date</th><th>Lang</th></tr></thead>
+		<thead class="thead-light"><tr><th>Study Id</th><th>Name</th><th>Phone</th><th>Clincard</th><th>Interviewer @ Location</th><th>Recruited Date</th><th>Lang</th><th>Cohort</th></tr></thead>
 		<tbody>
 		{% for subject in subjects_active %}
 		<tr>
@@ -44,6 +44,11 @@
 		<td>{{ subject.recruited_by.first_name }} @ {{ subject.recruited_location }}</td>
 		<td>{{ subject.recruited_date|date:'Y-m-d' }}</td>
 		<td><img src="{% static 'subjects/' %}{{subject.language}}.png" style="height:25px;"/></td>
+		{% if subject.schedule_study_id.cohort %}
+			<td class="bg-success">{{ subject.schedule_study_id.cohort }}</td>
+		{% else %}
+			<td>-</td>
+		{% endif %}
 		</tr>
 	 	{% endfor %}
 	 	</tbody>
@@ -56,7 +61,7 @@
 		<h3>Inactive - Opted-Out ({{ subjects_inactive.count }})</h3>
 		<div class="table-responsive">
 		<table class="table table-sm table-hover table-bordered bg-white mt-4">
-		<thead class="thead-light"><tr><th>Study Id</th><th>Name</th><th>Phone</th><th>Clincard</th><th>Interviewer @ Location</th><th>Recruited Date</th><th>Lang</th></tr></thead>
+		<thead class="thead-light"><tr><th>Study Id</th><th>Name</th><th>Phone</th><th>Clincard</th><th>Interviewer @ Location</th><th>Recruited Date</th><th>Lang</th><th>Cohort</th></tr></thead>
 		<tbody>
 		{% for subject in subjects_inactive %}
 		<tr>
@@ -67,6 +72,11 @@
 		<td>{{ subject.recruited_by.first_name }} @ {{ subject.recruited_location }}</td>
 		<td>{{ subject.recruited_date|date:'Y-m-d' }}</td>
 		<td><img src="{% static 'subjects/' %}{{subject.language}}.png" style="height:25px;"/></td>
+		{% if subject.schedule_study_id.cohort %}
+			<td class="bg-success">{{ subject.schedule_study_id.cohort }}</td>
+		{% else %}
+			<td>-</td>
+		{% endif %}
 		</tr>
 	 	{% endfor %}
 	 	</tbody>
@@ -79,7 +89,7 @@
 		<h3>Test (BeeLab) ({{ subjects_test.count }})</h3>
 		<div class="table-responsive">
 		<table class="table table-sm table-hover table-bordered bg-white mt-4">
-		<thead class="thead-light"><tr><th>Study Id</th><th>Name</th><th>Phone</th><th>Clincard</th><th>Interviewer @ Location</th><th>Recruited Date</th><th>Lang</th></tr></thead>
+		<thead class="thead-light"><tr><th>Study Id</th><th>Name</th><th>Phone</th><th>Clincard</th><th>Interviewer @ Location</th><th>Recruited Date</th><th>Lang</th><th>Cohort</th></tr></thead>
 		<tbody>
 		{% for subject in subjects_test %}
 		<tr>
@@ -90,6 +100,11 @@
 		<td>{{ subject.recruited_by.first_name }} @ {{ subject.recruited_location }}</td>
 		<td>{{ subject.recruited_date|date:'Y-m-d' }}</td>
 		<td><img src="{% static 'subjects/' %}{{subject.language}}.png" style="height:25px;"/></td>
+		{% if subject.schedule_study_id.cohort %}
+			<td class="bg-success">{{ subject.schedule_study_id.cohort }}</td>
+		{% else %}
+			<td>-</td>
+		{% endif %}
 		</tr>
 	 	{% endfor %}
 	 	</tbody>
@@ -102,7 +117,7 @@
 		<h3>Deleted ({{ subjects_deleted.count }})</h3>
 		<div class="table-responsive">
 		<table class="table table-sm table-hover table-bordered bg-white mt-4">
-		<thead class="thead-light"><tr><th>Study Id</th><th>Name</th><th>Phone</th><th>Clincard</th><th>Interviewer @ Location</th><th>Recruited Date</th><th>Lang</th></tr></thead>
+		<thead class="thead-light"><tr><th>Study Id</th><th>Name</th><th>Phone</th><th>Clincard</th><th>Interviewer @ Location</th><th>Recruited Date</th><th>Lang</th><th>Cohort</th></tr></thead>
 		<tbody>
 		{% for subject in subjects_deleted %}
 		<tr>
@@ -113,6 +128,11 @@
 		<td>{{ subject.recruited_by.first_name }} @ {{ subject.recruited_location }}</td>
 		<td>{{ subject.recruited_date|date:'Y-m-d' }}</td>
 		<td><img src="{% static 'subjects/' %}{{subject.language}}.png" style="height:25px;"/></td>
+		{% if subject.schedule_study_id.cohort %}
+			<td class="bg-success">{{ subject.schedule_study_id.cohort }}</td>
+		{% else %}
+			<td>-</td>
+		{% endif %}
 		</tr>
 	 	{% endfor %}
 	 	</tbody>

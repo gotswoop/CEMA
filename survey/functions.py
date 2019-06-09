@@ -14,10 +14,10 @@ from survey.models import *
 from django.db import IntegrityError
 import random, string
 
-def generate_survey_link(survey_number, study_id, bonus_questions=None):
+def generate_survey_link(survey_number, study_id, bonus_questions=None, start_datetime=datetime.now()):
 
 	timed = 60
-	short_url_length = 10
+	short_url_length = 16
 
 	# TODO: What if it's not unique
 	survey_key = ''.join(random.choices(string.ascii_letters + string.digits, k=short_url_length))
@@ -25,7 +25,7 @@ def generate_survey_link(survey_number, study_id, bonus_questions=None):
 	try:
 		survey_link = SurveyLinks.objects.create(
 			survey_key=survey_key, 
-			start_datetime=datetime.now(), 
+			start_datetime=start_datetime,
 			timed=timed, 
 			survey_number=survey_number, 
 			bonus_questions=bonus_questions,

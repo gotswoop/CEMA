@@ -80,7 +80,11 @@
 		if (question_response == "-1") {
 			// Not previosly prompted
 			if (prompted == 0) {
-				$('#error').html('Please provide an answer / Por favor provea una respuesta'); // TODO: SPANISH
+				{% if survey.study_id.language == 'es' %}
+					$('#error').html('Por favor provea una respuesta');
+				{% else %}
+					$('#error').html('Please provide an answer');
+				{% endif %}
 				$('#error').show();
 				prompted = isNaN(prompted) ? 0 : prompted;
 				prompted++;

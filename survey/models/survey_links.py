@@ -44,6 +44,26 @@ class SurveyLinks(models.Model):
 			end_datetime = self.start_datetime + timedelta(days=self.untimed_expiration_days)
 		return end_datetime
 	
+	def progress(self):
+		if self.status == 0:
+			return '-'
+		elif self.status == 1:
+			return 'Started'
+		elif self.status == 2:
+			return 'Completed'
+		elif self.status == 3:
+			return 'Timed out'
+
+	def survey_type(self):
+		if self.survey_number == 1:
+			return 'Time'
+		elif self.survey_number == 2:
+			return 'Risk'
+		elif self.survey_number == 4:
+			return 'Week 4'
+		elif self.survey_number == 14:
+			return 'Week 14'
+
 	def status_details(self):
 		if self.timed:
 			end_datetime = self.start_datetime + timedelta(minutes=self.timed)

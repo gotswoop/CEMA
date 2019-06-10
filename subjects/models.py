@@ -131,4 +131,71 @@ class Subjects_History(models.Model):
 	# Clincard without "_del_YYYY-MM-DD HH:SS:"
 	def clincard_number(self):
 		return self.clincard[0:8]
+
+class Payments(models.Model):
+	status = models.IntegerField()
+	payment_datetime = models.DateTimeField()
+	ts_created = models.DateTimeField(auto_now_add=True)
+	ts_updated = models.DateTimeField(auto_now=True)
+
+	class Meta:
+		db_table = "payments"
+
+class Schedule(models.Model):
+
+	study_id = models.OneToOneField(Subjects, to_field='study_id', db_column='study_id', related_name='schedule_study_id', on_delete=models.PROTECT)
 	
+	cohort = models.IntegerField()
+
+	wk1_d1_survey_1 = models.OneToOneField('survey.SurveyLinks', db_column='wk1_d1_survey_1', related_name='wk1_d1_survey_1', on_delete=models.PROTECT)
+	wk1_d1_survey_2 = models.OneToOneField('survey.SurveyLinks', db_column='wk1_d1_survey_2', related_name='wk1_d1_survey_2', on_delete=models.PROTECT)
+	wk1_d1_survey_3 = models.OneToOneField('survey.SurveyLinks', db_column='wk1_d1_survey_3', related_name='wk1_d1_survey_3', on_delete=models.PROTECT)
+	wk1_d1_survey_4 = models.OneToOneField('survey.SurveyLinks', db_column='wk1_d1_survey_4', related_name='wk1_d1_survey_4', on_delete=models.PROTECT)
+	wk1_d1_payment = models.OneToOneField(Payments, db_column='wk1_d1_payment', related_name='wk1_d1_payment', on_delete=models.PROTECT, null=True)
+
+	wk1_d2_survey_1 = models.OneToOneField('survey.SurveyLinks', db_column='wk1_d2_survey_1', related_name='wk1_d2_survey_1', on_delete=models.PROTECT)
+	wk1_d2_survey_2 = models.OneToOneField('survey.SurveyLinks', db_column='wk1_d2_survey_2', related_name='wk1_d2_survey_2', on_delete=models.PROTECT)
+	wk1_d2_survey_3 = models.OneToOneField('survey.SurveyLinks', db_column='wk1_d2_survey_3', related_name='wk1_d2_survey_3', on_delete=models.PROTECT)
+	wk1_d2_survey_4 = models.OneToOneField('survey.SurveyLinks', db_column='wk1_d2_survey_4', related_name='wk1_d2_survey_4', on_delete=models.PROTECT)
+	wk1_d2_payment = models.OneToOneField(Payments, db_column='wk1_d2_payment', related_name='wk1_d2_payment', on_delete=models.PROTECT, null=True)
+
+	wk2_d1_survey_1 = models.OneToOneField('survey.SurveyLinks', db_column='wk2_d1_survey_1', related_name='wk2_d1_survey_1', on_delete=models.PROTECT)
+	wk2_d1_survey_2 = models.OneToOneField('survey.SurveyLinks', db_column='wk2_d1_survey_2', related_name='wk2_d1_survey_2', on_delete=models.PROTECT)
+	wk2_d1_survey_3 = models.OneToOneField('survey.SurveyLinks', db_column='wk2_d1_survey_3', related_name='wk2_d1_survey_3', on_delete=models.PROTECT)
+	wk2_d1_survey_4 = models.OneToOneField('survey.SurveyLinks', db_column='wk2_d1_survey_4', related_name='wk2_d1_survey_4', on_delete=models.PROTECT)
+	wk2_d1_payment = models.OneToOneField(Payments, db_column='wk2_d1_payment', related_name='wk2_d1_payment', on_delete=models.PROTECT, null=True)
+
+	wk2_d2_survey_1 = models.OneToOneField('survey.SurveyLinks', db_column='wk2_d2_survey_1', related_name='wk2_d2_survey_1', on_delete=models.PROTECT)
+	wk2_d2_survey_2 = models.OneToOneField('survey.SurveyLinks', db_column='wk2_d2_survey_2', related_name='wk2_d2_survey_2', on_delete=models.PROTECT)
+	wk2_d2_survey_3 = models.OneToOneField('survey.SurveyLinks', db_column='wk2_d2_survey_3', related_name='wk2_d2_survey_3', on_delete=models.PROTECT)
+	wk2_d2_survey_4 = models.OneToOneField('survey.SurveyLinks', db_column='wk2_d2_survey_4', related_name='wk2_d2_survey_4', on_delete=models.PROTECT)
+	wk2_d2_payment = models.OneToOneField(Payments, db_column='wk2_d2_payment', related_name='wk2_d2_payment', on_delete=models.PROTECT, null=True)
+
+	wk3_d1_survey_1 = models.OneToOneField('survey.SurveyLinks', db_column='wk3_d1_survey_1', related_name='wk3_d1_survey_1', on_delete=models.PROTECT)
+	wk3_d1_survey_2 = models.OneToOneField('survey.SurveyLinks', db_column='wk3_d1_survey_2', related_name='wk3_d1_survey_2', on_delete=models.PROTECT)
+	wk3_d1_survey_3 = models.OneToOneField('survey.SurveyLinks', db_column='wk3_d1_survey_3', related_name='wk3_d1_survey_3', on_delete=models.PROTECT)
+	wk3_d1_survey_4 = models.OneToOneField('survey.SurveyLinks', db_column='wk3_d1_survey_4', related_name='wk3_d1_survey_4', on_delete=models.PROTECT)
+	wk3_d1_payment = models.OneToOneField(Payments, db_column='wk3_d1_payment', related_name='wk3_d1_payment', on_delete=models.PROTECT, null=True)
+
+	wk3_d2_survey_1 = models.OneToOneField('survey.SurveyLinks', db_column='wk3_d2_survey_1', related_name='wk3_d2_survey_1', on_delete=models.PROTECT)
+	wk3_d2_survey_2 = models.OneToOneField('survey.SurveyLinks', db_column='wk3_d2_survey_2', related_name='wk3_d2_survey_2', on_delete=models.PROTECT)
+	wk3_d2_survey_3 = models.OneToOneField('survey.SurveyLinks', db_column='wk3_d2_survey_3', related_name='wk3_d2_survey_3', on_delete=models.PROTECT)
+	wk3_d2_survey_4 = models.OneToOneField('survey.SurveyLinks', db_column='wk3_d2_survey_4', related_name='wk3_d2_survey_4', on_delete=models.PROTECT)
+	wk3_d2_payment = models.OneToOneField(Payments, db_column='wk3_d2_payment', related_name='wk3_d2_payment', on_delete=models.PROTECT, null=True)
+
+	wk4_d1_survey = models.OneToOneField('survey.SurveyLinks', db_column='wk4_d1_survey', related_name='wk4_d1_survey', on_delete=models.PROTECT)
+	wk4_d1_payment = models.OneToOneField(Payments, db_column='wk4_d1_payment', related_name='wk4_d1_payment', on_delete=models.PROTECT, null=True)
+	wk4_d2_survey = models.OneToOneField('survey.SurveyLinks', db_column='wk4_d2_survey', related_name='wk4_d2_survey', on_delete=models.PROTECT)
+	wk4_d2_payment = models.OneToOneField(Payments, db_column='wk4_d2_payment', related_name='wk4_d2_payment', on_delete=models.PROTECT, null=True)
+	wk4_d3_survey = models.OneToOneField('survey.SurveyLinks', db_column='wk4_d3_survey', related_name='wk4_d3_survey', on_delete=models.PROTECT)
+	wk4_d3_payment = models.OneToOneField(Payments, db_column='wk4_d3_payment', related_name='wk4_d3_payment', on_delete=models.PROTECT, null=True)
+
+	wk14_d1_survey = models.OneToOneField('survey.SurveyLinks', db_column='wk14_d1_survey', related_name='wk14_d1_survey', on_delete=models.PROTECT)
+	wk14_d1_payment = models.OneToOneField(Payments, db_column='wk14_d1_payment', related_name='wk14_d1_payment', on_delete=models.PROTECT, null=True)
+	wk14_d2_survey = models.OneToOneField('survey.SurveyLinks', db_column='wk14_d2_survey', related_name='wk14_d2_survey', on_delete=models.PROTECT)
+	wk14_d2_payment = models.OneToOneField(Payments, db_column='wk14_d2_payment', related_name='wk14_d2_payment', on_delete=models.PROTECT, null=True)
+	wk14_d3_survey = models.OneToOneField('survey.SurveyLinks', db_column='wk14_d3_survey', related_name='wk14_d3_survey', on_delete=models.PROTECT)
+	wk14_d3_payment = models.OneToOneField(Payments, db_column='wk14_d3_payment', related_name='wk14_d3_payment', on_delete=models.PROTECT, null=True)
+
+	class Meta:
+		db_table = "schedule"

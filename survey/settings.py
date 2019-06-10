@@ -79,7 +79,7 @@ sms_messages = {
 		"Hola _TO_FNAME_, su próxima encuesta ya está lista. Tiene hasta las _EXPIRES_AT_ para completarla.",
 		"¡Espero que estes teniendo un buen dia! Por favor completa nuestra próxima encuesta antes de _EXPIRES_AT_.",
 		"Buenas tardes, _TO_FNAME_. Su encuesta esta lista y tiene hasta _EXPIRES_AT_ para completarla. ¡Gracias!",
-		"Hola, aquí esta su tercera encuesta de hoy. Por favor completa la antes de_EXPIRES_AT_. ¡Gracias por ayudar!",
+		"Hola, aquí esta su tercera encuesta de hoy. Por favor completa la antes de _EXPIRES_AT_. ¡Gracias por ayudar!",
 		"Hola _TO_FNAME_. Su proxima encuesta esta lista. Por favor completa la antes de _EXPIRES_AT_.",
 		"¡Hola! Su proxima encuesta esta lista. Por favor terminala antes de _EXPIRES_AT_. Gracias por su ayda.",
 	],

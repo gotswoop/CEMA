@@ -4,10 +4,10 @@
 {% block content %}
 <ol class="breadcrumb">
   <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
-  <li class="breadcrumb-item active">Study Dashboard</li>
+  <li class="breadcrumb-item active">Wave {{ cohort }} Status</li>
 </ol>
 
-<h2>Study Dashboard</h2>
+<h2>Wave {{ cohort }} Status:</h2>
 
 <div class="tab-pane fade show active" id="acct_active" role="tabpanel" aria-labelledby="tab-acct_active">
 	<div class="table-responsive">
@@ -106,6 +106,16 @@
  	</tbody>
  	</table>
  	</div>
+
+	<table class="table table-sm table-bordered bg-white mt-4" style="width:50%">
+	<tbody>
+	<tr><td class="survey_status_0">-</td><td>Did not click on survey link, or survey not yet open.</td></tr>
+	<tr><td class="survey_status_1">?</td><td>Started but did not complete.</td></tr>
+	<tr><td class="survey_status_2">Y</td><td>Completed.</td></tr>
+	<tr><td class="survey_status_3">X</td><td>Timed out.</td></tr>
+	</tbody>
+	</table>
+
 </div>
 
 {% endblock content %}

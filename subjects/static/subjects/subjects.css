@@ -1,0 +1,24 @@
+td.survey_status_0 {
+	background-color: #FFFFFF;
+	text-align: center;
+	color: black;
+}
+
+td.survey_status_1 {
+	background-color: #FFFF00;
+	text-align: center;
+	color: black;
+}
+
+td.survey_status_2 {
+	background-color: #4CAF50;
+	text-align: center;
+	color: white;
+}
+
+td.survey_status_3 {
+	background-color: #DF2800;
+	text-align: center;	
+	color: white;
+}
+

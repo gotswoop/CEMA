@@ -36,6 +36,7 @@ urlpatterns = [
     path('dashboard/', home_views.dashboard, name='dashboard'),
     #
 	path('subjects/', subject_views.subjects_all, name='subjects_all'),
+	path('subjects/dashboard/', subject_views.subjects_dashboard, name='subjects_dashboard'),
 	path('subject/<int:study_id>/', subject_views.subject_details, name='subject_details'),
 	path('subject/<int:study_id>/edit/', subject_views.subject_edit, name='subject_edit'),
 	path('subjects/recruit/', subject_views.subject_recruit, name='subjects_recruit'),

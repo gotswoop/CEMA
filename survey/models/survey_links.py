@@ -48,11 +48,11 @@ class SurveyLinks(models.Model):
 		if self.status == 0:
 			return '-'
 		elif self.status == 1:
-			return 'Started'
+			return '?'
 		elif self.status == 2:
-			return 'Completed'
+			return 'Y'
 		elif self.status == 3:
-			return 'Timed out'
+			return 'X'
 
 	def survey_type(self):
 		if self.survey_number == 1:

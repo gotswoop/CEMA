@@ -1,0 +1,111 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% load auth_extras %}
+{% block content %}
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+  <li class="breadcrumb-item active">Study Dashboard</li>
+</ol>
+
+<h2>Study Dashboard</h2>
+
+<div class="tab-pane fade show active" id="acct_active" role="tabpanel" aria-labelledby="tab-acct_active">
+	<div class="table-responsive">
+	<table class="table table-sm table-hover table-bordered bg-white mt-4">
+	<thead class="thead-light">
+		<tr>
+			<th colspan="3"></th>
+			<th class="text-center" colspan="8">Week 1</th>
+			<th class="text-center" colspan="8">Week 2</th>
+			<th class="text-center" colspan="8">Week 3</th>
+		</tr>
+		
+		<tr>
+			<th colspan="3"></th>
+			<th class="text-center" colspan="4">Day 1</th>
+			<th class="text-center" colspan="4">Day 2</th>
+			
+			<th class="text-center" colspan="4">Day 1</th>
+			<th class="text-center" colspan="4">Day 2</th>
+			
+			<th class="text-center" colspan="4">Day 1</th>
+			<th class="text-center" colspan="4">Day 2</th>
+		</tr>
+		<tr>
+			<th>#</th>
+			<th>Name</th>
+			<th></th>
+			<th class="text-center">1</th>
+			<th class="text-center">2</th>
+			<th class="text-center">3</th>
+			<th class="text-center">4</th>
+			<th class="text-center">1</th>
+			<th class="text-center">2</th>
+			<th class="text-center">3</th>
+			<th class="text-center">4</th>
+			
+			<th class="text-center">1</th>
+			<th class="text-center">2</th>
+			<th class="text-center">3</th>
+			<th class="text-center">4</th>
+			<th class="text-center">1</th>
+			<th class="text-center">2</th>
+			<th class="text-center">3</th>
+			<th class="text-center">4</th>
+			
+			<th class="text-center">1</th>
+			<th class="text-center">2</th>
+			<th class="text-center">3</th>
+			<th class="text-center">4</th>
+			<th class="text-center">1</th>
+			<th class="text-center">2</th>
+			<th class="text-center">3</th>
+			<th class="text-center">4</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for schedule in schedules %}
+	<tr>
+	<td>{{ forloop.counter }}</td>
+	<td><a href="{% url 'subject_details' schedule.study_id.pk %}">{{ schedule.study_id.fullname }} </a> ({{ schedule.study_id.pk }})</td>
+	<td><img src="{% static 'subjects/' %}{{schedule.study_id.language}}.png" style="height:20px;"/></td>
+	<!-- Week 1 -->
+	<td class="survey_status_{{schedule.wk1_d1_survey_1.status}}">{{schedule.wk1_d1_survey_1.progress}}</td>
+	<td class="survey_status_{{schedule.wk1_d1_survey_2.status}}">{{schedule.wk1_d1_survey_2.progress}}</td>
+	<td class="survey_status_{{schedule.wk1_d1_survey_3.status}}">{{schedule.wk1_d1_survey_3.progress}}</td>
+	<td class="survey_status_{{schedule.wk1_d1_survey_4.status}}">{{schedule.wk1_d1_survey_4.progress}}</td>
+
+	<td class="survey_status_{{schedule.wk1_d2_survey_1.status}}">{{schedule.wk1_d2_survey_1.progress}}</td>
+	<td class="survey_status_{{schedule.wk1_d2_survey_2.status}}">{{schedule.wk1_d2_survey_2.progress}}</td>
+	<td class="survey_status_{{schedule.wk1_d2_survey_3.status}}">{{schedule.wk1_d2_survey_3.progress}}</td>
+	<td class="survey_status_{{schedule.wk1_d2_survey_4.status}}">{{schedule.wk1_d2_survey_4.progress}}</td>
+
+	<!-- Week 2 -->
+	<td class="survey_status_{{schedule.wk2_d1_survey_1.status}}">{{schedule.wk2_d1_survey_1.progress}}</td>
+	<td class="survey_status_{{schedule.wk2_d1_survey_2.status}}">{{schedule.wk2_d1_survey_2.progress}}</td>
+	<td class="survey_status_{{schedule.wk2_d1_survey_3.status}}">{{schedule.wk2_d1_survey_3.progress}}</td>
+	<td class="survey_status_{{schedule.wk2_d1_survey_4.status}}">{{schedule.wk2_d1_survey_4.progress}}</td>
+
+	<td class="survey_status_{{schedule.wk2_d2_survey_1.status}}">{{schedule.wk2_d2_survey_1.progress}}</td>
+	<td class="survey_status_{{schedule.wk2_d2_survey_2.status}}">{{schedule.wk2_d2_survey_2.progress}}</td>
+	<td class="survey_status_{{schedule.wk2_d2_survey_3.status}}">{{schedule.wk2_d2_survey_3.progress}}</td>
+	<td class="survey_status_{{schedule.wk2_d2_survey_4.status}}">{{schedule.wk2_d2_survey_4.progress}}</td>
+
+	<td class="survey_status_{{schedule.wk3_d1_survey_1.status}}">{{schedule.wk3_d1_survey_1.progress}}</td>
+	<td class="survey_status_{{schedule.wk3_d1_survey_2.status}}">{{schedule.wk3_d1_survey_2.progress}}</td>
+	<td class="survey_status_{{schedule.wk3_d1_survey_3.status}}">{{schedule.wk3_d1_survey_3.progress}}</td>
+	<td class="survey_status_{{schedule.wk3_d1_survey_4.status}}">{{schedule.wk3_d1_survey_4.progress}}</td>
+
+	<td class="survey_status_{{schedule.wk3_d2_survey_1.status}}">{{schedule.wk3_d2_survey_1.progress}}</td>
+	<td class="survey_status_{{schedule.wk3_d2_survey_2.status}}">{{schedule.wk3_d2_survey_2.progress}}</td>
+	<td class="survey_status_{{schedule.wk3_d2_survey_3.status}}">{{schedule.wk3_d2_survey_3.progress}}</td>
+	<td class="survey_status_{{schedule.wk3_d2_survey_4.status}}">{{schedule.wk3_d2_survey_4.progress}}</td>
+
+	</tr>
+ 	{% endfor %}
+ 	</tbody>
+ 	</table>
+ 	</div>
+</div>
+
+{% endblock content %}

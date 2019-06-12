@@ -109,7 +109,7 @@ def survey_test(request):
 		else:
 			bonus_questions = None
 
-		survey_obj = generate_survey_link(survey_number, study_id, bonus_questions)
+		survey_obj = generate_survey_link(survey_number, study_id, bonus_questions=bonus_questions)
 		survey_link = ('https://' if request.is_secure() else 'http://') + request.get_host() + '/s/' + survey_obj.survey_key
 		context = {
 			'survey_link': survey_link,

@@ -14,7 +14,10 @@ from survey.models import *
 from django.db import IntegrityError
 import random, string
 
-def generate_survey_link(survey_number, study_id, bonus_questions=None, start_datetime=datetime.now()):
+def generate_survey_link(survey_number, study_id, **kwargs):
+
+	bonus_questions = kwargs.get('bonus_question', None)
+	start_datetime = kwargs.get('start_datetime', datetime.now())
 
 	timed = 60
 	short_url_length = 16

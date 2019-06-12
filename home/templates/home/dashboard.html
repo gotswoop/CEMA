@@ -9,8 +9,8 @@
 <ul>
 	<li>Study Status: <span class="badge badge-success">New</span>
 		<ul>
-			<li><a href="{% url 'subjects_dashboard' 2 %}">Wave 2 - Monday, June 10th 2019</a></li>
-			<li><a href="{% url 'subjects_dashboard' 123 %}">Wave 123 (Test) - Monday, June 10th 2019</a></li>
+			<li><a href="{% url 'subjects_dashboard' 2 %}">Wave 2</a> - Started Mon, June 10th</li>
+			<li><a href="{% url 'subjects_dashboard' 123 %}">Wave 2 (Testers)</a> - Started Mon, June 10th</li>
 		</ul>
 	</li>
 	<li>Participants:
@@ -30,9 +30,9 @@
 	<li>Survey:
 		<ul>
 			<li><a href="{% url 'survey_test' %}">Test</a></li>
-			<li><a href="#">Generate Survey Links</a> (TODO)</li>
 		</ul>
 	</li>
+	<!--
 	<li>Data (coming soon):
 		<ul>
 			<li><a href="#">Download Survey Data</a> (TODO)</li>
@@ -44,6 +44,7 @@
 			<li><a href="#">System Settings</a> (TODO)</li>
 		</ul>
 	</li>
+	-->
 </ul>
 </div>
 {% endblock content %}

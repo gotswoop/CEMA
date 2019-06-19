@@ -40,6 +40,7 @@ urlpatterns = [
 	path('subject/<int:study_id>/', subject_views.subject_details, name='subject_details'),
 	path('subject/<int:study_id>/edit/', subject_views.subject_edit, name='subject_edit'),
 	path('subjects/recruit/', subject_views.subject_recruit, name='subjects_recruit'),
+	path('subjects/download/', subject_views.subjects_download, name='subjects_download'),
 	#
 	path('sms/queue/', sms_views.sms_queue, name='sms_queue'),
 	path('sms/sent/', sms_views.sms_sent, name='sms_sent'),
@@ -59,4 +60,5 @@ urlpatterns = [
 	path('s/<str:survey_key>', survey_views.survey, name='survey'),
 	# Test
 	path('survey/test/', survey_views.survey_test, name='survey_test'),
+	path('survey/download/', survey_views.survey_download, name='survey_download'),
 ]

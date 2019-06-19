@@ -1,3 +1,4 @@
+# UPDATE HERE
 survey_questions = {
 	1: ('q_00', 'q_01', 'q_02', 'q_03', 'q_04', 'q_05', 'q_06', 'q_10', 'q_11', 'q_12'),
 	2: ('q_00', 'q_01', 'q_02', 'q_03', 'q_04', 'q_05', 'q_06', 'q_20', 'q_21'),
@@ -6,6 +7,13 @@ survey_questions = {
 	123: ('q_00', 'q_01', 'q_02', 'q_03', 'q_04', 'q_05', 'q_06', 'q_10', 'q_11', 'q_12', 'q_20', 'q_21', 'q_51'),
 	223: ('q_00', 'qr_01', 'qr_02', 'qr_03', 'qr_04', 'qr_05', 'qr_06', 'qr_07', 'qr_08', 'qr_09', 'qr_10', 'qr_11', 'qr_12', 'qr_13', 'qr_14', 'qr_15', 'qr_16', 'qr_17', 'qr_18'),
 }
+# UPDATE HERE
+all_survey_questions = [
+	'q_00', 'q_01', 'q_02', 'q_03', 'q_04', 'q_05', 'q_06', # Emotions
+	'q_10', 'q_11', 'q_12', # Time
+	'q_20', 'q_21', # Risk
+	'qr_01', 'qr_02', 'qr_03', 'qr_04', 'qr_05', 'qr_06', 'qr_07', 'qr_08', 'qr_09', 'qr_10', 'qr_11', 'qr_12', 'qr_13', 'qr_14', 'qr_15', 'qr_16', 'qr_17', 'qr_18' # Bonus questions
+]
 
 survey_bonus_questions = [
 	'qr_01', 'qr_02', 'qr_03', 'qr_04', 'qr_05', 'qr_06', 'qr_07', 'qr_08',
@@ -51,7 +59,7 @@ sms_messages = {
 		"Hello! Your next survey is ready. Please finish it by _EXPIRES_AT_. Thanks for your help.",
 	],
 	'EN_survey_4': [
-		"Hi _TO_FNAME_, here’s today's last survey. You have until _EXPIRES_AT_ to complete it. Thanks and good night.",
+		"Hi _TO_FNAME_, here's today's last survey. You have until _EXPIRES_AT_ to complete it. Thanks and good night.",
 		"Hi _TO_FNAME_ - please complete your survey by _EXPIRES_AT_. Have a good evening!",
 		"Hi _TO_FNAME_, hope you had a great day. Please help by completing your survey by _EXPIRES_AT_. Good night!",
 		"Good evening! Please complete your last survey of today by _EXPIRES_AT_. Thank you.",
@@ -94,17 +102,42 @@ sms_messages = {
 }
 
 sms_messages_week_4_14 = {
-	'EN_wk4_d1_survey': "Hello _TO_FNAME_, _WK4_D1_SURVEY_TEXT_",
-	'EN_wk4_d2_survey': "Hello _TO_FNAME_, _WK4_D2_SURVEY_TEXT_",
-	'EN_wk4_d3_survey': "Hello _TO_FNAME_, _WK4_D3_SURVEY_TEXT_",
-	'EN_wk14_d1_survey': "Hello _TO_FNAME_, _WK14_D1_SURVEY_TEXT_",
-	'EN_wk14_d2_survey': "Hello _TO_FNAME_, _WK14_D2_SURVEY_TEXT_",
-	'EN_wk14_d3_survey': "Hello _TO_FNAME_, _WK14_D3_SURVEY_TEXT_",
+	# Wk 4 - English
+	'EN_wk4_d1_survey': "Hi _TO_FNAME_, your survey is ready. Complete by _EXPIRES_AT_ to earn $10 plus additional money.",
+	'EN_wk4_d2_survey': "Hello - we see you didn't complete your survey yesterday. Here's another chance to complete it by _EXPIRES_AT_ and earn $10+.",
+	'EN_wk4_d3_survey': "Here is your last chance to complete this week's survey - you have until _EXPIRES_AT_. Please help us out and earn $10+ doing it.",
+	# Wk 4 - Spanish
+	'ES_wk4_d1_survey': "Hola _TO_FNAME_, su encuesta esta lista. Complétala antes de _EXPIRES_AT_ para ganar $10 y dinero adicional.",
+	'ES_wk4_d2_survey': "Hola - parece que no completaste la encuesta de ayer. Esta es otra oportunidad completarla antes de _EXPIRES_AT_. Por favor ayúdanos y gana $10+ por completarla.",
+	'ES_wk4_d3_survey': "Esta es su última oportunidad completar la encuesta de esta semana - tiene hasta _EXPIRES_AT_. Por favor ayúdanos y gana $10+ por completarla.",
+	# Wk 14 - English
+	'EN_wk14_d1_survey': "Hi _TO_FNAME_, this is _FROM_FNAME_ from USC. Your last survey is here. Complete it by _EXPIRES_AT_ and earn $10. Thank you!",
+	'EN_wk14_d2_survey': "Hello - we see you didn't complete your survey yesterday. Here's another chance to complete it by _EXPIRES_AT_ and earn $10+.",
+	'EN_wk14_d3_survey': "Here is your last chance to complete this week's survey - you have until _EXPIRES_AT_. Please help us out and earn $10+ doing it.",
+	# Wk 14 - Spanish
+	'ES_wk14_d1_survey': "Hola _TO_FNAME_, soy _FROM_FNAME_ de USC. Su última encuesta esta lista. Complétala antes de _EXPIRES_AT_ para ganar $10+. ¡Gracias!",
+	'ES_wk14_d2_survey': "Hola - parece que no completaste la encuesta de ayer. Esta es otra oportunidad completarla antes de _EXPIRES_AT_ y ganar $10+.",
+	'ES_wk14_d3_survey': "Esta es su última oportunidad completar la encuesta de esta semana - tiene hasta _EXPIRES_AT_. Por favor ayúdanos y gana $10+ por completarla.",
+}
 
-	'ES_wk4_d1_survey': "Hola _TO_FNAME_, _WK4_D1_SURVEY_TEXT_",
-	'ES_wk4_d2_survey': "Hola _TO_FNAME_, _WK4_D2_SURVEY_TEXT_",
-	'ES_wk4_d3_survey': "Hola _TO_FNAME_, _WK4_D3_SURVEY_TEXT_",
-	'ES_wk14_d1_survey': "Hola _TO_FNAME_, _WK14_D1_SURVEY_TEXT_",
-	'ES_wk14_d2_survey': "Hola _TO_FNAME_, _WK14_D2_SURVEY_TEXT_",
-	'ES_wk14_d3_survey': "Hola _TO_FNAME_, _WK14_D3_SURVEY_TEXT_",
+sms_payment_messages = {
+	'EN_survey_payment': "Your card is loaded! You got $_BASIC_PAY_ for _SURVEYS_ surveys.",
+	'EN_no_surveys' : "Hi _TO_FNAME_, this is _FROM_FNAME_ from USC. You didn't complete any surveys yesterday. Is everything okay? Please give us a call if you need help!",
+	'EN_time_today': "In the choice-that-counts, you also got $_BONUS_PAY_ today.",
+	'EN_time_5': "In the choice-that-counts, you will get $_BONUS_PAY_ in 5 weeks.",
+	'EN_time_10': "In the choice-that-counts, you will get $_BONUS_PAY_ in 10 weeks.",
+	'EN_risk_lottery_won': "In the choice-that-counts, you picked the lottery and won $20.",
+	'EN_risk_lottery_lost': "In the choice-that-counts, you picked the lottery and did not win.",
+	'EN_risk_sure_payment': "In the choice-that-counts, you picked the sure choice and got $_BONUS_PAY_.",
+	'EN_no_choice': "In the choice-that-counts, you did not pick anything and did not earn extra money. Try to do more surveys each day to maximize your earnings.",
+
+	'ES_survey_payment': "Su tarjeta está cargada. Recibió $_BASIC_PAY_ por _SURVEYS_ encuestas.",
+	'ES_no_surveys' : "Hola _TO_FNAME_, esto es _FROM_FNAME_ de USC. No completo ninguna encuesta ayer. ¿Está todo bien? Por favor llámanos si necesita ayuda.",
+	'ES_time_today': "En la decisión-que-cuenta, también recibió $_BONUS_PAY_ hoy.",
+	'ES_time_5': "En la decisión-que-cuenta, recibirá $_BONUS_PAY_ en 5 semanas.",
+	'ES_time_10': "En la decisión-que-cuenta, recibirá $_BONUS_PAY_ en 10 semanas.",
+	'ES_risk_lottery_won': "En la decisión-que-cuenta, eligió la lotería y ganó $20.",
+	'ES_risk_lottery_lost': "En la decisión-que-cuenta, eligió la lotería y no ganó.",
+	'ES_risk_sure_payment': "En la decisión-que-cuenta, eligió la opción segura y recibió $_BONUS_PAY_.",
+	'ES_no_choice': "En la decisión-que-cuenta, no eligió nada, entonces no recibió dinero adicional. Completa más encuestas cada día para maximizar sus ganancias."
 }

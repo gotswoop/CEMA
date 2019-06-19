@@ -11,6 +11,7 @@ from django.conf import settings
 from django.contrib import messages
 from datetime import datetime
 from survey.models import *
+from survey.settings import *
 from django.db import IntegrityError
 import random, string
 
@@ -60,3 +61,20 @@ def save_survey_response(survey, question, question_response, user_ip):
 		response.save()
 	
 	return None
+
+def fetch_survey_responses(survey_id):
+	# Initializing
+	answers = []
+	responses = {}
+	for q in all_survey_questions: # Fetches all_survey_questions from settings.py
+		responses[q] = None
+
+	results = SurveyData.objects.filter(survey_link=survey_id)
+	for r in results:
+		responses[r.question] = r.response
+
+	for key, value in responses.items():
+		answers.append(value)
+
+	return answers
+

@@ -11,6 +11,7 @@
 		<ul>
 			<li><a href="{% url 'subjects_dashboard' 2 %}">Wave 2</a> - Started Mon, June 10th</li>
 			<li><a href="{% url 'subjects_dashboard' 200 %}">Wave 2 (Testers)</a> - Started Mon, June 10th</li>
+			<li><a href="{% url 'subjects_dashboard' 3 %}">Wave 3</a> - Started Mon, June 17th</li>
 		</ul>
 	</li>
 	<li>Participants:
@@ -32,19 +33,12 @@
 			<li><a href="{% url 'survey_test' %}">Test</a></li>
 		</ul>
 	</li>
-	<!--
-	<li>Data (coming soon):
+	<li>Downloads:
 		<ul>
-			<li><a href="#">Download Survey Data</a> (TODO)</li>
-			<li><a href="#">Download Payment Data for yyyy-mm-dd</a> (TODO)</li>
+			<li><a href="{% url 'subjects_download' %}">Subject Data</a></li>
+			<li><a href="{% url 'survey_download' %}">Download Survey Data</a></li>
 		</ul>
 	</li>
-	<li>Administration:
-		<ul>
-			<li><a href="#">System Settings</a> (TODO)</li>
-		</ul>
-	</li>
-	-->
 </ul>
 </div>
 {% endblock content %}

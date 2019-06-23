@@ -17,7 +17,7 @@ import random, string
 
 def generate_survey_link(survey_number, study_id, **kwargs):
 
-	bonus_questions = kwargs.get('bonus_question', None)
+	bonus_questions = kwargs.get('bonus_questions', None)
 	start_datetime = kwargs.get('start_datetime', datetime.now())
 
 	timed = 60

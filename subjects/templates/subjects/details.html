@@ -10,7 +10,7 @@
 </ol>
 
 <div class="content-section mt-4">
-	<h3><span class="badge badge-danger">{{ subject.study_id }}</span></h3>
+	<h3><span class="badge badge-danger">{{ subject.study_id }}</span><span class="badge badge-info ml-2">Wave {{ subject.cohort }} - {{ subject.schedule_study_id.wk1_d1_survey_1.start_datetime|date:'M d, Y' }}</span></h3>
 	<h2>{{ subject.first_name }} {{ subject.last_name }} {% if not subject.deleted %}<a class="ml-2" href="{% url 'subject_edit' study_id=subject.study_id %}"><img src="{% static 'subjects/edit.png' %}"/></a>{% endif %}</h2>
 	<h4>
 		<img src="{% static 'subjects/' %}{{subject.language}}.png" style="height:25px;"/>
@@ -152,8 +152,7 @@
 
 		<!-- Study schedule -->
 		<div class="tab-pane fade" id="schedule" role="tabpanel" aria-labelledby="tab-schedule">
-			<h5> Started on {{ subject.schedule_study_id.wk1_d1_survey_1.start_datetime|date:'M d, Y' }}. Cohort  {{ subject.schedule_study_id.cohort }} </h5>
-
+			<h5> Survey Status</h5>
 			<div class="table-responsive">
 				<table class="table table-sm table-hover table-bordered bg-white">
 					<thead class="thead-light"><tr><th>Survey</th><th>Type</th><th>Status</th></tr></thead>
@@ -161,164 +160,164 @@
 						<!-- Week 1 -->
 						<tr>
 							<td>Week 1 - {{ subject.schedule_study_id.wk1_d1_survey_1.start_datetime|date:"D, M dS Y @ P" }} - #1 </td>
-							<td>{{ subject.schedule_study_id.wk1_d1_survey_1.survey_type }}</td>
+							<td>{{ subject.schedule_study_id.wk1_d1_survey_1.survey_type }} + {{ subject.schedule_study_id.wk1_d1_survey_1.bonus_questions }} </td>
 							<td class="survey_status_{{subject.schedule_study_id.wk1_d1_survey_1.status}}">{{ subject.schedule_study_id.wk1_d1_survey_1.progress }}</td>
 						</tr>
 						<tr>
 							<td>Week 1 - {{ subject.schedule_study_id.wk1_d1_survey_2.start_datetime|date:"D, M dS Y @ P" }} - #2 </td>
-							<td>{{ subject.schedule_study_id.wk1_d1_survey_2.survey_type }}</td>
+							<td>{{ subject.schedule_study_id.wk1_d1_survey_2.survey_type }} + {{ subject.schedule_study_id.wk1_d1_survey_2.bonus_questions }} </td>
 							<td class="survey_status_{{subject.schedule_study_id.wk1_d1_survey_2.status}}">{{ subject.schedule_study_id.wk1_d1_survey_2.progress }}</td>
 						</tr>
 						<tr>
 							<td>Week 1 - {{ subject.schedule_study_id.wk1_d1_survey_3.start_datetime|date:"D, M dS Y @ P" }} - #3 </td>
-							<td>{{ subject.schedule_study_id.wk1_d1_survey_3.survey_type }}</td>
+							<td>{{ subject.schedule_study_id.wk1_d1_survey_3.survey_type }} + {{ subject.schedule_study_id.wk1_d1_survey_3.bonus_questions }} </td>
 							<td class="survey_status_{{subject.schedule_study_id.wk1_d1_survey_3.status}}">{{ subject.schedule_study_id.wk1_d1_survey_3.progress }}</td>
 						</tr>
 						<tr>
 						<td>Week 1 - {{ subject.schedule_study_id.wk1_d1_survey_4.start_datetime|date:"D, M dS Y @ P" }} - #4 </td>
-							<td>{{ subject.schedule_study_id.wk1_d1_survey_4.survey_type }}</td>
+							<td>{{ subject.schedule_study_id.wk1_d1_survey_4.survey_type }} + {{ subject.schedule_study_id.wk1_d1_survey_4.bonus_questions }} </td>
 							<td class="survey_status_{{subject.schedule_study_id.wk1_d1_survey_4.status}}">{{ subject.schedule_study_id.wk1_d1_survey_4.progress }}</td>
 						</tr>
 						<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 						<tr>
 							<td>Week 1 - {{ subject.schedule_study_id.wk1_d2_survey_1.start_datetime|date:"D, M dS Y @ P" }} - #1 </td>
-							<td>{{ subject.schedule_study_id.wk1_d2_survey_1.survey_type }}</td>
+							<td>{{ subject.schedule_study_id.wk1_d2_survey_1.survey_type }} + {{ subject.schedule_study_id.wk1_d2_survey_1.bonus_questions }} </td>
 							<td class="survey_status_{{subject.schedule_study_id.wk1_d2_survey_1.status}}">{{ subject.schedule_study_id.wk1_d2_survey_1.progress }}</td>
 						</tr>
 						<tr>
 							<td>Week 1 - {{ subject.schedule_study_id.wk1_d2_survey_2.start_datetime|date:"D, M dS Y @ P" }} - #2 </td>
-							<td>{{ subject.schedule_study_id.wk1_d2_survey_2.survey_type }}</td>
+							<td>{{ subject.schedule_study_id.wk1_d2_survey_2.survey_type }} + {{ subject.schedule_study_id.wk1_d2_survey_2.bonus_questions }} </td>
 							<td class="survey_status_{{subject.schedule_study_id.wk1_d2_survey_2.status}}">{{ subject.schedule_study_id.wk1_d2_survey_2.progress }}</td>
 						</tr>
 						<tr>
 							<td>Week 1 - {{ subject.schedule_study_id.wk1_d2_survey_3.start_datetime|date:"D, M dS Y @ P" }} - #3 </td>
-							<td>{{ subject.schedule_study_id.wk1_d2_survey_3.survey_type }}</td>
+							<td>{{ subject.schedule_study_id.wk1_d2_survey_3.survey_type }} + {{ subject.schedule_study_id.wk1_d2_survey_3.bonus_questions }} </td>
 							<td class="survey_status_{{subject.schedule_study_id.wk1_d2_survey_3.status}}">{{ subject.schedule_study_id.wk1_d2_survey_3.progress }}</td>
 						</tr>
 						<tr>
 						<td>Week 1 - {{ subject.schedule_study_id.wk1_d2_survey_4.start_datetime|date:"D, M dS Y @ P" }} - #4 </td>
-							<td>{{ subject.schedule_study_id.wk1_d2_survey_4.survey_type }}</td>
+							<td>{{ subject.schedule_study_id.wk1_d2_survey_4.survey_type }} + {{ subject.schedule_study_id.wk1_d2_survey_4.bonus_questions }} </td>
 							<td class="survey_status_{{subject.schedule_study_id.wk1_d2_survey_4.status}}">{{ subject.schedule_study_id.wk1_d2_survey_4.progress }}</td>
 						</tr>
 						<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 						<!-- Week 2 -->
 						<tr>
 							<td>Week 2 - {{ subject.schedule_study_id.wk2_d1_survey_1.start_datetime|date:"D, M dS Y @ P" }} - #1 </td>
-							<td>{{ subject.schedule_study_id.wk2_d1_survey_1.survey_type }}</td>
-							<td>{{ subject.schedule_study_id.wk2_d1_survey_1.progress }}</td>
+							<td>{{ subject.schedule_study_id.wk2_d1_survey_1.survey_type }} + {{ subject.schedule_study_id.wk2_d1_survey_1.bonus_questions }} </td>
+							<td class="survey_status_{{subject.schedule_study_id.wk1_d2_survey_3.status}}">{{ subject.schedule_study_id.wk2_d1_survey_1.progress }}</td>
 						</tr>
 						<tr>
 							<td>Week 2 - {{ subject.schedule_study_id.wk2_d1_survey_2.start_datetime|date:"D, M dS Y @ P" }} - #2 </td>
-							<td>{{ subject.schedule_study_id.wk2_d1_survey_2.survey_type }}</td>
-							<td>{{ subject.schedule_study_id.wk2_d1_survey_2.progress }}</td>
+							<td>{{ subject.schedule_study_id.wk2_d1_survey_2.survey_type }} + {{ subject.schedule_study_id.wk2_d1_survey_2.bonus_questions }} </td>
+							<td class="survey_status_{{subject.schedule_study_id.wk1_d2_survey_3.status}}">{{ subject.schedule_study_id.wk2_d1_survey_2.progress }}</td>
 						</tr>
 						<tr>
 							<td>Week 2 - {{ subject.schedule_study_id.wk2_d1_survey_3.start_datetime|date:"D, M dS Y @ P" }} - #3 </td>
-							<td>{{ subject.schedule_study_id.wk2_d1_survey_3.survey_type }}</td>
-							<td>{{ subject.schedule_study_id.wk2_d1_survey_3.progress }}</td>
+							<td>{{ subject.schedule_study_id.wk2_d1_survey_3.survey_type }} + {{ subject.schedule_study_id.wk2_d1_survey_3.bonus_questions }} </td>
+							<td class="survey_status_{{subject.schedule_study_id.wk1_d2_survey_3.status}}">{{ subject.schedule_study_id.wk2_d1_survey_3.progress }}</td>
 						</tr>
 						<tr>
 						<td>Week 2 - {{ subject.schedule_study_id.wk2_d1_survey_4.start_datetime|date:"D, M dS Y @ P" }} - #4 </td>
-							<td>{{ subject.schedule_study_id.wk2_d1_survey_4.survey_type }}</td>
-							<td>{{ subject.schedule_study_id.wk2_d1_survey_4.progress }}</td>
+							<td>{{ subject.schedule_study_id.wk2_d1_survey_4.survey_type }} + {{ subject.schedule_study_id.wk2_d1_survey_4.bonus_questions }} </td>
+							<td class="survey_status_{{subject.schedule_study_id.wk1_d2_survey_3.status}}">{{ subject.schedule_study_id.wk2_d1_survey_4.progress }}</td>
 						</tr>
 						<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 						<tr>
 							<td>Week 2 - {{ subject.schedule_study_id.wk2_d2_survey_1.start_datetime|date:"D, M dS Y @ P" }} - #1 </td>
-							<td>{{ subject.schedule_study_id.wk2_d2_survey_1.survey_type }}</td>
-							<td>{{ subject.schedule_study_id.wk2_d2_survey_1.progress }}</td>
+							<td>{{ subject.schedule_study_id.wk2_d2_survey_1.survey_type }} + {{ subject.schedule_study_id.wk2_d2_survey_1.bonus_questions }} </td>
+							<td class="survey_status_{{subject.schedule_study_id.wk1_d2_survey_3.status}}">{{ subject.schedule_study_id.wk2_d2_survey_1.progress }}</td>
 						</tr>
 						<tr>
 							<td>Week 2 - {{ subject.schedule_study_id.wk2_d2_survey_2.start_datetime|date:"D, M dS Y @ P" }} - #2 </td>
-							<td>{{ subject.schedule_study_id.wk2_d2_survey_2.survey_type }}</td>
-							<td>{{ subject.schedule_study_id.wk2_d2_survey_2.progress }}</td>
+							<td>{{ subject.schedule_study_id.wk2_d2_survey_2.survey_type }} + {{ subject.schedule_study_id.wk2_d2_survey_2.bonus_questions }} </td>
+							<td class="survey_status_{{subject.schedule_study_id.wk1_d2_survey_3.status}}">{{ subject.schedule_study_id.wk2_d2_survey_2.progress }}</td>
 						</tr>
 						<tr>
 							<td>Week 2 - {{ subject.schedule_study_id.wk2_d2_survey_3.start_datetime|date:"D, M dS Y @ P" }} - #3 </td>
-							<td>{{ subject.schedule_study_id.wk2_d2_survey_3.survey_type }}</td>
-							<td>{{ subject.schedule_study_id.wk2_d2_survey_3.progress }}</td>
+							<td>{{ subject.schedule_study_id.wk2_d2_survey_3.survey_type }} + {{ subject.schedule_study_id.wk2_d2_survey_3.bonus_questions }} </td>
+							<td class="survey_status_{{subject.schedule_study_id.wk1_d2_survey_3.status}}">{{ subject.schedule_study_id.wk2_d2_survey_3.progress }}</td>
 						</tr>
 						<tr>
 						<td>Week 2 - {{ subject.schedule_study_id.wk2_d2_survey_4.start_datetime|date:"D, M dS Y @ P" }} - #4 </td>
-							<td>{{ subject.schedule_study_id.wk2_d2_survey_4.survey_type }}</td>
-							<td>{{ subject.schedule_study_id.wk2_d2_survey_4.progress }}</td>
+							<td>{{ subject.schedule_study_id.wk2_d2_survey_4.survey_type }} + {{ subject.schedule_study_id.wk2_d2_survey_4.bonus_questions }} </td>
+							<td class="survey_status_{{subject.schedule_study_id.wk1_d2_survey_3.status}}">{{ subject.schedule_study_id.wk2_d2_survey_4.progress }}</td>
 						</tr>
 						<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 						<!-- Week 3 -->
 						<tr>
 							<td>Week 3 - {{ subject.schedule_study_id.wk3_d1_survey_1.start_datetime|date:"D, M dS Y @ P" }} - #1 </td>
-							<td>{{ subject.schedule_study_id.wk3_d1_survey_1.survey_type }}</td>
-							<td>{{ subject.schedule_study_id.wk3_d1_survey_1.progress }}</td>
+							<td>{{ subject.schedule_study_id.wk3_d1_survey_1.survey_type }} + {{ subject.schedule_study_id.wk3_d1_survey_1.bonus_questions }} </td>
+							<td class="survey_status_{{subject.schedule_study_id.wk3_d1_survey_1.status}}">{{ subject.schedule_study_id.wk3_d1_survey_1.progress }}</td>
 						</tr>
 						<tr>
 							<td>Week 3 - {{ subject.schedule_study_id.wk3_d1_survey_2.start_datetime|date:"D, M dS Y @ P" }} - #2 </td>
-							<td>{{ subject.schedule_study_id.wk3_d1_survey_2.survey_type }}</td>
-							<td>{{ subject.schedule_study_id.wk3_d1_survey_2.progress }}</td>
+							<td>{{ subject.schedule_study_id.wk3_d1_survey_2.survey_type }} + {{ subject.schedule_study_id.wk3_d1_survey_2.bonus_questions }} </td>
+							<td class="survey_status_{{subject.schedule_study_id.wk3_d2_survey_2.status}}">{{ subject.schedule_study_id.wk3_d1_survey_2.progress }}</td>
 						</tr>
 						<tr>
 							<td>Week 3 - {{ subject.schedule_study_id.wk3_d1_survey_3.start_datetime|date:"D, M dS Y @ P" }} - #3 </td>
-							<td>{{ subject.schedule_study_id.wk3_d1_survey_3.survey_type }}</td>
-							<td>{{ subject.schedule_study_id.wk3_d1_survey_3.progress }}</td>
+							<td>{{ subject.schedule_study_id.wk3_d1_survey_3.survey_type }} + {{ subject.schedule_study_id.wk3_d1_survey_3.bonus_questions }} </td>
+							<td class="survey_status_{{subject.schedule_study_id.wk3_d2_survey_3.status}}">{{ subject.schedule_study_id.wk3_d1_survey_3.progress }}</td>
 						</tr>
 						<tr>
 						<td>Week 3 - {{ subject.schedule_study_id.wk3_d1_survey_4.start_datetime|date:"D, M dS Y @ P" }} - #4 </td>
-							<td>{{ subject.schedule_study_id.wk3_d1_survey_4.survey_type }}</td>
-							<td>{{ subject.schedule_study_id.wk3_d1_survey_4.progress }}</td>
+							<td>{{ subject.schedule_study_id.wk3_d1_survey_4.survey_type }} + {{ subject.schedule_study_id.wk3_d1_survey_4.bonus_questions }} </td>
+							<td class="survey_status_{{subject.schedule_study_id.wk3_d2_survey_4.status}}">{{ subject.schedule_study_id.wk3_d1_survey_4.progress }}</td>
 						</tr>
 						<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 						<tr>
 							<td>Week 3 - {{ subject.schedule_study_id.wk3_d2_survey_1.start_datetime|date:"D, M dS Y @ P" }} - #1 </td>
-							<td>{{ subject.schedule_study_id.wk3_d2_survey_1.survey_type }}</td>
-							<td>{{ subject.schedule_study_id.wk3_d2_survey_1.progress }}</td>
+							<td>{{ subject.schedule_study_id.wk3_d2_survey_1.survey_type }} + {{ subject.schedule_study_id.wk3_d2_survey_1.bonus_questions }} </td>
+							<td class="survey_status_{{subject.schedule_study_id.wk3_d2_survey_1.status}}">{{ subject.schedule_study_id.wk3_d2_survey_1.progress }}</td>
 						</tr>
 						<tr>
 							<td>Week 3 - {{ subject.schedule_study_id.wk3_d2_survey_2.start_datetime|date:"D, M dS Y @ P" }} - #2 </td>
-							<td>{{ subject.schedule_study_id.wk3_d2_survey_2.survey_type }}</td>
-							<td>{{ subject.schedule_study_id.wk3_d2_survey_2.progress }}</td>
+							<td>{{ subject.schedule_study_id.wk3_d2_survey_2.survey_type }} + {{ subject.schedule_study_id.wk3_d2_survey_2.bonus_questions }} </td>
+							<td class="survey_status_{{subject.schedule_study_id.wk3_d2_survey_2.status}}">{{ subject.schedule_study_id.wk3_d2_survey_2.progress }}</td>
 						</tr>
 						<tr>
 							<td>Week 3 - {{ subject.schedule_study_id.wk3_d2_survey_3.start_datetime|date:"D, M dS Y @ P" }} - #3 </td>
-							<td>{{ subject.schedule_study_id.wk3_d2_survey_3.survey_type }}</td>
-							<td>{{ subject.schedule_study_id.wk3_d2_survey_3.progress }}</td>
+							<td>{{ subject.schedule_study_id.wk3_d2_survey_3.survey_type }} + {{ subject.schedule_study_id.wk3_d2_survey_3.bonus_questions }} </td>
+							<td class="survey_status_{{subject.schedule_study_id.wk3_d2_survey_3.status}}">{{ subject.schedule_study_id.wk3_d2_survey_3.progress }}</td>
 						</tr>
 						<tr>
 						<td>Week 3 - {{ subject.schedule_study_id.wk3_d2_survey_4.start_datetime|date:"D, M dS Y @ P" }} - #4 </td>
-							<td>{{ subject.schedule_study_id.wk3_d2_survey_4.survey_type }}</td>
-							<td>{{ subject.schedule_study_id.wk3_d2_survey_4.progress }}</td>
+							<td>{{ subject.schedule_study_id.wk3_d2_survey_4.survey_type }} + {{ subject.schedule_study_id.wk3_d2_survey_4.bonus_questions }} </td>
+							<td class="survey_status_{{subject.schedule_study_id.wk3_d2_survey_4.status}}">{{ subject.schedule_study_id.wk3_d2_survey_4.progress }}</td>
 						</tr>
 						<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 						<!-- Week 4 -->
 						<tr>
 							<td>Week 4 - {{ subject.schedule_study_id.wk4_d1_survey.start_datetime|date:"D, M dS Y @ P" }}</td>
 							<td>{{ subject.schedule_study_id.wk4_d1_survey.survey_type }}</td>
-							<td>{{ subject.schedule_study_id.wk4_d1_survey.progress }}</td>
+							<td class="survey_status_{{subject.schedule_study_id.wk4_d1_survey.status}}">{{ subject.schedule_study_id.wk4_d1_survey.progress }}</td>
 						</tr>
 						<tr>
 							<td>Week 4 - {{ subject.schedule_study_id.wk4_d2_survey.start_datetime|date:"D, M dS Y @ P" }} (Reminder 1)</td>
 							<td>{{ subject.schedule_study_id.wk4_d2_survey.survey_type }}</td>
-							<td>{{ subject.schedule_study_id.wk4_d2_survey.progress }}</td>
+							<td class="survey_status_{{subject.schedule_study_id.wk4_d2_survey.status}}">{{ subject.schedule_study_id.wk4_d2_survey.progress }}</td>
 						</tr>
 						<tr>
 							<td>Week 4 - {{ subject.schedule_study_id.wk4_d3_survey.start_datetime|date:"D, M dS Y @ P" }} (Reminder 2)</td>
 							<td>{{ subject.schedule_study_id.wk4_d3_survey.survey_type }}</td>
-							<td>{{ subject.schedule_study_id.wk4_d3_survey.progress }}</td>
+							<td class="survey_status_{{subject.schedule_study_id.wk4_d3_survey.status}}">{{ subject.schedule_study_id.wk4_d3_survey.progress }}</td>
 						</tr>
 						<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 						<!-- Week 14 -->
 						<tr>
 							<td>Week 14 - {{ subject.schedule_study_id.wk14_d1_survey.start_datetime|date:"D, M dS Y @ P" }}</td>
 							<td>{{ subject.schedule_study_id.wk14_d1_survey.survey_type }}</td>
-							<td>{{ subject.schedule_study_id.wk14_d1_survey.progress }}</td>
+							<td class="survey_status_{{subject.schedule_study_id.wk14_d1_survey.status}}">{{ subject.schedule_study_id.wk14_d1_survey.progress }}</td>
 						</tr>
 						<tr>
 							<td>Week 14 - {{ subject.schedule_study_id.wk14_d2_survey.start_datetime|date:"D, M dS Y @ P" }} (Reminder 1)</td>
 							<td>{{ subject.schedule_study_id.wk14_d2_survey.survey_type }}</td>
-							<td>{{ subject.schedule_study_id.wk14_d2_survey.progress }}</td>
+							<td class="survey_status_{{subject.schedule_study_id.wk14_d2_survey.status}}">{{ subject.schedule_study_id.wk14_d2_survey.progress }}</td>
 						</tr>
 						<tr>
 							<td>Week 14 - {{ subject.schedule_study_id.wk14_d3_survey.start_datetime|date:"D, M dS Y @ P" }} (Reminder 2)</td>
 							<td>{{ subject.schedule_study_id.wk14_d3_survey.survey_type }}</td>
-							<td>{{ subject.schedule_study_id.wk14_d3_survey.progress }}</td>
+							<td class="survey_status_{{subject.schedule_study_id.wk14_d3_survey.status}}">{{ subject.schedule_study_id.wk14_d3_survey.progress }}</td>
 						</tr>
 						<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 					</tbody>

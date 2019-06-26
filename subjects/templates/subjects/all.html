@@ -44,10 +44,10 @@
 		<td>{{ subject.recruited_by.first_name }} @ {{ subject.recruited_location }}</td>
 		<td>{{ subject.recruited_date|date:'Y-m-d' }}</td>
 		<td><img src="{% static 'subjects/' %}{{subject.language}}.png" style="height:25px;"/></td>
-		{% if subject.schedule_study_id.cohort %}
-			<td class="bg-success">{{ subject.schedule_study_id.cohort }}</td>
+		{% if subject.cohort %}
+			<td class="text-center"><a href="{% url 'subjects_dashboard' cohort=subject.cohort %}" class="badge badge-pill badge-warning">{{ subject.cohort }}</a></td>
 		{% else %}
-			<td>-</td>
+			<td class="text-center">-</td>
 		{% endif %}
 		</tr>
 	 	{% endfor %}
@@ -72,10 +72,10 @@
 		<td>{{ subject.recruited_by.first_name }} @ {{ subject.recruited_location }}</td>
 		<td>{{ subject.recruited_date|date:'Y-m-d' }}</td>
 		<td><img src="{% static 'subjects/' %}{{subject.language}}.png" style="height:25px;"/></td>
-		{% if subject.schedule_study_id.cohort %}
-			<td class="bg-success">{{ subject.schedule_study_id.cohort }}</td>
+		{% if subject.cohort %}
+			<td class="text-center"><a href="{% url 'subjects_dashboard' cohort=subject.cohort %}" class="badge badge-pill badge-warning">{{ subject.cohort }}</a></td>
 		{% else %}
-			<td>-</td>
+			<td class="text-center">-</td>
 		{% endif %}
 		</tr>
 	 	{% endfor %}
@@ -100,10 +100,10 @@
 		<td>{{ subject.recruited_by.first_name }} @ {{ subject.recruited_location }}</td>
 		<td>{{ subject.recruited_date|date:'Y-m-d' }}</td>
 		<td><img src="{% static 'subjects/' %}{{subject.language}}.png" style="height:25px;"/></td>
-		{% if subject.schedule_study_id.cohort %}
-			<td class="bg-success">{{ subject.schedule_study_id.cohort }}</td>
+		{% if subject.cohort %}
+			<td class="text-center"><a href="{% url 'subjects_dashboard' cohort=subject.cohort %}" class="badge badge-pill badge-warning">{{ subject.cohort }}</a></td>
 		{% else %}
-			<td>-</td>
+			<td class="text-center">-</td>
 		{% endif %}
 		</tr>
 	 	{% endfor %}
@@ -128,10 +128,10 @@
 		<td>{{ subject.recruited_by.first_name }} @ {{ subject.recruited_location }}</td>
 		<td>{{ subject.recruited_date|date:'Y-m-d' }}</td>
 		<td><img src="{% static 'subjects/' %}{{subject.language}}.png" style="height:25px;"/></td>
-		{% if subject.schedule_study_id.cohort %}
-			<td class="bg-success">{{ subject.schedule_study_id.cohort }}</td>
+		{% if subject.cohort %}
+			<td class="text-center"><a href="{% url 'subjects_dashboard' cohort=subject.cohort %}" class="badge badge-pill badge-warning">{{ subject.cohort }}</a></td>
 		{% else %}
-			<td>-</td>
+			<td class="text-center">-</td>
 		{% endif %}
 		</tr>
 	 	{% endfor %}

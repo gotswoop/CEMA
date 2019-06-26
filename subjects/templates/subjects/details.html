@@ -10,7 +10,14 @@
 </ol>
 
 <div class="content-section mt-4">
-	<h3><span class="badge badge-danger">{{ subject.study_id }}</span><span class="badge badge-info ml-2">Wave {{ subject.cohort }} - {{ subject.schedule_study_id.wk1_d1_survey_1.start_datetime|date:'M d, Y' }}</span></h3>
+	<h3>
+		<span class="badge badge-danger">{{ subject.study_id }}</span>
+		{% if subject.cohort > 0 %}
+			<a href="{% url 'subjects_dashboard' cohort=subject.cohort %}" class="badge badge-info ml-2">Wave {{ subject.cohort }}</a>
+		{% else %}
+			<span class="badge badge-info ml-2">Not Scheduled</span>
+		{% endif %}
+	</h3>
 	<h2>{{ subject.first_name }} {{ subject.last_name }} {% if not subject.deleted %}<a class="ml-2" href="{% url 'subject_edit' study_id=subject.study_id %}"><img src="{% static 'subjects/edit.png' %}"/></a>{% endif %}</h2>
 	<h4>
 		<img src="{% static 'subjects/' %}{{subject.language}}.png" style="height:25px;"/>

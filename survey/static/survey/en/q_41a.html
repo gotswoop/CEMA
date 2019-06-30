@@ -1,4 +1,4 @@
-<h5>How much do you want the financial planning session?</h5>
+<h5>How much do you want the emergency kit?</h5>
 
 <p>Tap or slide your finger along the bar to select</p>
 <br/>
@@ -18,7 +18,7 @@
 </table>
 <br/><br/>
 
-<input type="hidden" id="question" name="question" value="q_42a">
+<input type="hidden" id="question" name="question" value="q_41a">
 <input type="hidden" id="question_response" name="question_response" value="-1">
 
 <script type="text/javascript">
@@ -28,13 +28,13 @@
 		$('#white_castle').slider({
 			formater: function(value) {
 				return this.calculateValue();
-			}
+			} 
 		});
 
 		$('#white_castle').slider().on('slideStart', function(ev){
 			originalVal = $('#white_castle').data('slider').getValue();
 		});
-
+	
 		$('#white_castle').slider().on('slideStop', function(ev){
 			var newVal = $('#white_castle').data('slider').getValue();
 			// if(originalVal != newVal) {

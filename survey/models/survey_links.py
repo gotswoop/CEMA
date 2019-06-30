@@ -132,14 +132,18 @@ class SurveyLinks(models.Model):
 		last_question = self.last_answered_question
 		cash = None
 
-		if last_question == 'q_42':
-			last_question = 'q_42a'
+		# Start randomization after user completes question "q_42a" - slider for financial advice
+		if last_question == 'q_42b':
+
+			# Set and save last question to q_42b so randomization doesn't trigger again on page refresh
+			last_question = 'q_42c'
 			self.update_last_answered(last_question)
 
+			# Computer picking between q_41 and q_42 with 95% probablity for q_42
 			wk4_q_draw, = choice(['q_41','q_42'], 1, p=[0.05, 0.95])
 			self.update_survey_data(question="wk4_q_draw", response=wk4_q_draw, user_ip=user_ip)
-			print('wk4_q_draw: ', str(wk4_q_draw))
 
+			# If computer picked emergency kit question (q_41)
 			if wk4_q_draw == "q_41":
 
 				wk4_q41_draw = random.randint(1,12) #
@@ -147,19 +151,22 @@ class SurveyLinks(models.Model):
 
 				# TODO: What if thy didn't pick anything??
 				q_41_user_response = self.surveydata_set.get(question='q_41').response
-				print('wk4_q41_draw: ', str(wk4_q41_draw))
-				print('q_41_user_response: ', q_41_user_response)
 
-				if int(q_41_user_response) >= wk4_q41_draw: # Emergency Kit
+				# Emergency Kit
+				if int(q_41_user_response) >= wk4_q41_draw:
 					self.update_survey_data(question="wk4_kit_win", response=1, user_ip=user_ip)
 					self.bonus_questions = "q_45"
 					self.save()
-				else: # Emergency Kit Cash
+				# Emergency Kit Cash
+				else:
 					cash = str(q_41_B[wk4_q41_draw])
 					self.update_survey_data(question="wk4_kit_cash", response=cash, user_ip=user_ip)
 					self.bonus_questions = "q_46"
 					self.save()
+
+			# If computer picked financial advice question (q_42)
 			else: # q_42
+				# Computer picking between financial advice and cash with 95% probablity to advice
 				draw, = choice([1, 2], 1, p=[0.95, 0.05])
 				# 2 represents answers 2 - 12. So, now pick something between 2 and 12
 				if draw == 2:
@@ -171,14 +178,14 @@ class SurveyLinks(models.Model):
 
 				# TODO: What if thy didn't pick anything??
 				q_42_user_response = self.surveydata_set.get(question='q_42').response
-				print('wk4_q42_draw: ', str(wk4_q42_draw))
-				print('q_42_user_response: ', q_42_user_response)
 
-				if int(q_42_user_response) >= wk4_q42_draw: # Financial Advice
+				# Financial Advice
+				if int(q_42_user_response) >= wk4_q42_draw:
 					self.update_survey_data(question="wk4_fin_advice", response=1, user_ip=user_ip)
 					self.bonus_questions = "q_43"
 					self.save()
-				else: # Financial Advice Cash
+				# Financial Advice Cash
+				else:
 					cash = str(q_42_B[wk4_q42_draw])
 					self.update_survey_data(question="wk4_fin_cash", response=cash, user_ip=user_ip)
 					self.bonus_questions = "q_44"

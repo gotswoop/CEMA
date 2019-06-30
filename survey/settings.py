@@ -2,8 +2,7 @@
 survey_questions = {
 	1: ('q_00', 'q_01', 'q_02', 'q_03', 'q_04', 'q_05', 'q_06', 'q_10', 'q_11', 'q_12'),
 	2: ('q_00', 'q_01', 'q_02', 'q_03', 'q_04', 'q_05', 'q_06', 'q_20', 'q_21'),
-	4: ('q_00', 'q_01', 'q_02', 'q_03', 'q_04', 'q_05', 'q_40', 'q_41', 'q_42', 'q_42a'),
-	# 4: ('q_40', 'q_41', 'q_42', 'q_42a'),
+	4: ('q_00', 'q_01', 'q_02', 'q_03', 'q_04', 'q_05', 'q_40', 'q_41', 'q_41a', 'q_42', 'q_42a', 'q_42b', 'q_42c'),
 	14: ('q_00', 'q_01', 'q_02', 'q_03', 'q_04', 'q_05'),
 	123: ('q_00', 'q_01', 'q_02', 'q_03', 'q_04', 'q_05', 'q_06', 'q_10', 'q_11', 'q_12', 'q_20', 'q_21', 'q_51'),
 	223: ('q_00', 'qr_01', 'qr_02', 'qr_03', 'qr_04', 'qr_05', 'qr_06', 'qr_07', 'qr_08', 'qr_09', 'qr_10', 'qr_11', 'qr_12', 'qr_13', 'qr_14', 'qr_15', 'qr_16', 'qr_17', 'qr_18'),
@@ -14,7 +13,7 @@ all_survey_questions = [
 	'q_06', # Segue
 	'q_10', 'q_11', 'q_12', # Time
 	'q_20', 'q_21', # Risk
-	'q_40', 'q_41', 'q_42', # Week 4
+	'q_40', 'q_41', 'q_41a', 'q_42', 'q_42a', 'q_43', 'q_44', 'q_45', 'q_46' # Week 4
 	'qr_01', 'qr_02', 'qr_03', 'qr_04', 'qr_05', 'qr_06', 'qr_07', 'qr_08', 'qr_09', 'qr_10', 'qr_11', 'qr_12', 'qr_13', 'qr_14', 'qr_15', 'qr_16', 'qr_17', 'qr_18' # Bonus questions
 ]
 
@@ -106,13 +105,15 @@ sms_messages = {
 
 sms_messages_week_4_14 = {
 	# Wk 4 - English
-	'EN_wk4_d1_survey': "Hi _TO_FNAME_, your survey is ready. Complete by _EXPIRES_AT_ to earn $10 plus additional money.",
-	'EN_wk4_d2_survey': "Hello - we see you didn't complete your survey yesterday. Here's another chance to complete it by _EXPIRES_AT_ and earn $10+.",
-	'EN_wk4_d3_survey': "Here is your last chance to complete this week's survey - you have until _EXPIRES_AT_. Please help us out and earn $10+ doing it.",
+	'EN_wk4_reminder': "Hi _TO_FNAME_. You will receive one survey tomorrow at _TIME_. Please answer it by _EXPIRES_AT_ and get $25 plus the chance for more money. Thank you!",
+	'EN_wk4_d1_survey': "Hi _TO_FNAME_, your survey is ready. Complete by _EXPIRES_AT_ to earn $25 plus additional money.",
+	'EN_wk4_d2_survey': "Hello - we see you didn't complete your survey yesterday. Here's another chance to complete it by _EXPIRES_AT_ and earn $25+.",
+	'EN_wk4_d3_survey': "Here is your last chance to complete this week's survey - you have until _EXPIRES_AT_. Please help us out and earn $25+ doing it.",
 	# Wk 4 - Spanish
-	'ES_wk4_d1_survey': "Hola _TO_FNAME_, su encuesta esta lista. Complétala antes de _EXPIRES_AT_ para ganar $10 y dinero adicional.",
-	'ES_wk4_d2_survey': "Hola - parece que no completaste la encuesta de ayer. Esta es otra oportunidad completarla antes de _EXPIRES_AT_. Por favor ayúdanos y gana $10+ por completarla.",
-	'ES_wk4_d3_survey': "Esta es su última oportunidad completar la encuesta de esta semana - tiene hasta _EXPIRES_AT_. Por favor ayúdanos y gana $10+ por completarla.",
+	'ES_wk4_reminder': "Hola _TO_FNAME_. Recibirá una encuesta mañana a las _TIME_. Por favor contéstala antes de las _EXPIRES_AT_, y recibirá $25 más la posibilidad de recibir dinero adicional. ¡Gracias!",
+	'ES_wk4_d1_survey': "Hola _TO_FNAME_, su encuesta esta lista. Complétala antes de _EXPIRES_AT_ para ganar $25 y dinero adicional.",
+	'ES_wk4_d2_survey': "Hola - parece que no completaste la encuesta de ayer. Esta es otra oportunidad completarla antes de _EXPIRES_AT_. Por favor ayúdanos y gana $25+ por completarla.",
+	'ES_wk4_d3_survey': "Esta es su última oportunidad completar la encuesta de esta semana - tiene hasta _EXPIRES_AT_. Por favor ayúdanos y gana $25+ por completarla.",
 	# Wk 14 - English
 	'EN_wk14_d1_survey': "Hi _TO_FNAME_, this is _FROM_FNAME_ from USC. Your last survey is here. Complete it by _EXPIRES_AT_ and earn $10. Thank you!",
 	'EN_wk14_d2_survey': "Hello - we see you didn't complete your survey yesterday. Here's another chance to complete it by _EXPIRES_AT_ and earn $10+.",

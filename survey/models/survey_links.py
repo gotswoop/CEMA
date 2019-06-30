@@ -2,6 +2,8 @@ from django.db import models
 from subjects.models import Subjects
 from datetime import datetime, timedelta
 from survey.settings import *
+from numpy.random import choice
+import random
 
 class SurveyLinks(models.Model):
 	survey_key = models.CharField(max_length=50, unique=True)
@@ -11,7 +13,7 @@ class SurveyLinks(models.Model):
 	status = models.IntegerField(default=0)
 	survey_number = models.IntegerField()
 	bonus_questions = models.CharField(null=True, max_length=50)
-	last_answered_question = models.CharField(max_length=10, null=True)
+	last_answered_question = models.CharField(max_length=30, null=True)
 	ts_created = models.DateTimeField(auto_now_add=True)
 	ts_updated = models.DateTimeField(auto_now=True)
 	
@@ -97,28 +99,108 @@ class SurveyLinks(models.Model):
 		self.last_answered_question = question
 		self.save()
 
-	def get_next_question(self):
+	def update_survey_data(self, **kwargs):
+		question = kwargs.get('question', None)
+		response = kwargs.get('response', None)
+		user_ip = kwargs.get('user_ip', None)
+		ts_response = kwargs.get('ts_response', datetime.now())
+
+		'''
+		self.surveydata_set.create(
+			question=question,
+			response=response,
+			user_ip=user_ip,
+			ts_response=ts_response
+		)
+		'''
+		# TODO: Check this??
+		survey_data, created = self.surveydata_set.get_or_create(question=question,
+			defaults={
+				'response': response,
+				'user_ip': user_ip,
+				'ts_response':ts_response,
+			},
+		)
+
+	def get_next_question_for_week4(self, user_ip):
+		q_41_A = 'Emergency kit'
+		q_41_B = {1:0, 2:1, 3:3, 4:5, 5:10, 6:15, 7:20, 8:23, 9:25, 10:30, 11:40, 12:50}
+		q_42_A = 'Financial Advice'
+		q_42_B = {1:0, 2:1, 3:3, 4:5, 5:10, 6:15, 7:20, 8:23, 9:25, 10:30, 11:40, 12:50}
 
 		survey_number = self.survey_number
 		last_question = self.last_answered_question
-		
+		cash = None
+
+		if last_question == 'q_42':
+			last_question = 'q_42a'
+			self.update_last_answered(last_question)
+
+			wk4_q_draw, = choice(['q_41','q_42'], 1, p=[0.05, 0.95])
+			self.update_survey_data(question="wk4_q_draw", response=wk4_q_draw, user_ip=user_ip)
+			print('wk4_q_draw: ', str(wk4_q_draw))
+
+			if wk4_q_draw == "q_41":
+
+				wk4_q41_draw = random.randint(1,12) #
+				self.update_survey_data(question="wk4_q41_draw", response=wk4_q41_draw, user_ip=user_ip)
+
+				# TODO: What if thy didn't pick anything??
+				q_41_user_response = self.surveydata_set.get(question='q_41').response
+				print('wk4_q41_draw: ', str(wk4_q41_draw))
+				print('q_41_user_response: ', q_41_user_response)
+
+				if int(q_41_user_response) >= wk4_q41_draw: # Emergency Kit
+					self.update_survey_data(question="wk4_kit_win", response=1, user_ip=user_ip)
+					self.bonus_questions = "q_45"
+					self.save()
+				else: # Emergency Kit Cash
+					cash = str(q_41_B[wk4_q41_draw])
+					self.update_survey_data(question="wk4_kit_cash", response=cash, user_ip=user_ip)
+					self.bonus_questions = "q_46"
+					self.save()
+			else: # q_42
+				draw, = choice([1, 2], 1, p=[0.95, 0.05])
+				# 2 represents answers 2 - 12. So, now pick something between 2 and 12
+				if draw == 2:
+					wk4_q42_draw = random.randint(2,12)
+				else: # draw == 1
+					wk4_q42_draw = draw
+
+				self.update_survey_data(question="wk4_q42_draw", response=wk4_q42_draw, user_ip=user_ip)
+
+				# TODO: What if thy didn't pick anything??
+				q_42_user_response = self.surveydata_set.get(question='q_42').response
+				print('wk4_q42_draw: ', str(wk4_q42_draw))
+				print('q_42_user_response: ', q_42_user_response)
+
+				if int(q_42_user_response) >= wk4_q42_draw: # Financial Advice
+					self.update_survey_data(question="wk4_fin_advice", response=1, user_ip=user_ip)
+					self.bonus_questions = "q_43"
+					self.save()
+				else: # Financial Advice Cash
+					cash = str(q_42_B[wk4_q42_draw])
+					self.update_survey_data(question="wk4_fin_cash", response=cash, user_ip=user_ip)
+					self.bonus_questions = "q_44"
+					self.save()
+
 		questions = survey_questions.get(survey_number)
 		# Checking if this survey has any bonus_questions and adding to the tuple of "standard questions"
 		if self.bonus_questions:
 			questions = questions + (self.bonus_questions,)
 
 		if questions == None:
-			return None
+			return cash, None
 
 		# If last_answered_question was Null, then return the 1st question of the survey
 		if last_question == None:
-			return questions[0]
+			return cash, questions[0]
 
 		try:
 			pos = questions.index(last_question)
 		except ValueError:
 			# Could not find the last question in tuple. Only true if there is a typo in the survey_and_questions tuple
-			return None
+			return cash, None
 
 		try:
 			next_question = questions[pos+1]
@@ -126,6 +208,50 @@ class SurveyLinks(models.Model):
 			# Already at last question. Set status as completed (=2)
 			self.status=2
 			self.save()
-			return None
+			return cash, None
 
-		return next_question
+		if next_question  == 'q_44':
+			cash = self.surveydata_set.get(question='wk4_fin_cash').response
+		elif next_question == 'q_46':
+			cash = self.surveydata_set.get(question='wk4_kit_cash').response
+		else:
+			cash = None
+
+		return cash, next_question
+
+	def get_next_question(self, user_ip):
+
+		survey_number = self.survey_number
+		last_question = self.last_answered_question
+
+		if survey_number == 4:
+			next_question_data, next_question = self.get_next_question_for_week4(user_ip)
+			return next_question_data, next_question
+
+		questions = survey_questions.get(survey_number)
+		# Checking if this survey has any bonus_questions and adding to the tuple of "standard questions"
+		if self.bonus_questions:
+			questions = questions + (self.bonus_questions,)
+
+		if questions == None:
+			return None, None
+
+		# If last_answered_question was Null, then return the 1st question of the survey
+		if last_question == None:
+			return None, questions[0]
+
+		try:
+			pos = questions.index(last_question)
+		except ValueError:
+			# Could not find the last question in tuple. Only true if there is a typo in the survey_and_questions tuple
+			return None, None
+
+		try:
+			next_question = questions[pos+1]
+		except IndexError as e:
+			# Already at last question. Set status as completed (=2)
+			self.status=2
+			self.save()
+			return None, None
+
+		return None, next_question

@@ -63,6 +63,12 @@
 				if ($('#survey_endtime').length ) {
 					$('#survey_endtime').html('{{ survey.end_time }}');
 				}
+				if ($('#recruited_location').length ) {
+					$('#recruited_location').html('{{ survey.study_id.recruited_location }}');
+				}
+				if ($('#special_insert').length ) {
+					$('#special_insert').html('{{ next_question_data }}');
+				}
 			});
 			$('#next_button').show();
 		{% endif %}
@@ -77,6 +83,10 @@
 		
 		// Error checking
 		var prompted = parseInt(document.getElementById('prompted').value, 10);
+		// Forcing response for Week 4 questions q_41, q_42, q_43
+		if ( ["q_41", "q_42", "q_43"].indexOf(question)  > -1 ) {
+			prompted = 0;
+		}
 		if (question_response == "-1") {
 			// Not previosly prompted
 			if (prompted == 0) {
@@ -110,7 +120,15 @@
 				$('#next_button').hide();
 			} else {
 				var survey_question_url = '/static/survey/' + data.survey_question + '.html';
-				$('#survey_question').load(survey_question_url);	
+				$('#survey_question').load(survey_question_url, function () {
+					if ($('#recruited_location').length ) {
+						// TODO: THIS SHOULD NOT WORK? SEND VIA DATA.RECRUITED_LOCATION INSTEAD??
+						$('#recruited_location').html('{{ survey.study_id.recruited_location }}');
+					}
+					if ($('#special_insert').length ) {
+						$('#special_insert').html(data.next_question_data);
+					}
+				});
 				$('#next_button').show();
 				// Setting prompted = 0 for each new question
 				document.getElementById('prompted').value = 0;

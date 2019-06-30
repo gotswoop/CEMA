@@ -49,7 +49,7 @@ def survey(request, survey_key):
 			}
 			return JsonResponse(context)
 			
-		next_question = survey.get_next_question()
+		next_question_data, next_question = survey.get_next_question(request.META['REMOTE_ADDR'])
 		if next_question == None:
 			if survey.study_id.language == 'es':
 				msg = 'Gracias por participar, ' + survey.study_id.first_name + '! Le enviaremos un mensaje de texto una vez que le agregamos dinero a su tarjeta.'
@@ -66,6 +66,7 @@ def survey(request, survey_key):
 			context = {
 				'survey_key': survey.survey_key, 
 				'survey_status': survey.status, 
+				'next_question_data': next_question_data,
 				'survey_question': survey.study_id.language + '/' + next_question
 			}
 			return JsonResponse(context)
@@ -82,9 +83,10 @@ def survey(request, survey_key):
 		else:
 			# Check if survey has expired
 			survey.check_and_update_survey_status()
-			next_question = survey.get_next_question()
+			next_question_data, next_question = survey.get_next_question(request.META['REMOTE_ADDR'])
 			context = {
 				'survey': survey,
+				'next_question_data': next_question_data,
 				'survey_question': survey.study_id.language + '/' + next_question,
 			}
 			return render(request, 'survey/main.html', context)

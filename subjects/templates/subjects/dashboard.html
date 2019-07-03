@@ -83,7 +83,14 @@
 	{% for schedule in schedules %}
 	<tr>
 	<td>{{ forloop.counter }}</td>
-	<td><a href="{% url 'subject_details' schedule.study_id.pk %}">{{ schedule.study_id.fullname }} </a> ({{ schedule.study_id.pk }})</td>
+	<td><a href="{% url 'subject_details' schedule.study_id.pk %}">
+	{% if schedule.study_id.optout %}
+		<del>{{ schedule.study_id.fullname }}</del></a> <del>({{ schedule.study_id.pk }}) </del>
+	{% else %}
+		{{ schedule.study_id.fullname }}</a> ({{ schedule.study_id.pk }})
+	{% endif %}
+	</td>
+
 	<td><img src="{% static 'subjects/' %}{{schedule.study_id.language}}.png" style="height:20px;"/></td>
 	<!-- Week 1 -->
 	<td class="survey_status_{{schedule.wk1_d1_survey_1.status}}">{{schedule.wk1_d1_survey_1.progress}}</td>

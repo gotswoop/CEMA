@@ -85,7 +85,7 @@
 	<td>{{ forloop.counter }}</td>
 	<td><a href="{% url 'subject_details' schedule.study_id.pk %}">
 	{% if schedule.study_id.optout %}
-		<del>{{ schedule.study_id.fullname }}</del></a> <del>({{ schedule.study_id.pk }}) </del>
+		<span class="text-danger"><del>{{ schedule.study_id.fullname }}</del></a> <del>({{ schedule.study_id.pk }}) </del></span>
 	{% else %}
 		{{ schedule.study_id.fullname }}</a> ({{ schedule.study_id.pk }})
 	{% endif %}

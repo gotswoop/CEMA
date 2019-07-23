@@ -42,6 +42,9 @@ urlpatterns = [
 	path('subjects/recruit/', subject_views.subject_recruit, name='subjects_recruit'),
 	path('subjects/download/', subject_views.subjects_download, name='subjects_download'),
 	#
+	path('payments/', subject_views.payments_all, name='payments_all'),
+	path('payment_details/<int:id>/', subject_views.payment_details, name='payment_details'),
+	#
 	path('sms/queue/', sms_views.sms_queue, name='sms_queue'),
 	path('sms/sent/', sms_views.sms_sent, name='sms_sent'),
 	path('sms/inbox/', sms_views.sms_inbox, name='sms_inbox'),

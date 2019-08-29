@@ -63,8 +63,15 @@
 				if ($('#survey_endtime').length ) {
 					$('#survey_endtime').html('{{ survey.end_time }}');
 				}
-				if ($('#recruited_location').length ) {
-					$('#recruited_location').html('{{ survey.study_id.recruited_location }}');
+				if ($('.recruited_location').length ) {
+					$('.recruited_location').html('{{ survey.study_id.recruited_location }}');
+				}
+				if ($('.recruited_location_alternative').length ) {
+					if ('{{ survey.study_id.recruited_location }}' == "Bell") {
+						$('.recruited_location_alternative').html('5716 Atlantic Blvd, Maywood, CA 90270');
+					} else {
+						$('.recruited_location_alternative').html('2270 E Carson St., Long Beach, CA 90807');
+					}
 				}
 				if ($('#special_insert').length ) {
 					$('#special_insert').html('{{ next_question_data }}');
@@ -121,9 +128,16 @@
 			} else {
 				var survey_question_url = '/static/survey/' + data.survey_question + '.html';
 				$('#survey_question').load(survey_question_url, function () {
-					if ($('#recruited_location').length ) {
+					if ($('.recruited_location').length ) {
 						// TODO: THIS SHOULD NOT WORK? SEND VIA DATA.RECRUITED_LOCATION INSTEAD??
-						$('#recruited_location').html('{{ survey.study_id.recruited_location }}');
+						$('.recruited_location').html('{{ survey.study_id.recruited_location }}');
+					}
+					if ($('.recruited_location_alternative').length ) {
+						if ('{{ survey.study_id.recruited_location }}' == "Bell") {
+							$('.recruited_location_alternative').html('5716 Atlantic Blvd, Maywood, CA 90270');
+						} else {
+							$('.recruited_location_alternative').html('2270 E Carson St., Long Beach, CA 90807');
+						}
 					}
 					if ($('#special_insert').length ) {
 						$('#special_insert').html(data.next_question_data);

@@ -20,9 +20,12 @@ def generate_survey_link(survey_number, study_id, **kwargs):
 	bonus_questions = kwargs.get('bonus_questions', None)
 	start_datetime = kwargs.get('start_datetime', datetime.now())
 
-	timed = 60
-	short_url_length = 16
+	if survey_number == "14":
+		timed = 2160	# Week 14 Survey gets 1.5 days / 2160 mins
+	else:
+		timed = 60		# All other surveys get 1 hour / 60 mins
 
+	short_url_length = 16
 	# TODO: What if it's not unique
 	survey_key = ''.join(random.choices(string.ascii_letters + string.digits, k=short_url_length))
 	

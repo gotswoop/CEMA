@@ -1,0 +1,65 @@
+<h5>Do you have any credit or store card debt that you <u>do not</u> pay off in full every month?</h5>
+
+<label><input type="radio" name="radio_btn" value="1" onclick="clickRadioPlus();"> Yes</label><br/>
+<label><input type="radio" name="radio_btn" value="2" onclick="clickRadioPlus();"> No</label><br/>
+<label><input type="radio" name="radio_btn" value="3" onclick="clickRadioPlus();"> Don't know</label><br/>
+
+<div id="more_questions" style="display: none; margin-left: 1%;">
+	<br/>
+	<div class="border bg-light p-3">
+		<p>About how much total credit or store card debt do you have?</p>
+		<label>$ <input type="text" id="total_debt" oninput="textBoxInput()" maxlength="50"></label>
+	</div>
+</div>
+
+<input type="hidden" id="question" name="question" value="q_145">
+<input type="hidden" id="question_response" name="question_response" value="-1">
+
+<script type="text/javascript">
+	// On document ready
+	$( document ).ready(function() {
+		$('#more_questions').css('display', 'hide');
+	});
+
+	// For radios that show/hide other divs
+	function clickRadioPlus() {
+
+		document.getElementById("error").style.display = "none";
+
+		var question_response = '-1';
+		var radio_response = document.querySelector('input[name=radio_btn]:checked').value;
+		if (radio_response == '1') {
+			
+			document.getElementById("more_questions").style.display = "block";
+		
+			var total_debt = document.getElementById("total_debt").value;
+			
+			if ( total_debt != "") {
+				question_response = 'total_debt: ' + total_debt;
+			}
+
+		} else {
+			document.getElementById("more_questions").style.display = "none";
+			question_response = radio_response;
+		}
+		console.log(question_response);
+		document.getElementById("question_response").value = question_response;
+	}
+
+	function textBoxInput() {
+
+		var question_response = '-1';
+
+		var total_debt = document.getElementById("total_debt").value;
+		
+		if ( total_debt != "" ) {
+			document.getElementById("error").style.display = "none";
+			question_response = 'total_debt: ' + total_debt;
+		}
+		
+		console.log(question_response)
+		document.getElementById("question_response").value = question_response;
+
+	}	
+
+</script>

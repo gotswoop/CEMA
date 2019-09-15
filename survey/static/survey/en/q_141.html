@@ -1,0 +1,143 @@
+<h5>Do you have a bank account?</h5>
+
+<label><input type="radio" name="radio_btn" value="1" onclick="clickRadioPlus();"> Yes</label><br/>
+<label><input type="radio" name="radio_btn" value="2" onclick="clickRadioPlus();"> No</label><br/>
+
+<div id="more_questions" style="display: none; margin-left: 1%;">
+	<br/>
+	<div class="border bg-light p-3">
+		<p>What is the name of your bank:</p>
+			&nbsp;&nbsp;<label><input type="text" id="bank_name" oninput="textBoxInput()" maxlength="50"></label>
+		<p>Do you have a checking account? </p>
+			&nbsp;&nbsp;<label><input type="radio" name="radio_btn_checking" value="yes" onclick="clickRadioChecking();" id="id_checking"> Yes</label><br/>
+			&nbsp;&nbsp;<label><input type="radio" name="radio_btn_checking" value="no" onclick="clickRadioChecking();" id="id_checking"> No</label>
+		<p>Do you have a savings account?</p>
+			&nbsp;&nbsp;<label><input type="radio" name="radio_btn_savings" value="yes" onclick="clickRadioSavings();"> Yes</label><br/>
+			&nbsp;&nbsp;<label><input type="radio" name="radio_btn_savings" value="no" onclick="clickRadioSavings();"> No</label>
+	</div>
+</div>
+
+<input type="hidden" id="question" name="question" value="q_141">
+<input type="hidden" id="question_response" name="question_response" value="-1">
+
+<script type="text/javascript">
+	// On document ready
+	$( document ).ready(function() {
+		$('#more_questions').css('display', 'hide');
+	});
+
+	// For radios that show/hide other divs
+	function clickRadioPlus() {
+
+		document.getElementById("error").style.display = "none";
+		
+		var question_response = '-1';
+		var radio_response = document.querySelector('input[name=radio_btn]:checked').value;
+		if (radio_response == '1') {
+			document.getElementById("more_questions").style.display = "block";
+		
+			var bank_name = document.getElementById("bank_name").value;
+			if (bank_name == "") {
+				bank_name = 'no_response';
+			}
+	
+			var checking = null;
+			if (document.querySelector('input[name=radio_btn_checking]:checked') != null) {
+				checking = document.querySelector('input[name=radio_btn_checking]:checked').value;
+			}
+	
+			var savings = null;
+			if (document.querySelector('input[name=radio_btn_savings]:checked') != null) {
+				savings = document.querySelector('input[name=radio_btn_savings]:checked').value;
+			}
+
+			if ( checking != null && savings != null ) {
+				question_response = 'checking: ' + checking + '; savings: ' + savings + '; bank_name: ' + bank_name;
+			}
+		} else {
+			document.getElementById("more_questions").style.display = "none";
+			question_response = radio_response;
+		}
+		console.log(question_response);
+		document.getElementById("question_response").value = question_response;
+	}
+
+	function textBoxInput() {
+
+		var question_response = '-1';
+
+		var bank_name = document.getElementById("bank_name").value;
+		if (bank_name == "") {
+			bank_name = 'no_response';
+		}
+		
+		var checking = null;
+		if (document.querySelector('input[name=radio_btn_checking]:checked') != null) {
+			checking = document.querySelector('input[name=radio_btn_checking]:checked').value;
+		}
+	
+		var savings = null;
+		if (document.querySelector('input[name=radio_btn_savings]:checked') != null) {
+			savings = document.querySelector('input[name=radio_btn_savings]:checked').value;
+		}
+
+		if ( checking != null && savings != null ) {
+			question_response = 'checking: ' + checking + '; savings: ' + savings + '; bank_name: ' + bank_name;
+		}
+		
+		console.log(question_response)
+		document.getElementById("question_response").value = question_response;
+
+	}	
+
+	function clickRadioChecking() {
+		
+		var question_response = '-1';
+
+		var bank_name = document.getElementById("bank_name").value;
+		if (bank_name == "") {
+			bank_name = 'no_response';
+		}
+		
+		var checking = document.querySelector('input[name=radio_btn_checking]:checked').value;
+	
+		var savings = null;
+		if (document.querySelector('input[name=radio_btn_savings]:checked') != null) {
+			savings = document.querySelector('input[name=radio_btn_savings]:checked').value;
+		}
+
+		if ( checking != null && savings != null ) {
+			question_response = 'checking: ' + checking + '; savings: ' + savings + '; bank_name: ' + bank_name;
+		}
+
+		console.log(question_response)
+		document.getElementById("question_response").value = question_response;
+
+	}
+
+	function clickRadioSavings() {
+	
+		var question_response = '-1';
+
+		var bank_name = document.getElementById("bank_name").value;
+		if (bank_name == "") {
+			bank_name = 'no_response';
+		}
+		
+		var checking = null;
+		if (document.querySelector('input[name=radio_btn_checking]:checked') != null) {
+			checking = document.querySelector('input[name=radio_btn_checking]:checked').value;
+		}
+
+		var savings = document.querySelector('input[name=radio_btn_savings]:checked').value;
+
+		if ( checking != null && savings != null ) {
+			question_response = 'checking: ' + checking + '; savings: ' + savings + '; bank_name: ' + bank_name;
+		}
+
+		console.log(question_response)
+		document.getElementById("question_response").value = question_response;
+
+	}
+
+</script>

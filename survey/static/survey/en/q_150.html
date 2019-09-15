@@ -1,0 +1,40 @@
+<h5>Would you like to be invited to participate in future studies?</h5>
+
+<label><input type="radio" name="radio_btn" value="1" onclick="clickRadioPlus();"> Yes</label><br/>
+<label><input type="radio" name="radio_btn" value="2" onclick="clickRadioPlus();"> No</label><br/>
+
+<div id="more_questions" style="display: none; margin-left: 1%;">
+	<br/>
+	<div class="border bg-light p-3">
+		<p>
+			Thank you! Please hold on to your gift card so if you participate in the future you can receive money on it.
+		</p>
+	</div>
+</div>
+
+<input type="hidden" id="question" name="question" value="q_150">
+<input type="hidden" id="question_response" name="question_response" value="-1">
+
+<script type="text/javascript">
+	// On document ready
+	$( document ).ready(function() {
+		$('#more_questions').css('display', 'hide');
+	});
+
+	// For radios that show/hide other divs
+	function clickRadioPlus() {
+
+		document.getElementById("error").style.display = "none";
+
+		var radio_response = document.querySelector('input[name=radio_btn]:checked').value;
+		if (radio_response == '1') {
+			document.getElementById("more_questions").style.display = "block";
+		} else {
+			document.getElementById("more_questions").style.display = "none";
+		}
+
+		console.log(radio_response);
+		document.getElementById("question_response").value = radio_response;
+	}
+
+</script>

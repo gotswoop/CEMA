@@ -1,0 +1,83 @@
+<h5><strong>Si necesitara $500</strong> urgentemente para algo, como una reparación de automóvil o una emergencia de salud, ¿podría obtenerlos?</h5>
+
+<label><input type="radio" name="radio_btn" value="1" onclick="clickRadioPlus();"> Si</label><br/>
+<label><input type="radio" name="radio_btn" value="2" onclick="clickRadioPlus();"> No</label><br/>
+
+<div id="more_questions" style="display: none; margin-left: 1%;">
+	<br/>
+	<div class="border bg-light p-3">
+		<p>
+			<p>¿Como obtendría $500?<br/>
+			(Marque todo lo que corresponda)</p>
+			<label><input type="checkbox" name="chk_box" value="1" onclick="clickCheckBoxDebt();"> usarías sus ahorros</label><br/>
+			<label><input type="checkbox" name="chk_box" value="2" onclick="clickCheckBoxDebt();"> usarías una tarjeta de crédito</label><br/>
+			<label><input type="checkbox" name="chk_box" value="3" onclick="clickCheckBoxDebt();"> un préstamo de día de pago</label><br/>
+			<label><input type="checkbox" name="chk_box" value="4" onclick="clickCheckBoxDebt();"> tomaría prestado de un amigo o familia</label><br/>
+			<label><input type="checkbox" name="chk_box" value="5" onclick="clickCheckBoxDebt();"> otra manera</label><br/>
+		</p>
+	</div>
+</div>
+
+<input type="hidden" id="question" name="question" value="q_143">
+<input type="hidden" id="question_response" name="question_response" value="-1">
+
+<script type="text/javascript">
+	// On document ready
+	$( document ).ready(function() {
+		$('#more_questions').css('display', 'hide');
+	});
+
+	// For radios that show/hide other divs
+	function clickRadioPlus() {
+
+		document.getElementById("error").style.display = "none";
+
+		var question_response = '-1';
+
+		var radio_response = document.querySelector('input[name=radio_btn]:checked').value;
+
+		if (radio_response == '1') {
+		
+			document.getElementById("more_questions").style.display = "block";
+		
+			var chk_box_response = '';
+			var chk_box = document.getElementsByName("chk_box");
+			for(var x=0; x < chk_box.length; x++)
+			{
+				if (chk_box[x].checked == true) {
+					chk_box_response += chk_box[x].value + ',';
+				}
+			}
+			if (chk_box_response != '') {
+				question_response = 'cash_source: ' + chk_box_response;
+			}
+		} else {
+			document.getElementById("more_questions").style.display = "none";
+			question_response = radio_response;
+		}
+		console.log(question_response);
+		document.getElementById("question_response").value = question_response;
+	}
+
+	// For checkboxes
+	function clickCheckBoxDebt(){
+		
+		var question_response = '-1';
+
+		var chk_box_response = '';
+		var chk_box = document.getElementsByName("chk_box");
+		for(var x=0; x < chk_box.length; x++)
+		{
+			if (chk_box[x].checked == true) {
+				document.getElementById("error").style.display = "none";
+				chk_box_response += chk_box[x].value + ',';
+			}
+		}
+		if (chk_box_response != '') {
+			question_response = 'cash_source: ' + chk_box_response;
+		}
+		console.log(question_response);
+		document.getElementById("question_response").value = question_response;
+	}
+
+</script>

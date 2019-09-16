@@ -17,7 +17,9 @@ all_survey_questions = [
 	'q_10', 'q_11', 'q_12', # Time
 	'q_20', 'q_21', # Risk
 	'q_40', 'q_41', 'q_41a', 'q_42', 'q_42a', 'wk4_q_draw', 'wk4_q41_draw', 'wk4_q42_draw', 'wk4_kit_win', 'wk4_kit_cash', 'wk4_fin_advice', 'wk4_fin_cash', 'q_43', 'q_44', 'q_45', 'q_46',  # Week 4
-	'qr_01', 'qr_02', 'qr_03', 'qr_04', 'qr_05', 'qr_06', 'qr_07', 'qr_08', 'qr_09', 'qr_10', 'qr_11', 'qr_12', 'qr_13', 'qr_14', 'qr_15', 'qr_16', 'qr_17', 'qr_18' # Bonus questions
+	'qr_01', 'qr_02', 'qr_03', 'qr_04', 'qr_05', 'qr_06', 'qr_07', 'qr_08', 'qr_09', 'qr_10', 'qr_11', 'qr_12', 'qr_13', 'qr_14', 'qr_15', 'qr_16', 'qr_17', 'qr_18', # Bonus questions
+	'q_140', 'q_141', 'q_142', 'q_143', 'q_144', 'q_145', 'q_146', 'q_147', 'q_148', 'q_149', 'q_150', # Week 14 questions
+
 ]
 
 survey_bonus_questions = [

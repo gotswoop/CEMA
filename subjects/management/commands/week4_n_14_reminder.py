@@ -78,7 +78,7 @@ class Command(BaseCommand):
 			msg = 'User you are trying to schedule has been deleted or opted out of the study'
 			raise CommandError(msg)
 
-		# Checking to see if user is already scheduled
+		# Fetch Week 4 survey date 
 		try:
 			survey_obj = SurveyLinks.objects.filter(study_id=study_id, survey_number=4, status=0).order_by('start_datetime')[:1].get()
 		except SurveyLinks.DoesNotExist:
@@ -88,3 +88,15 @@ class Command(BaseCommand):
 		key = 'wk4_reminder'
 		print(key)
 		build_sms_reminder(subj_obj, survey_obj, key)
+
+		# Fetch Week 14 survey date 
+		try:
+			survey_obj = SurveyLinks.objects.filter(study_id=study_id, survey_number=14, status=0).order_by('start_datetime')[:1].get()
+		except SurveyLinks.DoesNotExist:
+			msg = 'User you are trying to schedule does not exist'
+			raise CommandError(msg)
+
+		key = 'wk14_reminder'
+		print(key)
+		build_sms_reminder(subj_obj, survey_obj, key)
+

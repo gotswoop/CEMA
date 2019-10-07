@@ -12,9 +12,11 @@ class Subjects(models.Model):
 
 	LOC_1 = 'Bell'
 	LOC_2 = 'Long Beach'
+	LOC_3 = 'Slauson'
 	LOCATION_CHOICES = (
 		(LOC_1, 'Bell'),
 		(LOC_2, 'Long Beach'),
+		(LOC_3, 'Slauson'),
 	)
 
 	study_id = models.AutoField(auto_created=True, primary_key=True)

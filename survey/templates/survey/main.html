@@ -68,9 +68,11 @@
 				}
 				if ($('.recruited_location_alternative').length ) {
 					if ('{{ survey.study_id.recruited_location }}' == "Bell") {
-						$('.recruited_location_alternative').html('5716 Atlantic Blvd, Maywood, CA 90270');
-					} else {
-						$('.recruited_location_alternative').html('2270 E Carson St., Long Beach, CA 90807');
+						$('.recruited_location_alternative').html('Starbucks @ 5716 Atlantic Blvd, Maywood, CA 90270');
+					} else if ('{{ survey.study_id.recruited_location }}' == "Long Beach") {
+						$('.recruited_location_alternative').html('Starbucks @ 2270 E Carson St., Long Beach, CA 90807');
+					} else { // Slauson Location
+						$('.recruited_location_alternative').html('Starbucks @ 5857 S Central Ave, Los Angeles, CA 90001');
 					}
 				}
 				if ($('#special_insert').length ) {
@@ -134,9 +136,11 @@
 					}
 					if ($('.recruited_location_alternative').length ) {
 						if ('{{ survey.study_id.recruited_location }}' == "Bell") {
-							$('.recruited_location_alternative').html('5716 Atlantic Blvd, Maywood, CA 90270');
-						} else {
-							$('.recruited_location_alternative').html('2270 E Carson St., Long Beach, CA 90807');
+							$('.recruited_location_alternative').html('Starbucks @ 5716 Atlantic Blvd, Maywood, CA 90270');
+						} else if ('{{ survey.study_id.recruited_location }}' == "Long Beach") {
+							$('.recruited_location_alternative').html('Starbucks @ 2270 E Carson St., Long Beach, CA 90807');
+						} else { // Slauson Location
+							$('.recruited_location_alternative').html('Starbucks @ 5857 S Central Ave, Los Angeles, CA 90001');
 						}
 					}
 					if ($('#special_insert').length ) {

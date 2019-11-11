@@ -34,6 +34,7 @@ urlpatterns = [
     #
     path('', home_views.home, name='home'), # front page
     path('dashboard/', home_views.dashboard, name='dashboard'),
+    path('ping/', home_views.ping, name='ping'),
     #
 	path('subjects/', subject_views.subjects_all, name='subjects_all'),
 	path('subjects/dashboard/<int:cohort>', subject_views.subjects_dashboard, name='subjects_dashboard'),

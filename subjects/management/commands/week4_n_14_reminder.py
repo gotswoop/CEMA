@@ -14,7 +14,7 @@ from survey.settings import *
 from subjects.models import Schedule
 
 def populate_sms_outgoing(send_after, sms_message, subj_obj, survey_obj):
-	from_phone = '+12133400348'
+	from_phone = settings.TWILIO_FROM_NUMBER
 	try:
 		user_obj = User.objects.get(username = 'avocadobot')
 	except User.DoesNotExist:

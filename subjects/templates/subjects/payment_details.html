@@ -1,0 +1,88 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+  <li class="breadcrumb-item"><a href="{% url 'payments_all' %}">Payments</a></li>
+  <li class="breadcrumb-item active">{{ p.payment_id.study_id.fullname }} for "{{ p.payment_id.payment_for }}"</li>
+</ol>
+
+<div class="content-section mt-4">
+	<h3>
+		<a href="{% url 'subject_details' p.payment_id.study_id.pk %}" class="badge badge-danger">{{ p.payment_id.study_id.pk }}</a>
+		{% if p.payment_id.study_id.cohort > 0 %}
+			<a href="{% url 'subjects_dashboard' cohort=p.payment_id.study_id.cohort %}" class="badge badge-info ml-2">Wave {{ p.payment_id.study_id.cohort }}</a>
+		{% else %}
+			<span class="badge badge-info ml-2">Not Scheduled</span>
+		{% endif %}
+	</h3>
+	<h2>Payment for {{ p.payment_id.study_id.fullname }}</h2>
+	<h4>
+		<img src="{% static 'subjects/' %}{{ p.payment_id.study_id.language }}.png" style="height:25px;"/>
+		<span class="badge badge-dark">Ph: {{ p.payment_id.study_id.phone_number }}</span>
+		<span class="badge badge-dark">CC: {{ p.payment_id.study_id.clincard_number }}</span>
+	</h4>
+	<h4>	
+		{% if subject.test_account %}
+			<span class="badge badge-warning">BeeLab Account</span>
+		{% endif %}
+		{% if subject.optout %}
+			<span class="badge badge-warning">OPTED-OUT</span>
+		{% endif %}
+		{% if subject.deleted %}
+			<span class="badge badge-warning">DELETED</span>
+		{% endif %}
+	</h4>
+	<h5><span class="badge badge-light">Recruited by {{ p.payment_id.study_id.recruited_by.first_name }} {{ p.payment_id.study_id.recruited_by.last_name }} on {{p.payment_id.study_id.recruited_date|date:'M d, Y' }} at {{ p.payment_id.study_id.recruited_location }}</span></h5>
+	<hr/>
+	{% if p.payment_type == "pay_today" %}
+		<strong>Surveys Completed: </strong>{{ p.payment_id.surveys_completed }}
+		<br/><strong>Payment for completion: </strong>${{ p.payment_id.payment_for_completion }}
+		<br/><strong>Randomization outcome: </strong>{{ p.payment_id.randomization_outcome }}
+		<br/><strong>Pay today: </strong>${{ p.payment_amount }}
+	{% elif p.payment_type in "pay_5wks_out,pay_10wks_out" %}
+		<strong>Payment for survey:</strong> {{ p.payment_id.payment_for }}<br/>
+		<strong>Payment type: </strong>{{p.payment_id.randomization_outcome}}<br/>
+		<strong>Payment amount: </strong>${{ p.payment_amount }}<br/>
+		<strong>Payment date: </strong><span class="text-danger">{{ p.payment_date|date:'M d, Y' }}</span>
+		<br/>
+	{% endif %}
+	{% if p.payment_id.pay_10wks %}
+		<br/><strong>Pay 10 weeks out: </strong>${{ p.payment_id.pay_10wks }}
+	{% endif %}
+	<hr/>
+	{% if p.processed_on == None %}
+    	<strong>Step 1:</strong> Add ${{ p.payment_amount }} to the clincard number {{ p.payment_id.study_id.clincard_number }}
+    	<br/><br/>
+    	<strong>Step 2:</strong> Please verify that ${{ p.payment_amount }} was added to the clincard number {{ p.payment_id.study_id.clincard_number }}
+    	<br/><br/>
+    	<strong>Step 3:</strong> Click the "NOTIFY USER OF PAYMENT" button below to automatically send the below message to {{ p.payment_id.study_id.fullname }}
+    	<br/><br/>
+    	<div class="alert alert-danger" role="alert">
+  			<strong>Message: </strong>{{ p.payment_message }}
+		</div>
+	    <hr/>
+		<form action="." method="post">
+			{% csrf_token %}
+			<input type="hidden" name="to_phone" value={{ p.payment_id.study_id.phone }} />
+			<input type="hidden" name="study_id" value={{ p.payment_id.study_id.pk }} />
+			<input type="hidden" name="sms_message" value={{ p.payment_message }} />
+			<div class="row">
+				<input type="submit" class="btn btn-lg btn-success pl-5 pr-5" value="NOTIFY USER OF PAYMENT">
+				<a class="btn btn-lg btn-outline-info ml-3" href="{% url 'payments_all' %}" role="button">Cancel</a>
+			</div>
+		</form>
+	{% else %}
+		<div class="alert alert-success" role="alert">
+			Payment of ${{p.payment_amount}} was processed by {{p.processed_by.first_name }} {{p.processed_by.last_name }} on {{ p.payment_date|date:'M d, Y' }} with message "<strong>{{p.payment_message}}</strong>"
+		</div>
+		<a class="btn btn-lg btn-outline-info ml-3" href="{% url 'payments_all' %}" role="button">Back</a>
+	{% endif %}
+
+</div>
+{% endblock content %}
+
+
+				

@@ -1,0 +1,111 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% load auth_extras %}
+{% block content %}
+<ol class="breadcrumb">
+  <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+  <li class="breadcrumb-item active">Payments</li>
+</ol>
+
+<h2>Payments</h2>
+<ul class="nav nav-tabs mt-5" id="myTab" role="tablist">
+	<li class="nav-item">
+	    <a class="nav-link active" id="tab-pay_today" data-toggle="tab" href="#pay_today" role="tab" aria-controls="pay_today" aria-selected="true">Pay Today</strong></a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" id="tab-pay_later" data-toggle="tab" href="#pay_later" role="tab" aria-controls="acct_optout" aria-selected="false">Pay Later</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link" id="tab-past_payments" data-toggle="tab" href="#past_payments" role="tab" aria-controls="past_payments" aria-selected="false">Past Payments</a>
+	</li>
+</ul>
+
+<div class="tab-content mt-3" id="myTabContent">
+
+	<!-- Pay today -->
+	<div class="tab-pane fade show active" id="pay_today" role="tabpanel" aria-labelledby="tab-pay_today">
+		<h3>Pay Today</h3>
+		<div class="table-responsive">
+		<table class="table table-sm table-hover table-bordered bg-white mt-4">
+		<thead class="thead-light"><tr><th>Study Id</th><th>Name</th><th>Payment Date</th><th>Payment For</th><th>Payment Amount</th><th>Status</th></tr></thead>
+		<tbody>
+		{% for p in payments_today_pending %}
+			<tr>
+			<td>{{ p.payment_id.study_id.pk }}</td>
+			<td><a href="{% url 'subject_details' p.payment_id.study_id.pk %}">{{ p.payment_id.study_id.fullname }} </a></td>
+			<td>{{ p.payment_date|date:'M d, Y' }}</td>
+			<td>{{ p.payment_id.payment_for }} - {{ p.payment_type }}</td>
+			<td>${{ p.payment_amount }}</td>
+			{% if p.processed_on == None %}
+				<td><a class="btn btn-sm btn-outline-danger" role="button" href="{% url 'payment_details' p.pk %}">Process Now</a></td>
+			{% else %}
+				<td><a class="btn btn-sm btn-outline-success" role="button" href="{% url 'payment_details' p.pk %}">Processed by {{ p.processed_by.first_name }}</a></td>
+			{% endif %}
+			</tr>
+	 	{% endfor %}
+	 	{% for p in payments_today_done %}
+			<tr>
+			<td>{{ p.payment_id.study_id.pk }}</td>
+			<td><a href="{% url 'subject_details' p.payment_id.study_id.pk %}">{{ p.payment_id.study_id.fullname }} </a></td>
+			<td>{{ p.payment_date|date:'M d, Y' }}</td>
+			<td>{{ p.payment_id.payment_for }} - {{ p.payment_type }}</td>
+			<td>${{ p.payment_amount }}</td>
+			{% if p.processed_on == None %}
+				<td><a class="btn btn-sm btn-outline-danger" role="button" href="{% url 'payment_details' p.pk %}">Process Now</a></td>
+			{% else %}
+				<td><a class="btn btn-sm btn-outline-success" role="button" href="{% url 'payment_details' p.pk %}">Processed by {{ p.processed_by.first_name }}</a></td>
+			{% endif %}
+			</tr>
+	 	{% endfor %}
+	 	</tbody>
+	 	</table>
+	 	</div>
+	</div>
+
+	<!-- Pay later -->
+	<div class="tab-pane fade" id="pay_later" role="tabpanel" aria-labelledby="tab-pay_later">
+		<h3>Pay Later</h3>
+		<div class="table-responsive">
+		<table class="table table-sm table-hover table-bordered bg-white mt-4">
+		<thead class="thead-light"><tr><th>Study Id</th><th>Name</th><th>Payment Date</th><th>Payment For</th><th>Payment Amount</th><th>Status</th></tr></thead>
+		<tbody>
+		{% for p in payments_later %}
+			<tr>
+			<td>{{ p.payment_id.study_id.pk }}</td>
+			<td><a href="{% url 'subject_details' p.payment_id.study_id.pk %}">{{ p.payment_id.study_id.fullname }} </a></td>
+			<td>{{ p.payment_date|date:'M d, Y' }}</td>
+			<td>{{ p.payment_id.payment_for }} - {{ p.payment_type }}</td>
+			<td>${{ p.payment_amount }}</td>
+			<td><a class="btn btn-sm btn-outline-danger" role="button" href="#">Process Later</a></td>
+			</tr>
+	 	{% endfor %}
+	 	</tbody>
+	 	</table>
+	 	</div>
+	</div>
+
+	<!-- Paid -->
+	<div class="tab-pane fade" id="past_payments" role="tabpanel" aria-labelledby="tab-past_payments">
+		<h3>Past Payments</h3>
+		<div class="table-responsive">
+		<table class="table table-sm table-hover table-bordered bg-white mt-4">
+		<thead class="thead-light"><tr><th>Study Id</th><th>Name</th><th>Payment Date</th><th>Payment For</th><th>Payment Amount</th><th>Status</th></tr></thead>
+		<tbody>
+		{% for p in payments_past %}
+			<tr>
+			<td>{{ p.payment_id.study_id.pk }}</td>
+			<td><a href="{% url 'subject_details' p.payment_id.study_id.pk %}">{{ p.payment_id.study_id.fullname }} </a></td>
+			<td>{{ p.payment_date|date:'M d, Y' }}</td>
+			<td>{{ p.payment_id.payment_for }} - {{ p.payment_type }}</td>
+			<td>${{ p.payment_amount }}</td>
+			<td><a class="btn btn-sm btn-outline-success" role="button" href="{% url 'payment_details' p.pk %}">Processed by {{ p.processed_by.first_name }}</a></td>
+			</tr>
+	 	{% endfor %}
+	 	</tbody>
+	 	</table>
+	 	</div>
+	</div>
+
+</div>
+
+{% endblock content %}

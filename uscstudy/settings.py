@@ -161,3 +161,8 @@ ADMIN_NOTIFICATION_EMAILS = config.get('ADMIN_NOTIFICATION_EMAILS').split()
 TWILIO_ACCOUNT_SID = config.get('TWILIO_ACCOUNT_SID')
 TWILIO_AUTH_TOKEN = config.get('TWILIO_AUTH_TOKEN')
 TWILIO_FROM_NUMBER = config.get('TWILIO_FROM_NUMBER')
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

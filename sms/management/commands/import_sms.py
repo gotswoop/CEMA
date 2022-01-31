@@ -45,7 +45,7 @@ def shorten_url(url_long, user_obj):
 		print("new url")
 		print(shorty_obj.url_short)
 
-	return 'https://uscstudy.com/l/' + shorty_obj.url_short
+	return 'https://uscstudy.beelab.site/l/' + shorty_obj.url_short
 
 
 

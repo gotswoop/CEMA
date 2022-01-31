@@ -101,7 +101,7 @@ class Command(BaseCommand):
 				'_TO_FNAME_': subj_obj.first_name,
 				'_FROM_FNAME_': subj_obj.recruited_by,
 				'_EXPIRES_AT_': _EXPIRES_AT_,
-				'_SURVEY_LINK_': 'https://uscstudy.com/s/' + survey_link_obj.survey_key,
+				'_SURVEY_LINK_': 'https://uscstudy.beelab.site/s/' + survey_link_obj.survey_key,
 			}
 
 			sms_message = build_message(row['message'], placeholders)

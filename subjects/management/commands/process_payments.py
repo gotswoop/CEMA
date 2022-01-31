@@ -50,7 +50,7 @@ def build_message(msg, subj_obj, surveys_completed, payment_basic, bonus_pay=Non
 
 def build_sms(subj_obj, survey_obj, key):
 	lang = subj_obj.language.upper()
-	url = 'https://uscstudy.com/s/' + survey_obj.survey_key
+	url = 'https://uscstudy.beelab.site/s/' + survey_obj.survey_key
 	
 	s = key.rfind('_survey_')
 	if s > 0:

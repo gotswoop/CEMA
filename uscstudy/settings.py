@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 import json
 
-with open('/etc/uscstudy.com_config.json') as config_file:
+with open('/etc/uscstudy.beelab.site_config.json') as config_file:
     config = json.load(config_file)
 
 
@@ -31,7 +31,7 @@ SECRET_KEY = config.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config.get('DEBUG')
 
-ALLOWED_HOSTS = ['uscstudy.com','127.0.0.1','50.18.216.76']
+ALLOWED_HOSTS = ['uscstudy.beelab.site','127.0.0.1','50.18.216.76']
 
 # Application definition
 
@@ -60,7 +60,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'uscstudy.urls'
+ROOT_URLCONF = 'uscstudy.beelab.site'
 
 TEMPLATES = [
     {

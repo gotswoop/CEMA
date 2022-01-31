@@ -238,7 +238,7 @@ def build_message_body(msg, subj_obj, survey_obj):
 
 def build_sms(subj_obj, survey_obj, key):
 	lang = subj_obj.language.upper()
-	url = 'https://uscstudy.com/s/' + survey_obj.survey_key
+	url = 'https://uscstudy.beelab.site/s/' + survey_obj.survey_key
 	
 	s = key.rfind('_survey_')
 	if s > 0:

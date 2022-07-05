@@ -13,3 +13,4 @@ migrations
 *.log
 *.pyc
 .venv
+favicon.ico
